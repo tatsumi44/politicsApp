@@ -1,0 +1,6 @@
+framework module Pods_Politics {
+  umbrella header "Pods-Politics-umbrella.h"
+
+  export *
+  module * { export * }
+}
