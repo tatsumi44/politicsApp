@@ -17,6 +17,14 @@
 		B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9085AE6211B44C00099DBE1 /* Start.storyboard */; };
 		B9085AE9211B527E0099DBE1 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085AE8211B527E0099DBE1 /* Helper.swift */; };
 		B9085AEB211B58FE0099DBE1 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9085AEA211B58FE0099DBE1 /* News.storyboard */; };
+		B9085B1A211C418F0099DBE1 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9085B18211C418F0099DBE1 /* Realm.framework */; };
+		B9085B1B211C418F0099DBE1 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9085B19211C418F0099DBE1 /* RealmSwift.framework */; };
+		B9085B1D211C431C0099DBE1 /* VoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B1C211C431C0099DBE1 /* VoteListViewController.swift */; };
+		B9085B1F211D8CAF0099DBE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9085B1E211D8CAF0099DBE1 /* GoogleService-Info.plist */; };
+		B9085B22211DA30C0099DBE1 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B21211DA30C0099DBE1 /* VoteViewController.swift */; };
+		B9085B24211DE8010099DBE1 /* ChartsResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */; };
+		B9085B26211E7B800099DBE1 /* DemoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */; };
+		B9085B2A211EB2120099DBE1 /* ChartsResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */; };
 		CA3D035177EB5581E57CCAE3 /* Pods_Politics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43E352199C059506D6961DA /* Pods_Politics.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +43,14 @@
 		B9085AE6211B44C00099DBE1 /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		B9085AE8211B527E0099DBE1 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B9085AEA211B58FE0099DBE1 /* News.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		B9085B18211C418F0099DBE1 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		B9085B19211C418F0099DBE1 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		B9085B1C211C431C0099DBE1 /* VoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteListViewController.swift; sourceTree = "<group>"; };
+		B9085B1E211D8CAF0099DBE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B9085B21211DA30C0099DBE1 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultViewController.swift; sourceTree = "<group>"; };
+		B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoBaseViewController.swift; sourceTree = "<group>"; };
+		B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultTableViewCell.swift; sourceTree = "<group>"; };
 		E43E352199C059506D6961DA /* Pods_Politics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Politics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -43,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9085B1A211C418F0099DBE1 /* Realm.framework in Frameworks */,
+				B9085B1B211C418F0099DBE1 /* RealmSwift.framework in Frameworks */,
 				CA3D035177EB5581E57CCAE3 /* Pods_Politics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +71,8 @@
 		29D55B3DF2A0B388A6EC8692 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9085B18211C418F0099DBE1 /* Realm.framework */,
+				B9085B19211C418F0099DBE1 /* RealmSwift.framework */,
 				E43E352199C059506D6961DA /* Pods_Politics.framework */,
 			);
 			name = Frameworks;
@@ -89,10 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				B9085ACC211B3EF10099DBE1 /* AppDelegate.swift */,
+				B9085B1E211D8CAF0099DBE1 /* GoogleService-Info.plist */,
 				B9085ACE211B3EF10099DBE1 /* ViewController.swift */,
-				B9085AE4211B444E0099DBE1 /* StartViewController.swift */,
-				B9085AE6211B44C00099DBE1 /* Start.storyboard */,
-				B9085AD0211B3EF10099DBE1 /* Chart.storyboard */,
+				B9085AEE211BFB7A0099DBE1 /* Start */,
+				B9085B20211DA2EA0099DBE1 /* Charts */,
 				B9085AE0211B40530099DBE1 /* SNS.storyboard */,
 				B9085AEA211B58FE0099DBE1 /* News.storyboard */,
 				B9085AD3211B3EF50099DBE1 /* Assets.xcassets */,
@@ -101,6 +121,28 @@
 				B9085AE8211B527E0099DBE1 /* Helper.swift */,
 			);
 			path = Politics;
+			sourceTree = "<group>";
+		};
+		B9085AEE211BFB7A0099DBE1 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				B9085AE4211B444E0099DBE1 /* StartViewController.swift */,
+				B9085AE6211B44C00099DBE1 /* Start.storyboard */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		B9085B20211DA2EA0099DBE1 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B9085AD0211B3EF10099DBE1 /* Chart.storyboard */,
+				B9085B1C211C431C0099DBE1 /* VoteListViewController.swift */,
+				B9085B21211DA30C0099DBE1 /* VoteViewController.swift */,
+				B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */,
+				B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */,
+				B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,6 +158,7 @@
 				B9085AC7211B3EF10099DBE1 /* Resources */,
 				2A7B3204FDA5474DD12BB31E /* [CP] Embed Pods Frameworks */,
 				9F767B8A28652E94A1F82474 /* [CP] Copy Pods Resources */,
+				B9085B17211C41390099DBE1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -170,6 +213,7 @@
 				B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
 				B9085AD2211B3EF10099DBE1 /* Chart.storyboard in Resources */,
+				B9085B1F211D8CAF0099DBE1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +299,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Politics/Pods-Politics-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B9085B17211C41390099DBE1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -262,9 +321,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9085B22211DA30C0099DBE1 /* VoteViewController.swift in Sources */,
 				B9085ACF211B3EF10099DBE1 /* ViewController.swift in Sources */,
 				B9085ACD211B3EF10099DBE1 /* AppDelegate.swift in Sources */,
+				B9085B1D211C431C0099DBE1 /* VoteListViewController.swift in Sources */,
+				B9085B24211DE8010099DBE1 /* ChartsResultViewController.swift in Sources */,
 				B9085AE5211B444E0099DBE1 /* StartViewController.swift in Sources */,
+				B9085B2A211EB2120099DBE1 /* ChartsResultTableViewCell.swift in Sources */,
+				B9085B26211E7B800099DBE1 /* DemoBaseViewController.swift in Sources */,
 				B9085AE9211B527E0099DBE1 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,8 +476,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TBZF3HX4JL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -428,8 +499,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TBZF3HX4JL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

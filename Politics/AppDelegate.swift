@@ -7,39 +7,23 @@
 //
 
 import UIKit
-
+import Firebase
+import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let setData:UserDefaults = UserDefaults.standard
-
+    let realm = try! Realm()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        var viewControllers: [UIViewController] = []
-        let firstSB = UIStoryboard(name: "Chart", bundle: nil)
-        let firstVC = firstSB.instantiateInitialViewController()! as UIViewController
-        firstVC.tabBarItem = UITabBarItem(title: "世論調査", image: UIImage(named:"chart"), tag: 1)
-        viewControllers.append(firstVC)
-        
-        // 2ページ目になるViewController
-        let secondSB = UIStoryboard(name: "SNS", bundle: nil)
-        let secondVC = secondSB.instantiateInitialViewController()! as UIViewController
-        secondVC.tabBarItem = UITabBarItem(title: "語り場", image: UIImage(named:"User"), tag: 2)
-        viewControllers.append(secondVC)
-        
-        // 3ページ目になるViewController
-        let thirdSB = UIStoryboard(name: "News", bundle: nil)
-        let thirdVC = thirdSB.instantiateInitialViewController()! as UIViewController
-        thirdVC.tabBarItem = UITabBarItem(title: "ニュース", image: UIImage(named:"news"), tag: 3)
-        viewControllers.append(thirdVC)
-        let tabBarController = UITabBarController()
-        tabBarController.tabBar.unselectedItemTintColor = UIColor.orange
-        tabBarController.setViewControllers(viewControllers, animated: false)
-        if setData.object(forKey: "user") != nil{
-            window?.rootViewController = tabBarController
+        FirebaseApp.configure()
+        print("呼ばれてる")
+//        setData.removeObject(forKey: "user")
+
+        if  setData.object(forKey: "user") != nil{
+            window?.rootViewController = tabSegue()
         }
-        
 //        window?.makeKeyAndVisible()
         return true
     }
