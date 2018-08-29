@@ -9,6 +9,7 @@ PODS:
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
+  - Eureka (4.1.1)
   - Firebase/Core (4.11.0):
     - FirebaseAnalytics (= 4.1.0)
     - FirebaseCore (= 4.0.18)
@@ -70,10 +71,12 @@ PODS:
   - Protobuf (3.5.0)
   - SwiftDate (4.5.1)
   - SwiftyJSON (4.0.0)
+  - WCLShineButton (1.0.7)
 
 DEPENDENCIES:
   - Alamofire
   - Charts
+  - Eureka
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
@@ -81,11 +84,13 @@ DEPENDENCIES:
   - PKHUD (~> 5.0)
   - SwiftDate
   - SwiftyJSON
+  - WCLShineButton
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   BoringSSL: 32764dbaf5f5888cf51fbaa172a010126b41bcd4
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Eureka: b88fb930e42c79f8c03c373d0fcdc28c1d6c50ed
   Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
   FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
   FirebaseCore: b981f47e5254cbcfdeb483355300d743f6fcab2c
@@ -104,7 +109,8 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  WCLShineButton: d8b979b6f6f9f6709f9e241e6e1a4712a1a9b36b
 
-PODFILE CHECKSUM: bf9316cae7ef219b2c31570bd90009338a955b05
+PODFILE CHECKSUM: 68957a376522252a806b38f5467574735321b845
 
 COCOAPODS: 1.4.0

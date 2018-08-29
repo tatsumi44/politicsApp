@@ -15,10 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let setData:UserDefaults = UserDefaults.standard
     let realm = try! Realm()
-
+    var mainQuestionArray = [String:[Qusetions]]()
+    var navBarHeight:CGFloat!
+    var tabheight:CGFloat!
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         print("呼ばれてる")
+        
 //        setData.removeObject(forKey: "user")
 
         if  setData.object(forKey: "user") != nil{

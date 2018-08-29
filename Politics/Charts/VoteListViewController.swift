@@ -19,20 +19,18 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewDidLoad()
         mainTable.dataSource = self
         mainTable.delegate  = self
-        
-
-        // Do any additional setup after loading the view.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         db.collection("questions").getDocuments { (snap, error) in
             for content in snap!.documents{
                 let data = content.data()
-//                print(data)
+                //                print(data)
                 self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: content.documentID))
             }
             self.mainTable.reloadData()
         }
+        // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {

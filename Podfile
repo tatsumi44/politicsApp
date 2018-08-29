@@ -13,7 +13,8 @@ target 'Politics' do
   pod 'PKHUD', '~> 5.0'
   pod 'SwiftDate'
   pod 'PageMenu'
-
+  pod 'Eureka'
+  pod 'WCLShineButton'
   # Pods for Politics
 
 end

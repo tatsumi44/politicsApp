@@ -72,8 +72,23 @@ class VoteViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
                 "place" : user[0].place,
                 "sex" : user[0].sex
                 ])
+            db.collection("questions").document(questions.questionID).getDocument { (snap, error) in
+                if let error = error{
+                    self.alert(message: error.localizedDescription)
+                }else{
+                    let data = snap?.data()
+                    let todayFlag = data!["\(self.nowDate(num: 0))"]
+                    if todayFlag == nil{
+                        self.db.collection("questions").document(self.questions.questionID).updateData([
+                            "\(self.nowDate(num: 0))" : true
+                            ])
+                    }
+                }
+            }
             performSegue(withIdentifier: "GoResult", sender: nil)
 //            print("good")
+        }else{
+            alert(message: "何か入力して")
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -25,6 +25,52 @@
 		B9085B24211DE8010099DBE1 /* ChartsResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */; };
 		B9085B26211E7B800099DBE1 /* DemoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */; };
 		B9085B2A211EB2120099DBE1 /* ChartsResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */; };
+		B9085B4F211F51AA0099DBE1 /* MyFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9085B4E211F51AA0099DBE1 /* MyFormViewController.swift */; };
+		B911E72821296B51004728C0 /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911E72721296B51004728C0 /* SearchListViewController.swift */; };
+		B911E72A2129B258004728C0 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911E7292129B258004728C0 /* SearchDetailViewController.swift */; };
+		B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92327C02134360600141A01 /* SNSPostViewController.swift */; };
+		B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9293499211FF4A900637B16 /* ViewResultViewController.swift */; };
+		B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349B21200D4800637B16 /* TodayResultViewController.swift */; };
+		B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349D21200D6B00637B16 /* OneDayAgoResultViewController.swift */; };
+		B92934A021200D7E00637B16 /* TwoDaysAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349F21200D7E00637B16 /* TwoDaysAgoResultViewController.swift */; };
+		B92934A221200D9000637B16 /* ThreeDaysAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934A121200D9000637B16 /* ThreeDaysAgoResultViewController.swift */; };
+		B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934A321200DA500637B16 /* FourDaysAgoResultViewController.swift */; };
+		B92934A621200DBB00637B16 /* FiveDaysAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934A521200DBB00637B16 /* FiveDaysAgoResultViewController.swift */; };
+		B92934A821200DD100637B16 /* SixDaysAgoResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934A721200DD100637B16 /* SixDaysAgoResultViewController.swift */; };
+		B92934AA21209C2F00637B16 /* WaitResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934A921209C2F00637B16 /* WaitResultViewController.swift */; };
+		B92934AC2120A55200637B16 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934AB2120A55200637B16 /* SelectViewController.swift */; };
+		B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934AD2120AAB700637B16 /* PastResultViewController.swift */; };
+		B92934B02120BA4800637B16 /* PastChartsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */; };
+		B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934B12120C62B00637B16 /* MyPastFormViewController.swift */; };
+		B97402E42131D3BD008A1D34 /* MainTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97402E32131D3BD008A1D34 /* MainTodayViewController.swift */; };
+		B9FC939F212F09890029EF12 /* NewsTodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC939D212F09890029EF12 /* NewsTodayTableViewCell.swift */; };
+		B9FC93A0212F09890029EF12 /* NewsTodayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FC939E212F09890029EF12 /* NewsTodayTableViewCell.xib */; };
+		B9FC93A2212FE4710029EF12 /* NewsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93A1212FE4710029EF12 /* NewsMainViewController.swift */; };
+		B9FC93A5212FE5070029EF12 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93A4212FE5070029EF12 /* TodayViewController.swift */; };
+		B9FC93A7212FE5310029EF12 /* OneDayAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93A6212FE5310029EF12 /* OneDayAgoViewController.swift */; };
+		B9FC93A9212FE5490029EF12 /* TwoDaysAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93A8212FE5490029EF12 /* TwoDaysAgoViewController.swift */; };
+		B9FC93AB212FE5570029EF12 /* ThreeDaysAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93AA212FE5570029EF12 /* ThreeDaysAgoViewController.swift */; };
+		B9FC93AD212FE5690029EF12 /* FourDaysAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93AC212FE5690029EF12 /* FourDaysAgoViewController.swift */; };
+		B9FC93AF212FE5750029EF12 /* FiveDaysAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93AE212FE5750029EF12 /* FiveDaysAgoViewController.swift */; };
+		B9FC93B1212FE5830029EF12 /* SixDaysAgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93B0212FE5830029EF12 /* SixDaysAgoViewController.swift */; };
+		B9FC93B3213002EC0029EF12 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93B2213002EC0029EF12 /* NewsViewController.swift */; };
+		B9FC93B521304B980029EF12 /* NewsPostCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93B421304B980029EF12 /* NewsPostCommentViewController.swift */; };
+		B9FC93B7213082500029EF12 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93B6213082500029EF12 /* NewsDetailViewController.swift */; };
+		B9FC93BA213092E70029EF12 /* NewsDetailSpaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC93B8213092E70029EF12 /* NewsDetailSpaceTableViewCell.swift */; };
+		B9FC93BB213092E70029EF12 /* NewsDetailSpaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FC93B9213092E70029EF12 /* NewsDetailSpaceTableViewCell.xib */; };
+		B9FE6149212525B100DFF419 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE6148212525B100DFF419 /* PostDetailViewController.swift */; };
+		B9FE614C2125572700DFF419 /* SNSListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE614B2125572700DFF419 /* SNSListViewController.swift */; };
+		B9FE61512125D35000DFF419 /* SNSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE614F2125D35000DFF419 /* SNSTableViewCell.swift */; };
+		B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FE61502125D35000DFF419 /* SNSTableViewCell.xib */; };
+		B9FE615A2126B3C800DFF419 /* CommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE61592126B3C800DFF419 /* CommentDetailViewController.swift */; };
+		B9FE61632126F43D00DFF419 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE61612126F43D00DFF419 /* TagCollectionViewCell.swift */; };
+		B9FE61642126F43D00DFF419 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FE61622126F43D00DFF419 /* TagCollectionViewCell.xib */; };
+		B9FE61672126F4DB00DFF419 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE61652126F4DB00DFF419 /* TagTableViewCell.swift */; };
+		B9FE61682126F4DB00DFF419 /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FE61662126F4DB00DFF419 /* TagTableViewCell.xib */; };
+		B9FE616D21282FF300DFF419 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE616B21282FF300DFF419 /* commentTableViewCell.swift */; };
+		B9FE616E21282FF300DFF419 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FE616C21282FF300DFF419 /* commentTableViewCell.xib */; };
+		B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE6178212891BB00DFF419 /* ResponseTableViewCell.swift */; };
+		B9FE617B212891BB00DFF419 /* ResponseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9FE6179212891BB00DFF419 /* ResponseTableViewCell.xib */; };
 		CA3D035177EB5581E57CCAE3 /* Pods_Politics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43E352199C059506D6961DA /* Pods_Politics.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +97,52 @@
 		B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultViewController.swift; sourceTree = "<group>"; };
 		B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoBaseViewController.swift; sourceTree = "<group>"; };
 		B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultTableViewCell.swift; sourceTree = "<group>"; };
+		B9085B4E211F51AA0099DBE1 /* MyFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFormViewController.swift; sourceTree = "<group>"; };
+		B911E72721296B51004728C0 /* SearchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
+		B911E7292129B258004728C0 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
+		B92327C02134360600141A01 /* SNSPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSPostViewController.swift; sourceTree = "<group>"; };
+		B9293499211FF4A900637B16 /* ViewResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewResultViewController.swift; sourceTree = "<group>"; };
+		B929349B21200D4800637B16 /* TodayResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResultViewController.swift; sourceTree = "<group>"; };
+		B929349D21200D6B00637B16 /* OneDayAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDayAgoResultViewController.swift; sourceTree = "<group>"; };
+		B929349F21200D7E00637B16 /* TwoDaysAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoDaysAgoResultViewController.swift; sourceTree = "<group>"; };
+		B92934A121200D9000637B16 /* ThreeDaysAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysAgoResultViewController.swift; sourceTree = "<group>"; };
+		B92934A321200DA500637B16 /* FourDaysAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDaysAgoResultViewController.swift; sourceTree = "<group>"; };
+		B92934A521200DBB00637B16 /* FiveDaysAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysAgoResultViewController.swift; sourceTree = "<group>"; };
+		B92934A721200DD100637B16 /* SixDaysAgoResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixDaysAgoResultViewController.swift; sourceTree = "<group>"; };
+		B92934A921209C2F00637B16 /* WaitResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitResultViewController.swift; sourceTree = "<group>"; };
+		B92934AB2120A55200637B16 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		B92934AD2120AAB700637B16 /* PastResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastResultViewController.swift; sourceTree = "<group>"; };
+		B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastChartsTableViewCell.swift; sourceTree = "<group>"; };
+		B92934B12120C62B00637B16 /* MyPastFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPastFormViewController.swift; sourceTree = "<group>"; };
+		B97402E32131D3BD008A1D34 /* MainTodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodayViewController.swift; sourceTree = "<group>"; };
+		B9FC939D212F09890029EF12 /* NewsTodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTodayTableViewCell.swift; sourceTree = "<group>"; };
+		B9FC939E212F09890029EF12 /* NewsTodayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTodayTableViewCell.xib; sourceTree = "<group>"; };
+		B9FC93A1212FE4710029EF12 /* NewsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMainViewController.swift; sourceTree = "<group>"; };
+		B9FC93A4212FE5070029EF12 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		B9FC93A6212FE5310029EF12 /* OneDayAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDayAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93A8212FE5490029EF12 /* TwoDaysAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoDaysAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93AA212FE5570029EF12 /* ThreeDaysAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93AC212FE5690029EF12 /* FourDaysAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDaysAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93AE212FE5750029EF12 /* FiveDaysAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93B0212FE5830029EF12 /* SixDaysAgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixDaysAgoViewController.swift; sourceTree = "<group>"; };
+		B9FC93B2213002EC0029EF12 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		B9FC93B421304B980029EF12 /* NewsPostCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPostCommentViewController.swift; sourceTree = "<group>"; };
+		B9FC93B6213082500029EF12 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		B9FC93B8213092E70029EF12 /* NewsDetailSpaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailSpaceTableViewCell.swift; sourceTree = "<group>"; };
+		B9FC93B9213092E70029EF12 /* NewsDetailSpaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailSpaceTableViewCell.xib; sourceTree = "<group>"; };
+		B9FE6148212525B100DFF419 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		B9FE614B2125572700DFF419 /* SNSListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSListViewController.swift; sourceTree = "<group>"; };
+		B9FE614F2125D35000DFF419 /* SNSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSTableViewCell.swift; sourceTree = "<group>"; };
+		B9FE61502125D35000DFF419 /* SNSTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SNSTableViewCell.xib; sourceTree = "<group>"; };
+		B9FE61592126B3C800DFF419 /* CommentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailViewController.swift; sourceTree = "<group>"; };
+		B9FE61612126F43D00DFF419 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		B9FE61622126F43D00DFF419 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
+		B9FE61652126F4DB00DFF419 /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		B9FE61662126F4DB00DFF419 /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
+		B9FE616B21282FF300DFF419 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
+		B9FE616C21282FF300DFF419 /* commentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = commentTableViewCell.xib; sourceTree = "<group>"; };
+		B9FE6178212891BB00DFF419 /* ResponseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseTableViewCell.swift; sourceTree = "<group>"; };
+		B9FE6179212891BB00DFF419 /* ResponseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResponseTableViewCell.xib; sourceTree = "<group>"; };
 		E43E352199C059506D6961DA /* Pods_Politics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Politics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -113,8 +205,8 @@
 				B9085ACE211B3EF10099DBE1 /* ViewController.swift */,
 				B9085AEE211BFB7A0099DBE1 /* Start */,
 				B9085B20211DA2EA0099DBE1 /* Charts */,
-				B9085AE0211B40530099DBE1 /* SNS.storyboard */,
-				B9085AEA211B58FE0099DBE1 /* News.storyboard */,
+				B9FE614A2125266600DFF419 /* SNS */,
+				B9FC939C212F04F10029EF12 /* News */,
 				B9085AD3211B3EF50099DBE1 /* Assets.xcassets */,
 				B9085AD5211B3EF50099DBE1 /* LaunchScreen.storyboard */,
 				B9085AD8211B3EF50099DBE1 /* Info.plist */,
@@ -135,14 +227,132 @@
 		B9085B20211DA2EA0099DBE1 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				B9293498211FF46800637B16 /* ViewResult */,
 				B9085AD0211B3EF10099DBE1 /* Chart.storyboard */,
 				B9085B1C211C431C0099DBE1 /* VoteListViewController.swift */,
 				B9085B21211DA30C0099DBE1 /* VoteViewController.swift */,
 				B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */,
 				B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */,
 				B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */,
+				B9085B4E211F51AA0099DBE1 /* MyFormViewController.swift */,
+				B92934AB2120A55200637B16 /* SelectViewController.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		B911E72621296B27004728C0 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B911E72721296B51004728C0 /* SearchListViewController.swift */,
+				B911E7292129B258004728C0 /* SearchDetailViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		B92327C2213446FF00141A01 /* NewsModel */ = {
+			isa = PBXGroup;
+			children = (
+				B9FC93B421304B980029EF12 /* NewsPostCommentViewController.swift */,
+				B9FC939D212F09890029EF12 /* NewsTodayTableViewCell.swift */,
+				B9FC939E212F09890029EF12 /* NewsTodayTableViewCell.xib */,
+				B9FC93A1212FE4710029EF12 /* NewsMainViewController.swift */,
+				B9FC93B2213002EC0029EF12 /* NewsViewController.swift */,
+				B9FC93B6213082500029EF12 /* NewsDetailViewController.swift */,
+				B9FC93B8213092E70029EF12 /* NewsDetailSpaceTableViewCell.swift */,
+				B9FC93B9213092E70029EF12 /* NewsDetailSpaceTableViewCell.xib */,
+			);
+			path = NewsModel;
+			sourceTree = "<group>";
+		};
+		B9293498211FF46800637B16 /* ViewResult */ = {
+			isa = PBXGroup;
+			children = (
+				B9293499211FF4A900637B16 /* ViewResultViewController.swift */,
+				B929349B21200D4800637B16 /* TodayResultViewController.swift */,
+				B929349D21200D6B00637B16 /* OneDayAgoResultViewController.swift */,
+				B929349F21200D7E00637B16 /* TwoDaysAgoResultViewController.swift */,
+				B92934A121200D9000637B16 /* ThreeDaysAgoResultViewController.swift */,
+				B92934A321200DA500637B16 /* FourDaysAgoResultViewController.swift */,
+				B92934A521200DBB00637B16 /* FiveDaysAgoResultViewController.swift */,
+				B92934A721200DD100637B16 /* SixDaysAgoResultViewController.swift */,
+				B92934A921209C2F00637B16 /* WaitResultViewController.swift */,
+				B92934AD2120AAB700637B16 /* PastResultViewController.swift */,
+				B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */,
+				B92934B12120C62B00637B16 /* MyPastFormViewController.swift */,
+			);
+			path = ViewResult;
+			sourceTree = "<group>";
+		};
+		B9FC939C212F04F10029EF12 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				B9085AEA211B58FE0099DBE1 /* News.storyboard */,
+				B9FC93A3212FE4EB0029EF12 /* NewsList */,
+				B92327C2213446FF00141A01 /* NewsModel */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		B9FC93A3212FE4EB0029EF12 /* NewsList */ = {
+			isa = PBXGroup;
+			children = (
+				B9FC93A4212FE5070029EF12 /* TodayViewController.swift */,
+				B97402E32131D3BD008A1D34 /* MainTodayViewController.swift */,
+				B9FC93A6212FE5310029EF12 /* OneDayAgoViewController.swift */,
+				B9FC93A8212FE5490029EF12 /* TwoDaysAgoViewController.swift */,
+				B9FC93AA212FE5570029EF12 /* ThreeDaysAgoViewController.swift */,
+				B9FC93AC212FE5690029EF12 /* FourDaysAgoViewController.swift */,
+				B9FC93AE212FE5750029EF12 /* FiveDaysAgoViewController.swift */,
+				B9FC93B0212FE5830029EF12 /* SixDaysAgoViewController.swift */,
+			);
+			path = NewsList;
+			sourceTree = "<group>";
+		};
+		B9FE614A2125266600DFF419 /* SNS */ = {
+			isa = PBXGroup;
+			children = (
+				B9085AE0211B40530099DBE1 /* SNS.storyboard */,
+				B9FE61702128910E00DFF419 /* CommentList */,
+				B9FE616F212835D000DFF419 /* CommentDetail */,
+				B9FE61712128914E00DFF419 /* Response */,
+				B911E72621296B27004728C0 /* Search */,
+			);
+			path = SNS;
+			sourceTree = "<group>";
+		};
+		B9FE616F212835D000DFF419 /* CommentDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B9FE61592126B3C800DFF419 /* CommentDetailViewController.swift */,
+				B9FE61612126F43D00DFF419 /* TagCollectionViewCell.swift */,
+				B9FE61622126F43D00DFF419 /* TagCollectionViewCell.xib */,
+				B9FE61652126F4DB00DFF419 /* TagTableViewCell.swift */,
+				B9FE61662126F4DB00DFF419 /* TagTableViewCell.xib */,
+				B9FE616B21282FF300DFF419 /* commentTableViewCell.swift */,
+				B9FE616C21282FF300DFF419 /* commentTableViewCell.xib */,
+			);
+			path = CommentDetail;
+			sourceTree = "<group>";
+		};
+		B9FE61702128910E00DFF419 /* CommentList */ = {
+			isa = PBXGroup;
+			children = (
+				B9FE6148212525B100DFF419 /* PostDetailViewController.swift */,
+				B9FE614B2125572700DFF419 /* SNSListViewController.swift */,
+				B9FE614F2125D35000DFF419 /* SNSTableViewCell.swift */,
+				B9FE61502125D35000DFF419 /* SNSTableViewCell.xib */,
+				B92327C02134360600141A01 /* SNSPostViewController.swift */,
+			);
+			path = CommentList;
+			sourceTree = "<group>";
+		};
+		B9FE61712128914E00DFF419 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				B9FE6178212891BB00DFF419 /* ResponseTableViewCell.swift */,
+				B9FE6179212891BB00DFF419 /* ResponseTableViewCell.xib */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,10 +419,17 @@
 			files = (
 				B9085AE1211B40530099DBE1 /* SNS.storyboard in Resources */,
 				B9085AEB211B58FE0099DBE1 /* News.storyboard in Resources */,
+				B9FC93A0212F09890029EF12 /* NewsTodayTableViewCell.xib in Resources */,
+				B9FE61682126F4DB00DFF419 /* TagTableViewCell.xib in Resources */,
 				B9085AD7211B3EF50099DBE1 /* LaunchScreen.storyboard in Resources */,
+				B9FE617B212891BB00DFF419 /* ResponseTableViewCell.xib in Resources */,
 				B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */,
+				B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
+				B9FE61642126F43D00DFF419 /* TagCollectionViewCell.xib in Resources */,
 				B9085AD2211B3EF10099DBE1 /* Chart.storyboard in Resources */,
+				B9FE616E21282FF300DFF419 /* commentTableViewCell.xib in Resources */,
+				B9FC93BB213092E70029EF12 /* NewsDetailSpaceTableViewCell.xib in Resources */,
 				B9085B1F211D8CAF0099DBE1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,12 +447,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -248,12 +467,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCLShineButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -321,14 +542,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9FC93A2212FE4710029EF12 /* NewsMainViewController.swift in Sources */,
+				B92934AC2120A55200637B16 /* SelectViewController.swift in Sources */,
+				B9FE6149212525B100DFF419 /* PostDetailViewController.swift in Sources */,
 				B9085B22211DA30C0099DBE1 /* VoteViewController.swift in Sources */,
+				B9FE616D21282FF300DFF419 /* commentTableViewCell.swift in Sources */,
+				B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */,
+				B9FE615A2126B3C800DFF419 /* CommentDetailViewController.swift in Sources */,
+				B9FE614C2125572700DFF419 /* SNSListViewController.swift in Sources */,
+				B9FC93AB212FE5570029EF12 /* ThreeDaysAgoViewController.swift in Sources */,
+				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
+				B9FC93BA213092E70029EF12 /* NewsDetailSpaceTableViewCell.swift in Sources */,
+				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
+				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
+				B911E72821296B51004728C0 /* SearchListViewController.swift in Sources */,
+				B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */,
+				B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */,
+				B9FE61512125D35000DFF419 /* SNSTableViewCell.swift in Sources */,
+				B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */,
+				B92934A821200DD100637B16 /* SixDaysAgoResultViewController.swift in Sources */,
 				B9085ACF211B3EF10099DBE1 /* ViewController.swift in Sources */,
+				B9085B4F211F51AA0099DBE1 /* MyFormViewController.swift in Sources */,
+				B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */,
 				B9085ACD211B3EF10099DBE1 /* AppDelegate.swift in Sources */,
+				B9FC93AD212FE5690029EF12 /* FourDaysAgoViewController.swift in Sources */,
+				B9FC93A5212FE5070029EF12 /* TodayViewController.swift in Sources */,
+				B92934AA21209C2F00637B16 /* WaitResultViewController.swift in Sources */,
+				B9FC93B7213082500029EF12 /* NewsDetailViewController.swift in Sources */,
+				B9FC939F212F09890029EF12 /* NewsTodayTableViewCell.swift in Sources */,
+				B97402E42131D3BD008A1D34 /* MainTodayViewController.swift in Sources */,
+				B9FE61632126F43D00DFF419 /* TagCollectionViewCell.swift in Sources */,
+				B92934A221200D9000637B16 /* ThreeDaysAgoResultViewController.swift in Sources */,
+				B9FC93B521304B980029EF12 /* NewsPostCommentViewController.swift in Sources */,
+				B92934A621200DBB00637B16 /* FiveDaysAgoResultViewController.swift in Sources */,
 				B9085B1D211C431C0099DBE1 /* VoteListViewController.swift in Sources */,
+				B9FC93A7212FE5310029EF12 /* OneDayAgoViewController.swift in Sources */,
 				B9085B24211DE8010099DBE1 /* ChartsResultViewController.swift in Sources */,
+				B911E72A2129B258004728C0 /* SearchDetailViewController.swift in Sources */,
+				B92934A021200D7E00637B16 /* TwoDaysAgoResultViewController.swift in Sources */,
+				B9FE61672126F4DB00DFF419 /* TagTableViewCell.swift in Sources */,
+				B9FC93B3213002EC0029EF12 /* NewsViewController.swift in Sources */,
+				B9FC93AF212FE5750029EF12 /* FiveDaysAgoViewController.swift in Sources */,
+				B9FC93A9212FE5490029EF12 /* TwoDaysAgoViewController.swift in Sources */,
 				B9085AE5211B444E0099DBE1 /* StartViewController.swift in Sources */,
+				B92934B02120BA4800637B16 /* PastChartsTableViewCell.swift in Sources */,
 				B9085B2A211EB2120099DBE1 /* ChartsResultTableViewCell.swift in Sources */,
 				B9085B26211E7B800099DBE1 /* DemoBaseViewController.swift in Sources */,
+				B9FC93B1212FE5830029EF12 /* SixDaysAgoViewController.swift in Sources */,
 				B9085AE9211B527E0099DBE1 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
