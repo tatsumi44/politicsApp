@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import RealmSwift
 import WCLShineButton
+import PKHUD
 class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mainTable: UITableView!
@@ -31,9 +32,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewDidLoad()
         mainTable.delegate = self
         mainTable.dataSource = self
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.navBarHeight = appDelegate.navBarHeight
-        self.tabheight = appDelegate.tabheight
+        
         
         //        mainTable.frame.size.height = UIScreen.main.bounds.height - navBarHeight - 40 - tabheight
         mainTable.frame.size.height = 300
@@ -51,6 +50,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func getNews(date:String){
+        HUD.show(.progress)
         let likes = realm.objects(NewsLikes.self)
         goodArray = [String]()
         badArray = [String]()
@@ -69,6 +69,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }else{
                 if self.newsArray.count != 0{
                     self.newsArray = [NewsData]()
+                    self.mainNewsArray = [MainNewsData]()
                 }
                 var num = 0
                 if let data = snap?.data(){
@@ -102,6 +103,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                                             if self.newsArray.count == self.mainNewsArray.count{
                                                 self.mainNewsArray.sort(by: {$0.num < $1.num})
                                                 self.mainTable.reloadData()
+                                                HUD.hide()
                                                 print("いいかもね")
                                             }
                                         })

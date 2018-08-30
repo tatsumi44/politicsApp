@@ -21,8 +21,8 @@ class NewsMainViewController: UIViewController {
 //        print(statusBarHeight)
 //        print(navBarHeight!)
 //        let navheight = statusBarHeight + navBarHeight!
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.navBarHeight = appDelegate.navBarHeight
+//        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        self.navBarHeight = appDelegate.navBarHeight
         for i in 0..<7{
             let date = nowDate(num: i)
             dateArray.append(date)
@@ -63,10 +63,14 @@ class NewsMainViewController: UIViewController {
             .addBottomMenuHairline(true),
             
             ]
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.navBarHeight = appDelegate.navBarHeight
+        let tabheight = appDelegate.tabheight
+        print("navBarHeight  \(self.navBarHeight)")
         
         pageMenu = CAPSPageMenu(
             viewControllers: controllers,
-            frame:           CGRect(x: 0.0, y: navBarHeight, width:  self.view.frame.width, height:  self.view.frame.height),
+            frame:           CGRect(x: 0.0, y: navBarHeight, width:  self.view.frame.width, height:  self.view.frame.height - navBarHeight - tabheight!),
             pageMenuOptions: params
         )
         
