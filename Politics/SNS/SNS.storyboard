@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7A-7W-FtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="-658"/>
+            <point key="canvasLocation" x="2468" y="-123"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="j6z-An-kYy">
@@ -168,11 +168,27 @@
                     <connections>
                         <outlet property="mainTable" destination="MP5-ff-xrO" id="E2B-rZ-Hp0"/>
                         <segue destination="qgu-xZ-7Tc" kind="show" identifier="SearchResultDetail" id="bKO-wR-vLc"/>
+                        <segue destination="dqE-hY-boZ" kind="show" identifier="SearchPost" id="sC2-f3-yqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAM-BR-V9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1718" y="931"/>
+        </scene>
+        <!--Search Post View Controller-->
+        <scene sceneID="f9Q-ne-mWY">
+            <objects>
+                <viewController id="dqE-hY-boZ" customClass="SearchPostViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fST-tp-VKh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qS0-QU-cMg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lCJ-ek-2pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1718" y="1792"/>
         </scene>
         <!--Search Detail View Controller-->
         <scene sceneID="TQW-ri-gVR">

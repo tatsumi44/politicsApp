@@ -1,15 +1,24 @@
 //
-//  NewsDetailSpaceTableViewCell.swift
+//  ChartsResultListTableViewCell.swift
 //  Politics
 //
-//  Created by tatsumi kentaro on 2018/08/25.
+//  Created by tatsumi kentaro on 2018/09/01.
 //  Copyright © 2018年 tatsumi kentaro. All rights reserved.
 //
 
 import UIKit
 
-class NewsDetailSpaceTableViewCell: UITableViewCell {
-
+class ChartsResultListTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var countLabel: UILabel!
+    
+    @IBOutlet weak var percentLabel: UILabel!
+    
+    @IBOutlet weak var bgView: UIView!
+    
+    @IBOutlet weak var numView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

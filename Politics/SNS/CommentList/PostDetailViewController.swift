@@ -17,8 +17,7 @@ class PostDetailViewController: FormViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Multivalued Examples"
-        
+        title = "投稿する"
         
         form +++ Section()
             +++ Section("投稿内容")
@@ -47,12 +46,12 @@ class PostDetailViewController: FormViewController  {
                                 
                                 $0.multivaluedRowToInsertAt = { index in
                                     //
-                                    return NameRow() {
+                                    return TextRow() {
                                         $0.placeholder = "Tag Name"
                                     }
                                 }
                                 
-                                $0 <<< NameRow() {
+                                $0 <<< TextRow() {
                                     $0.placeholder = "Tag Name"
                                 }
         }

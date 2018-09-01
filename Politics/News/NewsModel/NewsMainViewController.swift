@@ -16,13 +16,7 @@ class NewsMainViewController: UIViewController {
     var navBarHeight:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
-//        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
-//        print(statusBarHeight)
-//        print(navBarHeight!)
-//        let navheight = statusBarHeight + navBarHeight!
-//        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//        self.navBarHeight = appDelegate.navBarHeight
+
         for i in 0..<7{
             let date = nowDate(num: i)
             dateArray.append(date)

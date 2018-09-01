@@ -15,6 +15,7 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
     @IBOutlet weak var mainTable: UITableView!
     var resarchContents = [GetDetail]()
     var num:Int!
+    var postNum:Int!
     var goodArray = [String]()
     var badArray = [String]()
     let realm = try! Realm()
@@ -40,6 +41,9 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
         dislikes.forEach { (dislike) in
             badArray.append(dislike.documentID)
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+//         resarchContents = [GetDetail]()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,8 +103,8 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
         return cell
     }
     @objc func commentTap(sender:UIButton){
-        num = sender.tag
-        performSegue(withIdentifier: "SearchResultDetail", sender: nil)
+        postNum = sender.tag
+        performSegue(withIdentifier: "SearchPost", sender: nil)
     }
     @objc func likeTap(sender: WCLShineButton){
         
@@ -238,11 +242,21 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
         }
         print("Clicked \(sender.isSelected)")
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        num = indexPath.row
+        performSegue(withIdentifier: "SearchResultDetail", sender: nil)
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SearchResultDetail"{
             let searchDetailViewController = segue.destination as! SearchDetailViewController
-            searchDetailViewController.content = resarchContents[num]
+            searchDetailViewController.content = self.resarchContents[num]
+        }else if segue.identifier == "SearchPost"{
+            let searchPostViewController = segue.destination as! SearchPostViewController
+            searchPostViewController.resarchContent = self.resarchContents[postNum]
         }
     }
     

@@ -36,6 +36,8 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resarchmiddleContents = [MiddleGetDtail]()
+        resarchContents = [GetDetail]()
         getData()
     }
     func getData() {
@@ -343,13 +345,16 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
 extension SNSListViewController:UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
+        HUD.show(.progress)
         if let text = searchBar.text{
             db.collection("SNS").whereField("tags.\(text)", isGreaterThan: 0).order(by: "tags.\(text)", descending: true).getDocuments { (snap, error) in
                 if let error = error{
                     self.alert(message: error.localizedDescription)
                 }else{
                     if snap?.count == 0{
+                        searchBar.text = nil
+                        self.view.endEditing(true)
+                        HUD.hide()
                         self.alert(message: "何もないです")
                     }else{
                         var num = 0
@@ -379,6 +384,9 @@ extension SNSListViewController:UISearchBarDelegate{
                                                 if self.resarchContents.count == self.resarchmiddleContents.count{
                                                     print(self.resarchContents)
                                                     self.performSegue(withIdentifier: "Search", sender: nil)
+                                                    HUD.hide()
+                                                    self.view.endEditing(true)
+                                                    searchBar.text = nil
                                                 }
                                             })
                                         }
