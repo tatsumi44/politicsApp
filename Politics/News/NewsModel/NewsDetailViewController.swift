@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import RealmSwift
 import WCLShineButton
+import SafariServices
 class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet weak var mainTable: UITableView!
@@ -332,13 +333,18 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
     @objc func titleTap(sender:UIButton){
-        performSegue(withIdentifier: "GoNews", sender: nil)
+//        var strUrl : String = mainNews.url
+        if let url = NSURL(string: mainNews.url) {
+            let safariViewController = SFSafariViewController(url: url as URL)
+            present(safariViewController, animated: true, completion: nil)
+        }
+
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoNews"{
-            let newsViewController = segue.destination as! NewsViewController
-            newsViewController.url = mainNews.url
-        }
+//        if segue.identifier == "GoNews"{
+//            let newsViewController = segue.destination as! NewsViewController
+//            newsViewController.url = mainNews.url
+//        }
     }
     
 }

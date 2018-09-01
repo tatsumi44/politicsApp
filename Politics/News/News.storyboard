@@ -52,7 +52,6 @@
                     <navigationItem key="navigationItem" id="YbH-M3-SuV"/>
                     <connections>
                         <outlet property="mainTable" destination="O3g-5K-kck" id="ztq-Mz-Wfg"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="rrH-sx-kM5"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="OCY-zX-GEo"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="HqM-LA-a3O"/>
                     </connections>
@@ -88,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AUy-1p-by2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8756" y="-640"/>
+            <point key="canvasLocation" x="9854" y="-640"/>
         </scene>
         <!--One Day Ago View Controller-->
         <scene sceneID="582-MO-ox3">
@@ -114,7 +113,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="DOH-fH-ZYw" id="Hpo-mr-W2r"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="oEy-iK-Lth"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="JVx-vi-78g"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="SmF-lu-mFS"/>
                     </connections>
@@ -162,7 +160,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="17j-AU-lPc" id="hiu-Pi-1BM"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="cUF-nJ-PiV"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="OCr-PS-rmA"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="Qyd-dH-Sdm"/>
                     </connections>
@@ -233,7 +230,6 @@
                         <outlet property="commentTextView" destination="J5A-fX-pdZ" id="j9I-Zz-L2w"/>
                         <outlet property="commentView" destination="6SX-ba-V98" id="XKx-hR-dsT"/>
                         <outlet property="mainTable" destination="qt2-GM-sT4" id="VRS-US-1yf"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="GoNews" id="PPi-yh-eyk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCH-EG-Dwl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,7 +260,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="ea3-a6-jpw" id="ySO-3Y-WE2"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="gHL-M4-LXf"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="kW0-Pw-S0h"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="I8d-Ic-Cz8"/>
                     </connections>
@@ -297,7 +292,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="dPN-R6-zbx" id="gma-gC-K8s"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="UV2-qa-vK5"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="Nth-3J-Qdn"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="zab-ou-0gK"/>
                     </connections>
@@ -330,7 +324,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="WkN-uR-Inj" id="NCN-Zz-GGA"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="pXG-Zl-Zpq"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="MZz-7C-L3H"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="fWg-wA-23S"/>
                     </connections>
@@ -363,7 +356,6 @@
                     </view>
                     <connections>
                         <outlet property="mainTable" destination="81l-Ss-b8C" id="1HJ-Hz-h4U"/>
-                        <segue destination="BFt-hq-vek" kind="show" identifier="News" id="kw0-ZW-XDu"/>
                         <segue destination="rze-e3-FUd" kind="show" identifier="Post" id="ul4-bA-d3A"/>
                         <segue destination="Pq4-l9-VOB" kind="show" identifier="Detail" id="MKD-HF-muD"/>
                     </connections>
@@ -393,7 +385,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SmF-lu-mFS"/>
-        <segue reference="JVx-vi-78g"/>
-        <segue reference="oEy-iK-Lth"/>
+        <segue reference="ul4-bA-d3A"/>
     </inferredMetricsTieBreakers>
 </document>

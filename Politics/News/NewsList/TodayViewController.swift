@@ -11,6 +11,7 @@ import Firebase
 import RealmSwift
 import WCLShineButton
 import PKHUD
+import SafariServices
 class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mainTable: UITableView!
@@ -72,45 +73,50 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                     self.mainNewsArray = [MainNewsData]()
                 }
                 var num = 0
+                
                 if let data = snap?.data(){
                     let jsons = data["json"] as! [[String : String]]
-                    for json in jsons{
-                        let title = json["name"]
-                        let url = json["url"]
-                        let date = json["date"]
-                        self.newsArray.append(NewsData(num: num, title: title!, url: url!, date: date!))
-                        num += 1
-                    }
-                    print(self.newsArray)
-                    for news in self.newsArray{
-                        self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).getDocuments(completion: { (snap, error) in
-                            if let error = error{
-                                self.alert(message: error.localizedDescription)
-                            }else{
-                                let commnetCount = snap?.count
-                                self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).document("evaluate").collection("good").getDocuments(completion: { (snap, error) in
-                                    if let error = error{
-                                        self.alert(message: error.localizedDescription)
-                                    }else{
-                                        let likeCount = snap?.count
-                                        self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).document("evaluate").collection("bad").getDocuments(completion: { (snap, error) in
-                                            if let error = error{
-                                                self.alert(message: error.localizedDescription)
-                                            }else{
-                                                let dislikeCount = snap?.count
-                                                self.mainNewsArray.append(MainNewsData(num: news.num, title: news.title, url: news.url, likeCount: likeCount!, disLikeCount: dislikeCount!, commentCount: commnetCount!, date: news.date))
-                                            }
-                                            if self.newsArray.count == self.mainNewsArray.count{
-                                                self.mainNewsArray.sort(by: {$0.num < $1.num})
-                                                self.mainTable.reloadData()
-                                                HUD.hide()
-                                                print("いいかもね")
-                                            }
-                                        })
-                                    }
-                                })
-                            }
-                        })
+                    if jsons.count == 0{
+                         HUD.hide()
+                    }else{
+                        for json in jsons{
+                            let title = json["name"]
+                            let url = json["url"]
+                            let date = json["date"]
+                            self.newsArray.append(NewsData(num: num, title: title!, url: url!, date: date!))
+                            num += 1
+                        }
+                        print(self.newsArray)
+                        for news in self.newsArray{
+                            self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).getDocuments(completion: { (snap, error) in
+                                if let error = error{
+                                    self.alert(message: error.localizedDescription)
+                                }else{
+                                    let commnetCount = snap?.count
+                                    self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).document("evaluate").collection("good").getDocuments(completion: { (snap, error) in
+                                        if let error = error{
+                                            self.alert(message: error.localizedDescription)
+                                        }else{
+                                            let likeCount = snap?.count
+                                            self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: news.url)).document("evaluate").collection("bad").getDocuments(completion: { (snap, error) in
+                                                if let error = error{
+                                                    self.alert(message: error.localizedDescription)
+                                                }else{
+                                                    let dislikeCount = snap?.count
+                                                    self.mainNewsArray.append(MainNewsData(num: news.num, title: news.title, url: news.url, likeCount: likeCount!, disLikeCount: dislikeCount!, commentCount: commnetCount!, date: news.date))
+                                                }
+                                                if self.newsArray.count == self.mainNewsArray.count{
+                                                    self.mainNewsArray.sort(by: {$0.num < $1.num})
+                                                    self.mainTable.reloadData()
+                                                    HUD.hide()
+                                                    print("いいかもね")
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        }
                     }
                 }
             }
@@ -294,8 +300,10 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     
     @objc func titleTap(sender:UIButton){
-        num = sender.tag
-        performSegue(withIdentifier: "News", sender: nil)
+        if let url = NSURL(string: newsArray[sender.tag].url) {
+            let safariViewController = SFSafariViewController(url: url as URL)
+            present(safariViewController, animated: true, completion: nil)
+        }
     }
     
     @objc func commentTap(sender:UIButton){
@@ -311,10 +319,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "News"{
-            let newsViewController = segue.destination as! NewsViewController
-            newsViewController.url = self.newsArray[num].url
-        }else if segue.identifier == "Post"{
+        if segue.identifier == "Post"{
             let newsPostCommentViewController = segue.destination as! NewsPostCommentViewController
             newsPostCommentViewController.newsContents = self.newsArray[comnum]
             newsPostCommentViewController.date = self.date
