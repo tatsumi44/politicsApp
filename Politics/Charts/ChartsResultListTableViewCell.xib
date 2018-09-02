@@ -53,7 +53,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-06-vK0">
-                                <rect key="frame" x="8" y="0.0" width="284" height="32.5"/>
+                                <rect key="frame" x="8" y="8" width="284" height="24.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                             <constraint firstItem="c6w-qJ-rNh" firstAttribute="leading" secondItem="5W8-Bp-znh" secondAttribute="leading" constant="8" id="0Dc-5P-TM5"/>
                             <constraint firstAttribute="bottom" secondItem="c6w-qJ-rNh" secondAttribute="bottom" constant="8" id="1Kw-BR-acy"/>
                             <constraint firstAttribute="trailing" secondItem="c6w-qJ-rNh" secondAttribute="trailing" constant="8" id="3pN-Nj-Qxn"/>
-                            <constraint firstItem="nxD-06-vK0" firstAttribute="top" secondItem="5W8-Bp-znh" secondAttribute="top" id="KWa-eZ-ZP8"/>
+                            <constraint firstItem="nxD-06-vK0" firstAttribute="top" secondItem="5W8-Bp-znh" secondAttribute="top" constant="8" id="KWa-eZ-ZP8"/>
                             <constraint firstAttribute="trailing" secondItem="nxD-06-vK0" secondAttribute="trailing" constant="8" id="fhL-9t-BKE"/>
                             <constraint firstItem="nxD-06-vK0" firstAttribute="leading" secondItem="5W8-Bp-znh" secondAttribute="leading" constant="8" id="pap-uc-yDD"/>
                             <constraint firstItem="c6w-qJ-rNh" firstAttribute="top" secondItem="nxD-06-vK0" secondAttribute="bottom" id="xgG-As-dN6"/>

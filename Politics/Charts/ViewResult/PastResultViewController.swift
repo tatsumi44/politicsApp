@@ -42,10 +42,11 @@ class PastResultViewController: ChartsResultViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChartsResultListTableViewCell", for: indexPath) as! ChartsResultListTableViewCell
-        cell.bgView.backgroundColor = bgolors[indexPath.row] as? UIColor
+        let color = bgolors[indexPath.row] as? UIColor
+        cell.bgView.layer.borderColor = color?.cgColor
+        cell.bgView.layer.borderWidth = 4
         cell.bgView.layer.cornerRadius = 4
         cell.bgView.layer.masksToBounds = true
-        cell.numView.backgroundColor = bgolors[indexPath.row] as? UIColor
         cell.titleLabel.text = resultArray[indexPath.row].title
         cell.countLabel.text = "投票数 \(resultArray[indexPath.row].num1!)票"
         cell.percentLabel.text = "\((round(resultArray[indexPath.row].percent * 10)/10))%"

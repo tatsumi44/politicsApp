@@ -229,8 +229,8 @@
 		B9085B20211DA2EA0099DBE1 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				B9293498211FF46800637B16 /* ViewResult */,
 				B9085AD0211B3EF10099DBE1 /* Chart.storyboard */,
+				B9293498211FF46800637B16 /* ViewResult */,
 				B9085B1C211C431C0099DBE1 /* VoteListViewController.swift */,
 				B9085B21211DA30C0099DBE1 /* VoteViewController.swift */,
 				B9085B23211DE8010099DBE1 /* ChartsResultViewController.swift */,

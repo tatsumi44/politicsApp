@@ -9,9 +9,8 @@
 import UIKit
 import Firebase
 import Charts
+import PKHUD
 class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
-    
-    
     
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var mainTable: UITableView!
@@ -30,6 +29,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
     var bgolors = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        HUD.show(.progress)
         self.mainTable.register(UINib(nibName: "ChartsResultListTableViewCell", bundle: nil), forCellReuseIdentifier: "ChartsResultListTableViewCell")
         print("今日は\(day)")
         if day == "apple"{
@@ -60,17 +60,13 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                                 self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                             }
                         }
-                        
-                        
                         self.setDataCount(self.numArray.count, range: 100)
                         let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
                         self.pieChart.centerAttributedText = centerText
                         print(self.resultArray)
                         self.resultArray.sort(by: {$0.num1 > $1.num1})
-//                        self.resultArray.forEach({ (diff) in
-//                            print("\(diff.title!) \(diff.num1!)")
-//                        })
                         self.mainTable.reloadData()
+                        HUD.hide()
                         print(self.numArray)
                         self.count = 0
                         self.sum = 0.0
@@ -134,6 +130,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
         //
     }
     override func updateChartData() {
+        HUD.show(.progress)
         if self.shouldHideData {
             pieChart.data = nil
             return
@@ -172,6 +169,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                             self.pieChart.centerAttributedText = centerText
                             print(self.resultArray)
                             self.mainTable.reloadData()
+                            HUD.hide()
                             print(self.numArray)
                             dicVal = []
                             dicKeys = []
@@ -213,6 +211,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                             self.pieChart.centerAttributedText = centerText
                             print(self.resultArray)
                             self.mainTable.reloadData()
+                            HUD.hide()
                             print(self.numArray)
                             self.saveData.removeObject(forKey: "place")
                             self.saveData.removeObject(forKey: "age")
@@ -258,6 +257,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                             self.pieChart.centerAttributedText = centerText
                             print(self.resultArray)
                             self.mainTable.reloadData()
+                            HUD.hide()
                             print(self.numArray)
                             self.saveData.removeObject(forKey: "place")
                             self.saveData.removeObject(forKey: "age")
@@ -302,6 +302,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                             self.pieChart.centerAttributedText = centerText
                             print(self.resultArray)
                             self.mainTable.reloadData()
+                            HUD.hide()
                             print(self.numArray)
                             self.saveData.removeObject(forKey: "place")
                             self.saveData.removeObject(forKey: "age")
@@ -399,10 +400,12 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChartsResultListTableViewCell", for: indexPath) as! ChartsResultListTableViewCell
-        cell.bgView.backgroundColor = bgolors[indexPath.row] as? UIColor
+        let color = bgolors[indexPath.row] as? UIColor
+        cell.bgView.layer.borderColor = color?.cgColor
+        cell.bgView.layer.borderWidth = 4
         cell.bgView.layer.cornerRadius = 4
         cell.bgView.layer.masksToBounds = true
-        cell.numView.backgroundColor = bgolors[indexPath.row] as? UIColor
+//        cell.numView.backgroundColor = bgolors[indexPath.row] as? UIColor
         cell.titleLabel.text = resultArray[indexPath.row].title
         cell.countLabel.text = "投票数 \(resultArray[indexPath.row].num1!)票"
         cell.percentLabel.text = "\((round(resultArray[indexPath.row].percent * 10)/10))%"

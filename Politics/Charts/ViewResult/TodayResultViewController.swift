@@ -41,6 +41,9 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
         performSegue(withIdentifier: "a", sender: nil)
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
