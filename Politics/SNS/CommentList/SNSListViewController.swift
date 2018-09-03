@@ -11,6 +11,7 @@ import Firebase
 import WCLShineButton
 import RealmSwift
 import PKHUD
+import SafariServices
 class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mainTable: UITableView!
@@ -32,6 +33,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         searchBar.delegate = self
         num = -1
         self.mainTable.register(UINib(nibName: "SNSTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell2")
+        self.mainTable.register(UINib(nibName: "SNSwithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "SNSwithUrlTableViewCell")
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +71,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 var num = 0
                 for doc in snap!.documents{
                     let data = doc.data()
-                    self.middleContents.append(MiddleGetDtail(num: num, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, date: data["date"] as! NSDate))
+                    self.middleContents.append(MiddleGetDtail(num: num, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, url: data["url"] as! String, date: data["date"] as! NSDate))
                     num += 1
                 }
                 
@@ -95,7 +97,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                                         }else{
                                             let commentNum = snap?.count
                                             print("4\(self.middleContents[i].title)")
-                                            self.contents.append(UIViewController.GetDetail(num: self.middleContents[i].num, title: self.middleContents[i].title, contents: self.middleContents[i].contents, tagArray:self.middleContents[i].tagArray, uid: self.middleContents[i].uid, username: self.middleContents[i].username, docID: self.middleContents[i].docID, likeCount: likesNum!, disLikeCount: disLikeNum!, commentCount: commentNum!, date: self.middleContents[i].date))
+                                            self.contents.append(UIViewController.GetDetail(num: self.middleContents[i].num, title: self.middleContents[i].title, contents: self.middleContents[i].contents, tagArray:self.middleContents[i].tagArray, uid: self.middleContents[i].uid, username: self.middleContents[i].username, docID: self.middleContents[i].docID, url: self.middleContents[i].url, likeCount: likesNum!, disLikeCount: disLikeNum!, commentCount: commentNum!, date: self.middleContents[i].date))
                                             //                                            num += 1
                                         }
                                         if self.contents.count == self.middleContents.count{
@@ -119,59 +121,124 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
-        cell.tag = indexPath.row + 1
-        cell.nameLabel.text = self.contents[indexPath.row].username
-        cell.titleLabel.text = self.contents[indexPath.row].title
-        cell.contentLabel.text = self.contents[indexPath.row].contents
-        var param2 = WCLShineParams()
-        param2.bigShineColor = UIColor(rgb: (255, 195, 55))
-        cell.likebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
-        cell.likebtn.params = param2
-        cell.likebtn.tag = indexPath.row
         
-        if self.goodArray.index(of:contents[indexPath.row].docID ) != nil{
-            cell.likebtn.isSelected = true
-        }else{
-            cell.likebtn.isSelected = false
-        }
-        cell.likebtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
-        var param3 = WCLShineParams()
-        param3.bigShineColor = UIColor(rgb: (18, 255, 255))
-        cell.dislikebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
-        cell.dislikebtn.params = param3
-        cell.dislikebtn.tag = indexPath.row
         
-        if self.badArray.index(of: contents[indexPath.row].docID) != nil{
-            cell.dislikebtn.isSelected = true
-        }else{
-            cell.dislikebtn.isSelected = false
-        }
-        cell.dislikebtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
-        cell.commentBtn.imageView?.image = UIImage(named: "comment1")
-        let content = self.contents[indexPath.row].tagArray
-        var keys = [String](content!.keys)
-        print(keys)
-        switch keys.count {
-        case 1:
-            cell.label1.text = keys[0]
-            cell.label2.isHidden = true
-            cell.label3.isHidden = true
-        case 2:
-            cell.label1.text = keys[0]
-            cell.label2.text = keys[1]
-            cell.label3.isHidden = true
+        switch contents[indexPath.row].url {
+        case "":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
+            cell.tag = indexPath.row + 1
+            cell.nameLabel.text = self.contents[indexPath.row].username
+            cell.titleLabel.text = self.contents[indexPath.row].title
+            cell.contentLabel.text = self.contents[indexPath.row].contents
+            var param2 = WCLShineParams()
+            param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+            cell.likebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+            cell.likebtn.params = param2
+            cell.likebtn.tag = indexPath.row
+            
+            if self.goodArray.index(of:contents[indexPath.row].docID ) != nil{
+                cell.likebtn.isSelected = true
+            }else{
+                cell.likebtn.isSelected = false
+            }
+            cell.likebtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+            var param3 = WCLShineParams()
+            param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+            cell.dislikebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+            cell.dislikebtn.params = param3
+            cell.dislikebtn.tag = indexPath.row
+            
+            if self.badArray.index(of: contents[indexPath.row].docID) != nil{
+                cell.dislikebtn.isSelected = true
+            }else{
+                cell.dislikebtn.isSelected = false
+            }
+            cell.dislikebtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+            cell.commentBtn.imageView?.image = UIImage(named: "comment1")
+            let content = self.contents[indexPath.row].tagArray
+            var keys = [String](content!.keys)
+            print(keys)
+            switch keys.count {
+            case 1:
+                cell.label1.text = keys[0]
+                cell.label2.isHidden = true
+                cell.label3.isHidden = true
+            case 2:
+                cell.label1.text = keys[0]
+                cell.label2.text = keys[1]
+                cell.label3.isHidden = true
+            default:
+                cell.label1.text = keys[0]
+                cell.label2.text = keys[1]
+                cell.label3.text = keys[2]
+            }
+            cell.commentBtn.tag = indexPath.row
+            cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
+            cell.commenNum.text = "\(contents[indexPath.row].commentCount!) comments"
+            cell.likeNum.text = "\(contents[indexPath.row].likeCount!) good"
+            cell.disLikeNum.text = "\(contents[indexPath.row].disLikeCount!) bad"
+            return cell
         default:
-            cell.label1.text = keys[0]
-            cell.label2.text = keys[1]
-            cell.label3.text = keys[2]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SNSwithUrlTableViewCell", for: indexPath) as! SNSwithUrlTableViewCell
+            cell.tag = indexPath.row + 1
+            cell.nameLabel.text = self.contents[indexPath.row].username
+            cell.titleLabel.text = self.contents[indexPath.row].title
+            cell.contentLabel.text = self.contents[indexPath.row].contents
+            var param2 = WCLShineParams()
+            param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+            cell.likeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+            cell.likeBtn.params = param2
+            cell.likeBtn.tag = indexPath.row
+            
+            if self.goodArray.index(of:contents[indexPath.row].docID ) != nil{
+                cell.likeBtn.isSelected = true
+            }else{
+                cell.likeBtn.isSelected = false
+            }
+            cell.likeBtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+            var param3 = WCLShineParams()
+            param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+            cell.disLikeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+            cell.disLikeBtn.params = param3
+            cell.disLikeBtn.tag = indexPath.row
+            
+            if self.badArray.index(of: contents[indexPath.row].docID) != nil{
+                cell.disLikeBtn.isSelected = true
+            }else{
+                cell.disLikeBtn.isSelected = false
+            }
+            cell.disLikeBtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+            cell.commentBtn.imageView?.image = UIImage(named: "comment1")
+            let content = self.contents[indexPath.row].tagArray
+            var keys = [String](content!.keys)
+            print(keys)
+            switch keys.count {
+            case 1:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.isHidden = true
+                cell.tag3Label.isHidden = true
+            case 2:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.text = keys[1]
+                cell.tag3Label.isHidden = true
+            default:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.text = keys[1]
+                cell.tag3Label.text = keys[2]
+                
+            }
+            cell.commentBtn.tag = indexPath.row
+            cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
+            cell.commnetCount.text = "\(contents[indexPath.row].commentCount!) comments"
+            cell.likeCount.text = "\(contents[indexPath.row].likeCount!) good"
+            cell.disLikeCount.text = "\(contents[indexPath.row].disLikeCount!) bad"
+            cell.urlLabel.text = contents[indexPath.row].url
+            cell.urlBtn.tag = indexPath.row
+            cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
+            return cell
+            
         }
-        cell.commentBtn.tag = indexPath.row
-        cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
-        cell.commenNum.text = "\(contents[indexPath.row].commentCount!) comments"
-        cell.likeNum.text = "\(contents[indexPath.row].likeCount!) good"
-        cell.disLikeNum.text = "\(contents[indexPath.row].disLikeCount!) bad"
-        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -179,6 +246,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         performSegue(withIdentifier: "Go", sender: nil)
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+    }
+    @objc func urlTap(sender:UIButton){
+        if let url = NSURL(string: contents[sender.tag].url) {
+            let safariViewController = SFSafariViewController(url: url as URL)
+            present(safariViewController, animated: true, completion: nil)
         }
     }
     @objc func commentTap(sender:UIButton){
@@ -360,7 +433,7 @@ extension SNSListViewController:UISearchBarDelegate{
                         var num = 0
                         for doc in snap!.documents{
                             let data = doc.data()
-                            self.resarchmiddleContents.append(MiddleGetDtail(num: num, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, date: data["date"] as! NSDate))
+                            self.resarchmiddleContents.append(MiddleGetDtail(num: num, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, url: data["url"] as! String, date: data["date"] as! NSDate))
                             num += 1
                         }
                         for content in self.resarchmiddleContents{
@@ -379,7 +452,7 @@ extension SNSListViewController:UISearchBarDelegate{
                                                     self.alert(message: error.localizedDescription)
                                                 }else{
                                                     let commentNum = snap?.count
-                                                    self.resarchContents.append(GetDetail(num: content.num, title: content.title, contents: content.contents, tagArray: content.tagArray, uid: content.uid, username: content.username, docID: content.docID, likeCount: likesNum!, disLikeCount: disLikeNum!, commentCount: commentNum!, date: content.date))
+                                                    self.resarchContents.append(GetDetail(num: content.num, title: content.title, contents: content.contents, tagArray: content.tagArray, uid: content.uid, username: content.username, docID: content.docID, url: content.url, likeCount: likesNum!, disLikeCount: disLikeNum!, commentCount: commentNum!, date: content.date))
                                                 }
                                                 if self.resarchContents.count == self.resarchmiddleContents.count{
                                                     print(self.resarchContents)

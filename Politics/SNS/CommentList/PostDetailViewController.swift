@@ -14,6 +14,7 @@ class PostDetailViewController: FormViewController  {
     
     let db = Firestore.firestore()
     let realm = try! Realm()
+    var url:String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +59,11 @@ class PostDetailViewController: FormViewController  {
         
         form +++
             Section()
+            <<< URLRow("url") {
+                $0.title = "URL"
+                $0.placeholder = "URLを入力"
+//                $0.value = URL(string: "http://xmartlabs.com")
+            }
             <<< ButtonRow(){
                 $0.title = "投稿する"
                 $0.cell.tintColor = UIColor.orange
@@ -74,27 +80,34 @@ class PostDetailViewController: FormViewController  {
                             print(tag)
                             dateTagArray["\(tag)"] = int64
                         }
+                        if values["url"] as? String != nil{
+                            self.url = values["url"] as? String
+                        }else{
+                            self.url = ""
+                        }
                         let user = self.realm.objects(Userdata.self)
                         print(dateTagArray)
                         if tagArray.count != 0{
-                            let postContent = PostDetail(title: title, contents: content, tagArray: dateTagArray, uid: user[0].userID, username: user[0].name, date: date)
+                            let postContent = PostDetail(title: title, contents: content, tagArray: dateTagArray, uid: user[0].userID, username: user[0].name, url: self.url, date: date)
                             self.db.collection("SNS").addDocument(data: [
                                 "title": postContent.title,
                                 "content": postContent.contents,
                                 "tags": postContent.tagArray,
                                 "uid": postContent.uid,
                                 "name": postContent.username,
+                                "url":postContent.url,
                                 "date": postContent.date
                                 ])
                             self.navigationController?.popToRootViewController(animated: true)
                         }else{
-                            let postContentWithoutTag = PostDetail(title: title, contents: content, tagArray: ["何もありません" : int64], uid: user[0].userID, username: user[0].name, date: date)
+                            let postContentWithoutTag = PostDetail(title: title, contents: content, tagArray: ["何もありません" : int64], uid: user[0].userID, username: user[0].name, url: self.url, date: date)
                             self.db.collection("SNS").addDocument(data: [
                                 "title": postContentWithoutTag.title,
                                 "content": postContentWithoutTag.contents,
                                 "tags": postContentWithoutTag.tagArray,
                                 "uid": postContentWithoutTag.uid,
                                 "name": postContentWithoutTag.username,
+                                "url":postContentWithoutTag.url,
                                 "date": postContentWithoutTag.date
                                 ])
                             self.navigationController?.popToRootViewController(animated: true)

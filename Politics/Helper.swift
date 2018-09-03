@@ -64,13 +64,15 @@ extension UIViewController{
         var tagArray:[String:Int64]!
         var uid:String!
         var username:String!
+        var url:String!
         var date:NSDate!
-        init(title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,date:NSDate) {
+        init(title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,url:String,date:NSDate) {
             self.title = title
             self.contents = contents
             self.tagArray = tagArray
             self.uid = uid
             self.username = username
+            self.url = url
             self.date = date
         }
     }
@@ -82,8 +84,9 @@ extension UIViewController{
         var uid:String!
         var username:String!
         var docID:String!
+        var url:String!
         var date:NSDate!
-        init(num:Int,title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,docID:String,date:NSDate) {
+        init(num:Int,title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,docID:String,url:String,date:NSDate) {
             self.num = num
             self.title = title
             self.contents = contents
@@ -91,6 +94,7 @@ extension UIViewController{
             self.uid = uid
             self.username = username
             self.docID = docID
+            self.url = url
             self.date = date
         }
     }
@@ -103,11 +107,12 @@ extension UIViewController{
         var uid:String!
         var username:String!
         var docID:String!
+        var url:String!
         var likeCount:Int!
         var disLikeCount:Int!
         var commentCount:Int!
         var date:NSDate!
-        init(num:Int,title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,docID:String,likeCount:Int,disLikeCount:Int,commentCount:Int,date:NSDate) {
+        init(num:Int,title:String,contents:String,tagArray:[String:Int64],uid:String,username:String,docID:String,url:String,likeCount:Int,disLikeCount:Int,commentCount:Int,date:NSDate) {
             self.num = num
             self.title = title
             self.contents = contents
@@ -115,6 +120,7 @@ extension UIViewController{
             self.uid = uid
             self.username = username
             self.docID = docID
+            self.url = url
             self.likeCount = likeCount
             self.disLikeCount = disLikeCount
             self.commentCount = commentCount

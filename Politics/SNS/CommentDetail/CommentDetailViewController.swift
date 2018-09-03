@@ -12,6 +12,7 @@ import WCLShineButton
 import Firebase
 import RealmSwift
 import SwiftDate
+import SafariServices
 class CommentDetailViewController: UIViewController,UITextViewDelegate {
     let SCREEN_SIZE = UIScreen.main.bounds.size
     @IBOutlet weak var postView: UIView!
@@ -37,6 +38,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         self.mainTable.register(UINib(nibName: "commentTableViewCell", bundle: nil), forCellReuseIdentifier: "commentTableViewCell")
         self.mainTable.register(UINib(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: "TagTableViewCell")
         self.mainTable.register(UINib(nibName: "ResponseTableViewCell", bundle: nil), forCellReuseIdentifier: "ResponseTableViewCell")
+        self.mainTable.register(UINib(nibName: "commentWithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "commentWithUrlTableViewCell")
         let tags = content.tagArray
         keysArray = [String](tags!.keys)
         db.collection("SNS").document(content.docID).collection("response").order(by: "date", descending: true).getDocuments { (snap, error) in
@@ -52,7 +54,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                 self.mainTable.reloadData()
             }
         }
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,14 +101,14 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                 }
             })
         }
-
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-
+        
     }
     
     @objc func handleKeyboardWillShowNotification(_ notification: Notification){
@@ -115,12 +117,12 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else {
                 return
         }
-
+        
         UIView.animate(withDuration: duration, animations: {
             let transform = CGAffineTransform(translationX: 0, y: -(keyboardFrame.size.height + 2) + tabheight!)
             self.postView.transform = transform
         }, completion: nil)
-   }
+    }
     
     @objc func handleKeybordWillHideNotification(_ notification: Notification){
         let height = UIScreen.main.bounds.size.height
@@ -128,7 +130,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else {
             return
         }
-
+        
         UIView.animate(withDuration: duration, animations: {
             let transform = CGAffineTransform (translationX: 0, y: 0)
             self.postView.transform = transform
@@ -142,7 +144,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         //キーボードを閉じる処理
         view.endEditing(true)
     }
-
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         print(text)
         if text == "\n" {
@@ -177,7 +179,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         }else{
             alert(message: "ちゃんと入力してや！")
         }
-
+        
         
     }
 }
@@ -191,12 +193,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
         //ShopTableViewCell.swiftで設定したメソッドを呼び出す
         cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//        //Choose your custom row height
-//    }
-
-    
+ 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
     }
@@ -207,35 +204,72 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "commentTableViewCell", for: indexPath) as! commentTableViewCell
-            cell.nameLabel.text = content.username
-            cell.title.text = content.title
-            cell.content.text = content.contents
-            var param2 = WCLShineParams()
-            param2.bigShineColor = UIColor(rgb: (255, 195, 55))
-            cell.btn1.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
-            cell.btn1.params = param2
-            cell.btn1.tag = indexPath.row
-            if self.goodArray.index(of:content.docID) != nil{
-                cell.btn1.isSelected = true
-            }else{
-                cell.btn1.isSelected = false
+            switch content.url{
+            case "":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "commentTableViewCell", for: indexPath) as! commentTableViewCell
+                cell.nameLabel.text = content.username
+                cell.title.text = content.title
+                cell.content.text = content.contents
+                var param2 = WCLShineParams()
+                param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+                cell.btn1.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+                cell.btn1.params = param2
+                cell.btn1.tag = indexPath.row
+                if self.goodArray.index(of:content.docID) != nil{
+                    cell.btn1.isSelected = true
+                }else{
+                    cell.btn1.isSelected = false
+                }
+                cell.btn1.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+                var param3 = WCLShineParams()
+                param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+                cell.btn2.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+                cell.btn2.params = param3
+                cell.btn2.tag = indexPath.row
+                if self.badArray.index(of: content.docID) != nil{
+                    cell.btn2.isSelected = true
+                }else{
+                    cell.btn2.isSelected = false
+                }
+                cell.btn2.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+                cell.likecount.text = "\(content.likeCount!) good"
+                cell.dislikecount.text = "\(content.disLikeCount!) bad"
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "commentWithUrlTableViewCell", for: indexPath) as! commentWithUrlTableViewCell
+                cell.nameLabel.text = content.username
+                cell.titleLabel.text = content.title
+                cell.contentLabel.text = content.contents
+                var param2 = WCLShineParams()
+                param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+                cell.likeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+                cell.likeBtn.params = param2
+                cell.likeBtn.tag = indexPath.row
+                if self.goodArray.index(of:content.docID) != nil{
+                    cell.likeBtn.isSelected = true
+                }else{
+                    cell.likeBtn.isSelected = false
+                }
+                cell.likeBtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+                var param3 = WCLShineParams()
+                param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+                cell.disLikeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+                cell.disLikeBtn.params = param3
+                cell.disLikeBtn.tag = indexPath.row
+                if self.badArray.index(of: content.docID) != nil{
+                    cell.disLikeBtn.isSelected = true
+                }else{
+                    cell.disLikeBtn.isSelected = false
+                }
+                cell.disLikeBtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+                cell.likeCount.text = "\(content.likeCount!) good"
+                cell.disLikeCount.text = "\(content.disLikeCount!) bad"
+                cell.urlLabel.text = content.url
+                cell.urlBtn.tag = indexPath.row
+                cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
+                return cell
             }
-            cell.btn1.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
-            var param3 = WCLShineParams()
-            param3.bigShineColor = UIColor(rgb: (18, 255, 255))
-            cell.btn2.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
-            cell.btn2.params = param3
-            cell.btn2.tag = indexPath.row
-            if self.badArray.index(of: content.docID) != nil{
-                cell.btn2.isSelected = true
-            }else{
-                cell.btn2.isSelected = false
-            }
-            cell.btn2.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
-            cell.likecount.text = "\(content.likeCount!) good"
-            cell.dislikecount.text = "\(content.disLikeCount!) bad"
-            return cell
+            
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TagTableViewCell", for: indexPath) as! TagTableViewCell
             let tagnum = content.tagArray.count
@@ -253,7 +287,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
             cell.commentLabel.text = responseArray[indexPath.row - 2].comment
             cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
             return cell
-
+            
         }
     }
     
@@ -324,6 +358,13 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
             }
         }
         print("Clicked \(sender.isSelected)")
+    }
+    
+    @objc func urlTap(sender:UIButton){
+        if let url = NSURL(string: content.url) {
+            let safariViewController = SFSafariViewController(url: url as URL)
+            present(safariViewController, animated: true, completion: nil)
+        }
     }
     
     @objc func dislikeTap(sender:WCLShineButton){
@@ -397,20 +438,20 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
 
 
 extension CommentDetailViewController:UICollectionViewDelegate,UICollectionViewDataSource{
-  
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return content.tagArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCollectionViewCell", for: indexPath) as! TagCollectionViewCell
         cell.layer.cornerRadius = 4
         cell.layer.masksToBounds = true
         cell.tagLabel.text = keysArray[indexPath.row]
         return cell
-
+        
     }
     
     

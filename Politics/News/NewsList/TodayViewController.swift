@@ -36,7 +36,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         
         //        mainTable.frame.size.height = UIScreen.main.bounds.height - navBarHeight - 40 - tabheight
-        mainTable.frame.size.height = 300
+
         self.mainTable.register(UINib(nibName: "NewsTodayTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTodayTableViewCell")
         
         // Do any additional setup after loading the view.
@@ -47,7 +47,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        tableHeight.constant = UIScreen.main.bounds.height - navBarHeight - 40 - tabheight
+
     }
     
     func getNews(date:String){
