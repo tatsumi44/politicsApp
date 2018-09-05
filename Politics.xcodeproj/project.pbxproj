@@ -30,6 +30,8 @@
 		B911E72A2129B258004728C0 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911E7292129B258004728C0 /* SearchDetailViewController.swift */; };
 		B9179C57213D8260006F4352 /* SNSwithUrlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9179C55213D8260006F4352 /* SNSwithUrlTableViewCell.swift */; };
 		B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */; };
+		B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */; };
+		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
 		B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92327C02134360600141A01 /* SNSPostViewController.swift */; };
 		B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9293499211FF4A900637B16 /* ViewResultViewController.swift */; };
 		B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349B21200D4800637B16 /* TodayResultViewController.swift */; };
@@ -107,6 +109,8 @@
 		B911E7292129B258004728C0 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		B9179C55213D8260006F4352 /* SNSwithUrlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSwithUrlTableViewCell.swift; sourceTree = "<group>"; };
 		B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SNSwithUrlTableViewCell.xib; sourceTree = "<group>"; };
+		B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
+		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
 		B92327C02134360600141A01 /* SNSPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSPostViewController.swift; sourceTree = "<group>"; };
 		B9293499211FF4A900637B16 /* ViewResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewResultViewController.swift; sourceTree = "<group>"; };
 		B929349B21200D4800637B16 /* TodayResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResultViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				B92934AD2120AAB700637B16 /* PastResultViewController.swift */,
 				B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */,
 				B92934B12120C62B00637B16 /* MyPastFormViewController.swift */,
+				B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */,
+				B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */,
 			);
 			path = ViewResult;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				B9FE615A2126B3C800DFF419 /* CommentDetailViewController.swift in Sources */,
 				B9FE614C2125572700DFF419 /* SNSListViewController.swift in Sources */,
 				B9FC93AB212FE5570029EF12 /* ThreeDaysAgoViewController.swift in Sources */,
+				B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */,
 				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
 				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
@@ -591,6 +598,7 @@
 				B9FE61632126F43D00DFF419 /* TagCollectionViewCell.swift in Sources */,
 				B92934A221200D9000637B16 /* ThreeDaysAgoResultViewController.swift in Sources */,
 				B9FC93B521304B980029EF12 /* NewsPostCommentViewController.swift in Sources */,
+				B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */,
 				B92934A621200DBB00637B16 /* FiveDaysAgoResultViewController.swift in Sources */,
 				B9085B1D211C431C0099DBE1 /* VoteListViewController.swift in Sources */,
 				B9FC93A7212FE5310029EF12 /* OneDayAgoViewController.swift in Sources */,

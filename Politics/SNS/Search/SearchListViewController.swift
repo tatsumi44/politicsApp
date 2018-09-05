@@ -10,6 +10,7 @@ import UIKit
 import WCLShineButton
 import RealmSwift
 import Firebase
+import SafariServices
 class SearchListViewController: ViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var mainTable: UITableView!
@@ -25,6 +26,7 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
         mainTable.dataSource = self
         mainTable.delegate = self
         self.mainTable.register(UINib(nibName: "SNSTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell2")
+        self.mainTable.register(UINib(nibName: "SNSwithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "SNSwithUrlTableViewCell")
         
 
         
@@ -51,56 +53,125 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
-        cell.tag = indexPath.row + 1
-        cell.nameLabel.text = resarchContents[indexPath.row].username
-        cell.titleLabel.text = resarchContents[indexPath.row].title
-        cell.contentLabel.text = resarchContents[indexPath.row].contents
-        var param2 = WCLShineParams()
-        param2.bigShineColor = UIColor(rgb: (255, 195, 55))
-        cell.likebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
-        cell.likebtn.params = param2
-        cell.likebtn.tag = indexPath.row
-        cell.likebtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
-        if self.goodArray.index(of:resarchContents[indexPath.row].docID ) != nil{
-            cell.likebtn.isSelected = true
-        }else{
-            cell.likebtn.isSelected = false
-        }
-        var param3 = WCLShineParams()
-        param3.bigShineColor = UIColor(rgb: (18, 255, 255))
-        cell.dislikebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
-        cell.dislikebtn.params = param3
-        cell.dislikebtn.tag = indexPath.row
-        cell.dislikebtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
-        if self.badArray.index(of: resarchContents[indexPath.row].docID) != nil{
-            cell.dislikebtn.isSelected = true
-        }else{
-            cell.dislikebtn.isSelected = false
-        }
-        cell.commentBtn.imageView?.image = UIImage(named: "comment1")
-        var keys = [String](resarchContents[indexPath.row].tagArray.keys)
-        print(keys)
-        switch keys.count {
-        case 1:
-            cell.label1.text = keys[0]
-            cell.label2.isHidden = true
-            cell.label3.isHidden = true
-        case 2:
-            cell.label1.text = keys[0]
-            cell.label2.text = keys[1]
-            cell.label3.isHidden = true
+        switch resarchContents[indexPath.row].url {
+        case "":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
+            cell.tag = indexPath.row
+            cell.nameLabel.text = resarchContents[indexPath.row].username
+            cell.titleLabel.text = resarchContents[indexPath.row].title
+            cell.contentLabel.text = resarchContents[indexPath.row].contents
+            var param2 = WCLShineParams()
+            param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+            cell.likebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+            cell.likebtn.params = param2
+            cell.likebtn.tag = indexPath.row
+            cell.likebtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+            if self.goodArray.index(of:resarchContents[indexPath.row].docID ) != nil{
+                cell.likebtn.isSelected = true
+            }else{
+                cell.likebtn.isSelected = false
+            }
+            var param3 = WCLShineParams()
+            param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+            cell.dislikebtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+            cell.dislikebtn.params = param3
+            cell.dislikebtn.tag = indexPath.row
+            cell.dislikebtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+            if self.badArray.index(of: resarchContents[indexPath.row].docID) != nil{
+                cell.dislikebtn.isSelected = true
+            }else{
+                cell.dislikebtn.isSelected = false
+            }
+            cell.commentBtn.imageView?.image = UIImage(named: "comment1")
+            var keys = [String](resarchContents[indexPath.row].tagArray.keys)
+            print(keys)
+            switch keys.count {
+            case 1:
+                cell.label1.text = keys[0]
+                cell.label2.isHidden = true
+                cell.label3.isHidden = true
+            case 2:
+                cell.label1.text = keys[0]
+                cell.label2.text = keys[1]
+                cell.label3.isHidden = true
+            default:
+                cell.label1.text = keys[0]
+                cell.label2.text = keys[1]
+                cell.label3.text = keys[2]
+            }
+            cell.commentBtn.tag = indexPath.row
+            cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
+            cell.commenNum.text = "\(resarchContents[indexPath.row].commentCount!) comments"
+            cell.likeNum.text = "\(resarchContents[indexPath.row].likeCount!) good"
+            cell.disLikeNum.text = "\(resarchContents[indexPath.row].disLikeCount!) bad"
+            return cell
         default:
-            cell.label1.text = keys[0]
-            cell.label2.text = keys[1]
-            cell.label3.text = keys[2]
+             let cell = tableView.dequeueReusableCell(withIdentifier: "SNSwithUrlTableViewCell", for: indexPath) as! SNSwithUrlTableViewCell
+             cell.tag = indexPath.row
+             cell.nameLabel.text = resarchContents[indexPath.row].username
+             cell.titleLabel.text = resarchContents[indexPath.row].title
+             cell.contentLabel.text = resarchContents[indexPath.row].contents
+             var param2 = WCLShineParams()
+             param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+             cell.likeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+             cell.likeBtn.params = param2
+             cell.likeBtn.tag = indexPath.row
+             cell.likeBtn.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+             if self.goodArray.index(of:resarchContents[indexPath.row].docID ) != nil{
+                cell.likeBtn.isSelected = true
+             }else{
+                cell.likeBtn.isSelected = false
+             }
+             var param3 = WCLShineParams()
+             param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+             cell.disLikeBtn.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+             cell.disLikeBtn.params = param3
+             cell.disLikeBtn.tag = indexPath.row
+             cell.disLikeBtn.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+             if self.badArray.index(of: resarchContents[indexPath.row].docID) != nil{
+                cell.disLikeBtn.isSelected = true
+             }else{
+                cell.disLikeBtn.isSelected = false
+             }
+             cell.commentBtn.imageView?.image = UIImage(named: "comment1")
+             var keys = [String](resarchContents[indexPath.row].tagArray.keys)
+             print(keys)
+             switch keys.count {
+             case 1:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.isHidden = true
+                cell.tag3Label.isHidden = true
+             case 2:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.text = keys[1]
+                cell.tag3Label.isHidden = true
+             default:
+                cell.tag1Label.text = keys[0]
+                cell.tag2Label.text = keys[1]
+                cell.tag3Label.text = keys[2]
+             }
+             cell.commentBtn.tag = indexPath.row
+             cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
+             cell.commnetCount.text = "\(resarchContents[indexPath.row].commentCount!) comments"
+             cell.likeCount.text = "\(resarchContents[indexPath.row].likeCount!) good"
+             cell.disLikeCount.text = "\(resarchContents[indexPath.row].disLikeCount!) bad"
+             cell.commentBtn.tag = indexPath.row
+             cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
+             cell.commnetCount.text = "\(resarchContents[indexPath.row].commentCount!) comments"
+             cell.likeCount.text = "\(resarchContents[indexPath.row].likeCount!) good"
+             cell.disLikeCount.text = "\(resarchContents[indexPath.row].disLikeCount!) bad"
+             cell.urlLabel.text = resarchContents[indexPath.row].url
+             cell.urlBtn.tag = indexPath.row
+             cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
+            return cell
         }
-        cell.commentBtn.tag = indexPath.row
-        cell.commentBtn.addTarget(self, action: #selector(self.commentTap(sender:)), for: .touchUpInside)
-        cell.commenNum.text = "\(resarchContents[indexPath.row].commentCount!) comments"
-        cell.likeNum.text = "\(resarchContents[indexPath.row].likeCount!) good"
-        cell.disLikeNum.text = "\(resarchContents[indexPath.row].disLikeCount!) bad"
-        return cell
+        
+    }
+    @objc func urlTap(sender:UIButton){
+        if let url = NSURL(string: resarchContents[sender.tag].url) {
+            let safariViewController = SFSafariViewController(url: url as URL)
+            present(safariViewController, animated: true, completion: nil)
+        }
     }
     @objc func commentTap(sender:UIButton){
         postNum = sender.tag

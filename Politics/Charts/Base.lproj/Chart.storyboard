@@ -110,7 +110,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Je-oY-j4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2161" y="920"/>
+            <point key="canvasLocation" x="1484" y="915"/>
+        </scene>
+        <!--Detail Weekly View Controller-->
+        <scene sceneID="F3M-Gp-IFq">
+            <objects>
+                <viewController id="cNg-iD-oWH" customClass="DetailWeeklyViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cWI-Wg-mUw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Jox-JE-2xf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fk-Ng-4hS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="1701"/>
+        </scene>
+        <!--Weekly View Controller-->
+        <scene sceneID="pPl-a2-g24">
+            <objects>
+                <viewController storyboardIdentifier="WeeklyViewController" id="YYX-tc-Rru" customClass="WeeklyViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GI2-tI-iaP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yd7-Ib-7OI">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeeklyCell" id="8XW-9H-R60">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8XW-9H-R60" id="pVc-aX-NXb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Yd7-Ib-7OI" firstAttribute="top" secondItem="b2f-Qh-6Sj" secondAttribute="top" id="Dsn-xG-o70"/>
+                            <constraint firstItem="Yd7-Ib-7OI" firstAttribute="leading" secondItem="b2f-Qh-6Sj" secondAttribute="leading" id="K6I-0P-lUz"/>
+                            <constraint firstItem="Yd7-Ib-7OI" firstAttribute="bottom" secondItem="b2f-Qh-6Sj" secondAttribute="bottom" id="SLp-Na-b00"/>
+                            <constraint firstItem="Yd7-Ib-7OI" firstAttribute="trailing" secondItem="b2f-Qh-6Sj" secondAttribute="trailing" id="rDW-AK-W1g"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b2f-Qh-6Sj"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainTable" destination="Yd7-Ib-7OI" id="bLW-s3-qNV"/>
+                        <segue destination="cNg-iD-oWH" kind="show" identifier="GoWeekly" id="c9z-mF-uLQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X03-im-VYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="915.29235382308855"/>
         </scene>
         <!--Today Result View Controller-->
         <scene sceneID="tF6-R5-S9n">
@@ -598,6 +654,6 @@
         <image name="sort descending" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oyc-nD-van"/>
+        <segue reference="geX-kr-GTt"/>
     </inferredMetricsTieBreakers>
 </document>

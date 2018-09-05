@@ -126,7 +126,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         switch contents[indexPath.row].url {
         case "":
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
-            cell.tag = indexPath.row + 1
+            cell.tag = indexPath.row
             cell.nameLabel.text = self.contents[indexPath.row].username
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
@@ -180,7 +180,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SNSwithUrlTableViewCell", for: indexPath) as! SNSwithUrlTableViewCell
-            cell.tag = indexPath.row + 1
+            cell.tag = indexPath.row
             cell.nameLabel.text = self.contents[indexPath.row].username
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents

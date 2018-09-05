@@ -127,6 +127,31 @@ extension UIViewController{
             self.date = date
         }
     }
+    struct weeklyData {
+        var docID:String!
+        var title:String!
+        var questions:[String]!
+        init(docID:String,title:String,questions:[String]) {
+            self.docID = docID
+            self.title = title
+            self.questions = questions
+        }
+    }
+    
+    struct mainWeeklyData {
+        var docID:String!
+        var title:String!
+        var question:String!
+        var questionCount:Int!
+        var date:String!
+        init(docID:String,title:String,question:String,questionCount:Int,date:String) {
+            self.docID = docID
+            self.title = title
+            self.question = question
+            self.questionCount = questionCount
+            self.date = date
+        }
+    }
     
     struct GetResponse{
         var docID:String!

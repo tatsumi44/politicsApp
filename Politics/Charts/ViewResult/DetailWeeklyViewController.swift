@@ -1,17 +1,18 @@
 //
-//  SearchDetailViewController.swift
+//  DetailWeeklyViewController.swift
 //  Politics
 //
-//  Created by tatsumi kentaro on 2018/08/19.
+//  Created by tatsumi kentaro on 2018/09/06.
 //  Copyright © 2018年 tatsumi kentaro. All rights reserved.
 //
 
 import UIKit
 
-class SearchDetailViewController: CommentDetailViewController {
-
+class DetailWeeklyViewController: UIViewController {
+    var maincontentsArray = [mainWeeklyData]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(maincontentsArray.filter({$0.date == nowDate(num: 4)}))
 
         // Do any additional setup after loading the view.
     }
