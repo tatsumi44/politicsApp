@@ -131,10 +131,12 @@ extension UIViewController{
         var docID:String!
         var title:String!
         var questions:[String]!
-        init(docID:String,title:String,questions:[String]) {
+        var date:String!
+        init(docID:String,title:String,questions:[String],date:String) {
             self.docID = docID
             self.title = title
             self.questions = questions
+            self.date = date
         }
     }
     
@@ -287,6 +289,11 @@ extension  UIResponder{
         var date = Date()
         date = date - num.days
         return date.string(custom: "YYYY_MM_dd")
+    }
+    func shortNowDate(num:Int) -> String {
+        var date = Date()
+        date = date - num.days
+        return date.string(custom: "MM_dd")
     }
 }
 

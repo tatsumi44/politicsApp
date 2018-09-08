@@ -11,6 +11,7 @@ import Firebase
 import PKHUD
 class WeeklyViewController: UIViewController {
     let db = Firestore.firestore()
+    var mainQuestionArray = [String:[Qusetions]]()
     var contentsArray = [weeklyData]()
     var maincontentsArray = [mainWeeklyData]()
     var num:Int = 0
@@ -33,39 +34,39 @@ class WeeklyViewController: UIViewController {
                 self.mainTable.reloadData()
             }
         }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        mainQuestionArray = appDelegate.mainQuestionArray
+        print(mainQuestionArray)
         for i in 0..<7{
-            db.collection("questions").whereField("\(nowDate(num: i))", isEqualTo: true).getDocuments { (snap, error) in
-                if let error = error{
-                    self.alert(message: error.localizedDescription)
-                    HUD.hide()
-                }else{
-                    for doc in snap!.documents{
-                        self.contentsArray.append(weeklyData(docID: doc.documentID, title: doc["main_title"] as! String, questions: doc["question_array"] as! [String]))
-                    }
-                    for content in self.contentsArray{
-                        self.num = self.num + content.questions.count
-                        for question in content.questions{
-                            self.db.collection("\(self.nowDate(num: i))").document(content.docID).collection(question).getDocuments(completion: { (snap, error) in
-                                if let error = error{
-                                    self.alert(message: error.localizedDescription)
-                                    HUD.hide()
-                                }else{
-                                    self.maincontentsArray.append(mainWeeklyData(docID: content.docID, title: content.title, question: question, questionCount: (snap?.count)!, date: self.nowDate(num: i)))
-                                }
-                                if self.maincontentsArray.count == self.num{
-                                    let array = self.maincontentsArray.filter({$0.docID == self.contentsArray[1].docID}).filter({$0.date == self.nowDate(num: 4)})
-//                                    print(array)
-                                    HUD.hide()
-                                    
-                                }
-                            })
+            //その日の投票されているデータget
+            if let array = mainQuestionArray[nowDate(num: i)]{
+                for content in array{
+                    num = num + content.array.count
+                    print(num)
+                    for ques in content.array{
+                        db.collection(nowDate(num: i)).document(content.questionID).collection(ques).getDocuments { (snap, error) in
+                            if let error = error{
+                                self.alert(message: error.localizedDescription)
+                            }else{
+                                self.maincontentsArray.append(mainWeeklyData(docID: content.questionID, title: content.title, question: ques, questionCount: (snap?.count)!, date: self.nowDate(num: i)))
+                            }
+                            if self.maincontentsArray.count == self.num{
+//                                print(self.maincontentsArray)
+                                let array = self.maincontentsArray.filter({$0.docID == "5YROyYXLj9aIXsq0gIqZ"
+                                }).filter({$0.date == self.nowDate(num: 1)})
+//                                print(array)
+                                HUD.hide()
+                                
+                            }
                         }
                     }
                 }
             }
+            
         }
+ 
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,6 +92,7 @@ extension WeeklyViewController:UITableViewDataSource,UITableViewDelegate{
             let detailWeeklyViewController = segue.destination as! DetailWeeklyViewController
             if self.maincontentsArray.filter({$0.docID == question[selectNum].questionID}).count != 0{
                 detailWeeklyViewController.maincontentsArray = self.maincontentsArray.filter({$0.docID == question[selectNum].questionID})
+                detailWeeklyViewController.question = self.question[selectNum]
             }else{
                 self.alert(message: "この一週間で投票されたデータはありません")
             }
