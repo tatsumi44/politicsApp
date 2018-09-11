@@ -14,6 +14,7 @@ class SelectViewController: UIViewController {
     @IBOutlet weak var voteBtn: UIButton!
     
     @IBOutlet weak var resultBtn: UIButton!
+    @IBOutlet weak var regurarlyBtn: UIButton!
     var mainQuestionArray = [String:[Qusetions]]()
     var db: Firestore!
     var questionArray = [Qusetions]()
@@ -28,6 +29,10 @@ class SelectViewController: UIViewController {
         resultBtn.layer.borderWidth = 4
         resultBtn.layer.cornerRadius = 8
         resultBtn.layer.masksToBounds = true
+        regurarlyBtn.layer.borderColor = UIColor.orange.cgColor
+        regurarlyBtn.layer.borderWidth = 4
+        regurarlyBtn.layer.cornerRadius = 8
+        regurarlyBtn.layer.masksToBounds = true
         HUD.show(.progress)
         self.navigationItem.hidesBackButton = true
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height

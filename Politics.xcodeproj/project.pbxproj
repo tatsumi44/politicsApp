@@ -34,6 +34,7 @@
 		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
 		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
 		B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */; };
+		B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */; };
 		B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92327C02134360600141A01 /* SNSPostViewController.swift */; };
 		B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9293499211FF4A900637B16 /* ViewResultViewController.swift */; };
 		B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349B21200D4800637B16 /* TodayResultViewController.swift */; };
@@ -115,6 +116,7 @@
 		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
 		B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = opposeTableViewCell.xib; sourceTree = "<group>"; };
+		B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReguralyViewController.swift; sourceTree = "<group>"; };
 		B92327C02134360600141A01 /* SNSPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSPostViewController.swift; sourceTree = "<group>"; };
 		B9293499211FF4A900637B16 /* ViewResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewResultViewController.swift; sourceTree = "<group>"; };
 		B929349B21200D4800637B16 /* TodayResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResultViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				B92934AB2120A55200637B16 /* SelectViewController.swift */,
 				B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */,
 				B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */,
+				B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
 				B911E72821296B51004728C0 /* SearchListViewController.swift in Sources */,
 				B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */,
+				B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */,
 				B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */,
 				B9FE61512125D35000DFF419 /* SNSTableViewCell.swift in Sources */,
 				B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */,
