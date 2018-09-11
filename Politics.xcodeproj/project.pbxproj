@@ -32,6 +32,8 @@
 		B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */; };
 		B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */; };
 		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
+		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
+		B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */; };
 		B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92327C02134360600141A01 /* SNSPostViewController.swift */; };
 		B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9293499211FF4A900637B16 /* ViewResultViewController.swift */; };
 		B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349B21200D4800637B16 /* TodayResultViewController.swift */; };
@@ -111,6 +113,8 @@
 		B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SNSwithUrlTableViewCell.xib; sourceTree = "<group>"; };
 		B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
+		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
+		B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = opposeTableViewCell.xib; sourceTree = "<group>"; };
 		B92327C02134360600141A01 /* SNSPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSPostViewController.swift; sourceTree = "<group>"; };
 		B9293499211FF4A900637B16 /* ViewResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewResultViewController.swift; sourceTree = "<group>"; };
 		B929349B21200D4800637B16 /* TodayResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResultViewController.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 			children = (
 				B9FE6178212891BB00DFF419 /* ResponseTableViewCell.swift */,
 				B9FE6179212891BB00DFF419 /* ResponseTableViewCell.xib */,
+				B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */,
+				B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 				B9085AD7211B3EF50099DBE1 /* LaunchScreen.storyboard in Resources */,
 				B9FE617B212891BB00DFF419 /* ResponseTableViewCell.xib in Resources */,
 				B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */,
+				B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */,
 				B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
 				B9FE61642126F43D00DFF419 /* TagCollectionViewCell.xib in Resources */,
@@ -576,6 +583,7 @@
 				B9FC93AB212FE5570029EF12 /* ThreeDaysAgoViewController.swift in Sources */,
 				B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */,
 				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
+				B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */,
 				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
 				B911E72821296B51004728C0 /* SearchListViewController.swift in Sources */,

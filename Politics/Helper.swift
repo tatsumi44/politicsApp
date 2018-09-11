@@ -160,12 +160,18 @@ extension UIViewController{
         var comment:String!
         var uid:String!
         var name:String!
+        var opponentName:String!
+        var opponentUid:String!
+        var opponentDocID:String!
         var date:NSDate!
-        init(docID:String,comment:String,uid:String,name:String,date:NSDate) {
+        init(docID:String,comment:String,uid:String,name:String,opponentName:String,opponentUid:String,opponentDocID:String,date:NSDate) {
             self.docID = docID
             self.comment = comment
             self.uid = uid
             self.name = name
+            self.opponentName = opponentName
+            self.opponentUid = opponentUid
+            self.opponentDocID = opponentDocID
             self.date = date
         }
     }
@@ -293,7 +299,7 @@ extension  UIResponder{
     func shortNowDate(num:Int) -> String {
         var date = Date()
         date = date - num.days
-        return date.string(custom: "MM_dd")
+        return date.string(custom: "MM/dd")
     }
 }
 

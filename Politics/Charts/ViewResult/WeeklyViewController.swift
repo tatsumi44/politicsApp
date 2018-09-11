@@ -51,10 +51,7 @@ class WeeklyViewController: UIViewController {
                                 self.maincontentsArray.append(mainWeeklyData(docID: content.questionID, title: content.title, question: ques, questionCount: (snap?.count)!, date: self.nowDate(num: i)))
                             }
                             if self.maincontentsArray.count == self.num{
-//                                print(self.maincontentsArray)
-                                let array = self.maincontentsArray.filter({$0.docID == "5YROyYXLj9aIXsq0gIqZ"
-                                }).filter({$0.date == self.nowDate(num: 1)})
-//                                print(array)
+
                                 HUD.hide()
                                 
                             }
@@ -86,6 +83,9 @@ extension WeeklyViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectNum = indexPath.row
         performSegue(withIdentifier: "GoWeekly", sender: nil)
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoWeekly"{

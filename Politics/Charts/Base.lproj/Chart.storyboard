@@ -121,16 +121,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3l6-MY-rv8" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="627"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3l6-MY-rv8" firstAttribute="leading" secondItem="Jox-JE-2xf" secondAttribute="leading" id="2wL-Tw-tRl"/>
-                            <constraint firstItem="3l6-MY-rv8" firstAttribute="trailing" secondItem="Jox-JE-2xf" secondAttribute="trailing" id="WnB-cr-zqc"/>
-                            <constraint firstItem="3l6-MY-rv8" firstAttribute="top" secondItem="Jox-JE-2xf" secondAttribute="top" id="Yrz-IL-Mzf"/>
-                            <constraint firstItem="3l6-MY-rv8" firstAttribute="bottom" secondItem="Jox-JE-2xf" secondAttribute="bottom" id="mWg-22-ddf"/>
+                            <constraint firstItem="3l6-MY-rv8" firstAttribute="trailing" secondItem="Jox-JE-2xf" secondAttribute="trailing" id="48p-je-mmk"/>
+                            <constraint firstItem="3l6-MY-rv8" firstAttribute="leading" secondItem="Jox-JE-2xf" secondAttribute="leading" id="NT2-mm-9C2"/>
+                            <constraint firstItem="Jox-JE-2xf" firstAttribute="bottom" secondItem="3l6-MY-rv8" secondAttribute="bottom" constant="10" id="sRK-X4-bK9"/>
+                            <constraint firstItem="3l6-MY-rv8" firstAttribute="top" secondItem="Jox-JE-2xf" secondAttribute="top" constant="10" id="zFR-z8-Mjh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jox-JE-2xf"/>
                     </view>
@@ -669,6 +669,6 @@
         <image name="sort descending" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="geX-kr-GTt"/>
+        <segue reference="oyc-nD-van"/>
     </inferredMetricsTieBreakers>
 </document>

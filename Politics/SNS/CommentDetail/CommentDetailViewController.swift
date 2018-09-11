@@ -26,6 +26,9 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     var goodArray = [String]()
     var badArray = [String]()
     var flag = false
+    var charaNum:Int!
+    var postName:String!
+    var commnetNum:Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.delegate = self
@@ -39,6 +42,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         self.mainTable.register(UINib(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: "TagTableViewCell")
         self.mainTable.register(UINib(nibName: "ResponseTableViewCell", bundle: nil), forCellReuseIdentifier: "ResponseTableViewCell")
         self.mainTable.register(UINib(nibName: "commentWithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "commentWithUrlTableViewCell")
+        self.mainTable.register(UINib(nibName: "opposeTableViewCell", bundle: nil), forCellReuseIdentifier: "opposeTableViewCell")
         let tags = content.tagArray
         keysArray = [String](tags!.keys)
         db.collection("SNS").document(content.docID).collection("response").order(by: "date", descending: true).getDocuments { (snap, error) in
@@ -47,14 +51,19 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
             }else{
                 for doc in snap!.documents{
                     let data = doc.data()
-                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, date: data["date"] as! NSDate))
+                    if data["opponentName"] as? String != nil{
+                        print("返信の返信")
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                    }else{
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                    }
+                    
                 }
                 print(self.responseArray)
                 print(self.responseArray.count)
                 self.mainTable.reloadData()
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +100,12 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                             self.responseArray = [GetResponse]()
                             for doc in snap!.documents{
                                 let data = doc.data()
-                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, date: data["date"] as! NSDate))
+                                if data["opponentName"] as? String != nil{
+                                    print("返信の返信")
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                                }else{
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                                }
                             }
                             print(self.responseArray)
                             self.mainTable.reloadData()
@@ -125,8 +139,6 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     }
     
     @objc func handleKeybordWillHideNotification(_ notification: Notification){
-        let height = UIScreen.main.bounds.size.height
-        let tabheight = tabBarController?.tabBar.frame.size.height
         guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else {
             return
         }
@@ -134,9 +146,8 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         UIView.animate(withDuration: duration, animations: {
             let transform = CGAffineTransform (translationX: 0, y: 0)
             self.postView.transform = transform
-            self.postTextView.frame.size.height = 30
-            self.postTextView.frame.origin.x = 0
-            self.postTextView.frame.origin.y = height - tabheight! - 32
+            self.postTextView.layer.borderColor = UIColor.black.cgColor
+            self.postTextView.layer.borderWidth = 0.5
         }, completion: nil)
     }
     
@@ -168,19 +179,41 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         let user = realm.objects(Userdata.self)
         let date  = NSDate()
         if let post = postTextView.text{
-            db.collection("SNS").document(content.docID).collection("response").addDocument(data: [
-                "comment" : post,
-                "uid": user[0].userID,
-                "name": user[0].name,
-                "date": date
-                ])
-            postTextView.text = nil
-            view.endEditing(true)
+            if post.prefix(1) == "@"{
+                print("返信")
+                print(post.prefix(charaNum))
+                if postName != post.prefix(charaNum){
+                    alert(message: "相手は正しく入力してください")
+                    
+                }else{
+                    let num = post.count
+                    print(post[post.index(post.startIndex, offsetBy: charaNum)..<post.index(post.startIndex, offsetBy: num)])
+                    db.collection("SNS").document(content.docID).collection("response").addDocument(data: [
+                        "comment" : "\(post[post.index(post.startIndex, offsetBy: charaNum)..<post.index(post.startIndex, offsetBy: num)])",
+                        "uid": user[0].userID,
+                        "name": user[0].name,
+                        "opponentName": "\(postName!)",
+                        "opponentUid":"\(responseArray[commnetNum - 2].uid!)",
+                        "opponentDocID":"\(responseArray[commnetNum - 2].docID!)",
+                        "date": date
+                        ])
+                    print("成功")
+                    postTextView.text = nil
+                    view.endEditing(true)
+                }
+            }else{
+                db.collection("SNS").document(content.docID).collection("response").addDocument(data: [
+                    "comment" : post,
+                    "uid": user[0].userID,
+                    "name": user[0].name,
+                    "date": date
+                    ])
+                postTextView.text = nil
+                view.endEditing(true)
+            }
         }else{
             alert(message: "ちゃんと入力してや！")
         }
-        
-        
     }
 }
 
@@ -193,7 +226,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
         //ShopTableViewCell.swiftで設定したメソッドを呼び出す
         cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
- 
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
     }
@@ -282,13 +315,37 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
             
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
-            cell.nameLabel.text = responseArray[indexPath.row - 2].name
-            cell.commentLabel.text = responseArray[indexPath.row - 2].comment
-            cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
-            return cell
-            
+            switch responseArray[indexPath.row - 2].opponentName {
+            case "":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
+                cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 2].name!)"
+                cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
+                cell.commentLabel.text = responseArray[indexPath.row - 2].comment
+                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
+                cell.commentBtn.tag = indexPath.row
+                cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
+                cell.nameLabel.text = responseArray[indexPath.row - 2].name
+                cell.commentLabel.text = responseArray[indexPath.row - 2].comment
+                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
+                cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 2].opponentName!)＆返信先のID \(responseArray[indexPath.row - 2].opponentDocID!)"
+                cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
+                return cell
+            }
         }
+    }
+    @objc func commnetTap(sender:UIButton){
+        
+        commnetNum = sender.tag
+        postName = "@\(responseArray[commnetNum - 2].name!) "
+        postTextView.text = postName
+        charaNum = postTextView.text.count
+        let text = NSMutableAttributedString(string: postName)
+        text.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(0, charaNum - 1))
+        postTextView.attributedText = text
+        print(charaNum)
     }
     
     @objc func likeTap(sender:WCLShineButton){
@@ -439,7 +496,6 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
 
 extension CommentDetailViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return content.tagArray.count
     }
@@ -453,6 +509,4 @@ extension CommentDetailViewController:UICollectionViewDelegate,UICollectionViewD
         return cell
         
     }
-    
-    
 }

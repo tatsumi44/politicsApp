@@ -12,9 +12,12 @@ class ResponseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var docidLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var commentBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

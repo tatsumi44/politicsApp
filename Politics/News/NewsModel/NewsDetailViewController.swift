@@ -12,7 +12,7 @@ import RealmSwift
 import WCLShineButton
 import SafariServices
 class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
-
+    
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
@@ -24,7 +24,10 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     var responseArray = [GetResponse]()
     var goodArray = [String]()
     var badArray = [String]()
-//    let comviewPosy = self.commentView.frame.origin.y
+    var charaNum:Int!
+    var postName:String!
+    var commnetNum:Int!
+    //    let comviewPosy = self.commentView.frame.origin.y
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.dataSource = self
@@ -35,20 +38,25 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         self.mainTable.transform = transform
         self.mainTable.register(UINib(nibName: "NewsTodayTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTodayTableViewCell")
         self.mainTable.register(UINib(nibName: "ResponseTableViewCell", bundle: nil), forCellReuseIdentifier: "ResponseTableViewCell")
+        self.mainTable.register(UINib(nibName: "opposeTableViewCell", bundle: nil), forCellReuseIdentifier: "opposeTableViewCell")
         db.collection("news").document(date).collection(newsurlPath(newsURL: mainNews.url)).order(by: "date", descending: true).getDocuments { (snap, error) in
             if let error = error{
                 self.alert(message: error.localizedDescription)
             }else{
                 for doc in snap!.documents{
                     let data = doc.data()
-                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, date: data["date"] as! NSDate))
+                    if data["opponentName"] as? String != nil{
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                    }else{
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                    }
                 }
                 print(self.responseArray)
                 self.mainTable.reloadData()
             }
         }
-
-
+        
+        
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +88,11 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                             self.responseArray = [GetResponse]()
                             for doc in snap!.documents{
                                 let data = doc.data()
-                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, date: data["date"] as! NSDate))
+                                if data["opponentName"] as? String != nil{
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                                }else{
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                                }
                             }
                             self.mainTable.reloadData()
                         }
@@ -94,16 +106,42 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func decide(_ sender: Any) {
         let user = self.realm.objects(Userdata.self)
-        db.collection("news").document(date).collection(newsurlPath(newsURL: mainNews.url)).addDocument(data: [
-            "comment" : commentTextView.text,
-            "date": NSDate(),
-            "title": self.mainNews.title,
-            "url": self.mainNews.url,
-            "uid": user[0].userID,
-            "username":user[0].name,
-            "userImagePath": "/"
-            ])
-        commentTextView.text = nil
+        if let post = commentTextView.text{
+            if post.prefix(1) == "@"{
+                if postName == post.prefix(charaNum){
+                    db.collection("news").document(date).collection(newsurlPath(newsURL: mainNews.url)).addDocument(data: [
+                        "comment" : post[post.index(post.startIndex, offsetBy: charaNum)..<post.index(post.startIndex, offsetBy: post.count)],
+                        "date": NSDate(),
+                        "title": self.mainNews.title,
+                        "url": self.mainNews.url,
+                        "uid": user[0].userID,
+                        "username":user[0].name,
+                        "userImagePath": "/",
+                        "opponentName": "\(postName!)",
+                        "opponentUid":"\(responseArray[commnetNum - 1].uid!)",
+                        "opponentDocID":"\(responseArray[commnetNum - 1].docID!)",
+                        ])
+                    commentTextView.text = nil
+                    view.endEditing(true)
+                }else{
+                    alert(message: "相手の名前は正しく入力してください")
+                }
+            }else{
+                db.collection("news").document(date).collection(newsurlPath(newsURL: mainNews.url)).addDocument(data: [
+                    "comment" : post,
+                    "date": NSDate(),
+                    "title": self.mainNews.title,
+                    "url": self.mainNews.url,
+                    "uid": user[0].userID,
+                    "username":user[0].name,
+                    "userImagePath": "/"
+                    ])
+                commentTextView.text = nil
+                view.endEditing(true)
+            }
+        }else{
+            alert(message: "何か入力してください")
+        }
     }
     
     
@@ -143,7 +181,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             self.commentView.frame.origin.y = height - tabheight! - 32
         }, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -151,7 +189,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return responseArray.count + 1
-  
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,14 +227,40 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             cell.disLikeCount.text = "\(mainNews.disLikeCount!) bad"
             cell.commentCount.text = "\(mainNews.commentCount!) comment"
             return cell
-
+            
         default:
-             let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
-             cell.commentLabel.text = responseArray[indexPath.row - 1].comment
-             cell.nameLabel.text = responseArray[indexPath.row - 1].name
-             cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
-            return cell
+            switch responseArray[indexPath.row - 1].opponentName {
+            case "":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
+                cell.commentLabel.text = responseArray[indexPath.row - 1].comment
+                cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 1].name!)"
+                cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
+                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
+                cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
+                cell.commentBtn.tag = indexPath.row
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
+                cell.nameLabel.text = responseArray[indexPath.row - 1].name
+                cell.commentLabel.text = responseArray[indexPath.row - 1].comment
+                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy-MM-dd HH:mm:ss")
+                cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 1].opponentName!)＆返信先のID \(responseArray[indexPath.row - 1].opponentDocID!)"
+                cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
+                return cell
+            }
+
         }
+    }
+    @objc func commnetTap(sender:UIButton){
+        
+        commnetNum = sender.tag
+        postName = "@\(responseArray[commnetNum - 1].name!) "
+        commentTextView.text = postName
+        charaNum = commentTextView.text.count
+        let text = NSMutableAttributedString(string: postName)
+        text.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(0, charaNum - 1))
+        commentTextView.attributedText = text
+        print(charaNum)
     }
     
     @objc func likeTap(sender:WCLShineButton){
@@ -333,18 +397,14 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
     @objc func titleTap(sender:UIButton){
-//        var strUrl : String = mainNews.url
+        //        var strUrl : String = mainNews.url
         if let url = NSURL(string: mainNews.url) {
             let safariViewController = SFSafariViewController(url: url as URL)
             present(safariViewController, animated: true, completion: nil)
         }
-
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "GoNews"{
-//            let newsViewController = segue.destination as! NewsViewController
-//            newsViewController.url = mainNews.url
-//        }
     }
     
 }

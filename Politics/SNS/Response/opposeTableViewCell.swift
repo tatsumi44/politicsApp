@@ -1,22 +1,25 @@
 //
-//  commentTableViewCell.swift
+//  opposeTableViewCell.swift
 //  Politics
 //
-//  Created by tatsumi kentaro on 2018/08/18.
+//  Created by tatsumi kentaro on 2018/09/11.
 //  Copyright © 2018年 tatsumi kentaro. All rights reserved.
 //
 
 import UIKit
-import WCLShineButton
-class commentTableViewCell: UITableViewCell {
 
+class opposeTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var opposeLabel: UILabel!
+    
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var content: UILabel!
-    @IBOutlet weak var btn1: WCLShineButton!
-    @IBOutlet weak var btn2: WCLShineButton!
-    @IBOutlet weak var likecount: UILabel!
-    @IBOutlet weak var dislikecount: UILabel!
+    
+    @IBOutlet weak var commentLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var docIdLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -70,7 +70,7 @@ class DetailWeeklyViewController: DemoBaseViewController {
         //属性表示の文字色
         l.textColor = .orange
         l.horizontalAlignment = .left
-        l.verticalAlignment = .bottom
+        l.verticalAlignment = .top
         l.orientation = .horizontal
         l.drawInside = false
         
