@@ -242,6 +242,9 @@ class NewsLikes: Object {
 class NewsDisLikes: Object {
     @objc dynamic var documentID = ""
 }
+class RegularVote: Object {
+    @objc dynamic var flag = false
+}
 
 
 

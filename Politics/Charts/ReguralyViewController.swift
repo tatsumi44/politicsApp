@@ -9,9 +9,11 @@
 import UIKit
 import Eureka
 import Firebase
+import RealmSwift
 class ReguralyViewController: FormViewController {
     let array = ["abc","def","ghi","jkl","mno",]
     let db = Firestore.firestore()
+    let realm = try! Realm()
     var questionArray = [Qusetions]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +41,15 @@ class ReguralyViewController: FormViewController {
         form = Section("定期投票を行うには、ONにして下さい")
             <<< SwitchRow("Show Next Section") {
                 $0.title = "SwitchRow"
-                $0.value = false
-            }
+                let flag = realm.objects(RegularVote.self).first
+                $0.value = flag?.flag
+                }.onChange({ (diff) in
+                    print(diff.value)
+                    let flag = self.realm.objects(RegularVote.self).first
+                    try! self.realm.write() {
+                        flag?.flag = diff.value!
+                    }
+                })
             +++ Section("投票一覧"){
                 $0.tag = "sec2"
                 $0.hidden = .function(["Show Next Section"], { form -> Bool in
