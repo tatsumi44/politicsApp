@@ -48,12 +48,16 @@ class WeeklyViewController: UIViewController {
                             if let error = error{
                                 self.alert(message: error.localizedDescription)
                             }else{
-                                self.maincontentsArray.append(mainWeeklyData(docID: content.questionID, title: content.title, question: ques, questionCount: (snap?.count)!, date: self.nowDate(num: i)))
-                            }
-                            if self.maincontentsArray.count == self.num{
-
-                                HUD.hide()
-                                
+                                self.db.collection("users").whereField("regularFlag", isEqualTo: true).whereField(content.questionID, isEqualTo: ques).getDocuments(completion: { (snap1, error) in
+                                    if let error = error{
+                                        self.alert(message: error.localizedDescription)
+                                    }else{
+                                        self.maincontentsArray.append(mainWeeklyData(docID: content.questionID, title: content.title, question: ques, questionCount: (snap!.count + snap1!.count), date: self.nowDate(num: i)))
+                                    }
+                                    if self.maincontentsArray.count == self.num{
+                                        HUD.hide()
+                                    }
+                                })
                             }
                         }
                     }
