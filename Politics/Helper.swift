@@ -216,6 +216,14 @@ extension UIViewController{
             self.date = date
         }
     }
+    struct RegularResult {
+        var questionID:String!
+        var QuestionAnswer:String!
+        init(questionID:String,QuestionAnswer:String) {
+            self.questionID = questionID
+            self.QuestionAnswer = QuestionAnswer
+        }
+    }
 }
 
 class Userdata: Object{
@@ -244,6 +252,12 @@ class NewsDisLikes: Object {
 }
 class RegularVote: Object {
     @objc dynamic var flag = false
+}
+
+class RegularVoteResult: Object {
+    @objc dynamic var questionID = ""
+    @objc dynamic var questionTitle = ""
+    @objc dynamic var questionAnswer = ""
 }
 
 

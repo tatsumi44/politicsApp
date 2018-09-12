@@ -15,8 +15,15 @@ class ReguralyViewController: FormViewController {
     let db = Firestore.firestore()
     let realm = try! Realm()
     var questionArray = [Qusetions]()
+    var num = 0
+    var resultArray = [RegularResult]()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let data = realm.objects(RegularVoteResult.self)
+//        try! realm.write() {
+//            realm.delete(data)
+//        }
+//
         
         db.collection("questions").getDocuments { (snap, error) in
             if let error = error{
@@ -31,7 +38,15 @@ class ReguralyViewController: FormViewController {
         }
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resultArray = [RegularResult]()
+        let results = realm.objects(RegularVoteResult.self)
+        results.forEach { (result) in
+            resultArray.append(RegularResult(questionID: result.questionID, QuestionAnswer: result.questionAnswer))
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,12 +57,18 @@ class ReguralyViewController: FormViewController {
             <<< SwitchRow("Show Next Section") {
                 $0.title = "SwitchRow"
                 let flag = realm.objects(RegularVote.self).first
+                //                let user = self.realm.objects(Userdata.self)
                 $0.value = flag?.flag
                 }.onChange({ (diff) in
-                    print(diff.value)
+                    //                    print(diff.value)
+                    let user = self.realm.objects(Userdata.self)
                     let flag = self.realm.objects(RegularVote.self).first
                     try! self.realm.write() {
                         flag?.flag = diff.value!
+                        print(user[0].userID)
+                        self.db.collection("users").document(user[0].userID).updateData([
+                            "regularFlag" : diff.value!
+                            ])
                     }
                 })
             +++ Section("投票一覧"){
@@ -56,22 +77,55 @@ class ReguralyViewController: FormViewController {
                     let row: RowOf<Bool>! = form.rowBy(tag: "Show Next Section")
                     return row.value ?? false == false
                 })
-            }
+        }
         
         if let section = form.sectionBy(tag: "sec2") { //tagからSection2を取得
             forms.forEach { item in
                 section
                     <<< PushRow<String>(item.title) {
+                        $0.tag = "\(num)"
+                        let tagNum:Int = Int($0.tag!)!
+                        if resultArray.filter({$0.questionID == self.questionArray[tagNum].questionID}).count != 0{
+                            $0.value = resultArray.filter({$0.questionID == self.questionArray[tagNum].questionID})[0].QuestionAnswer
+                        }else{
+                            $0.value = ""
+                        }
                         $0.title = item.title
                         $0.options = item.array
-                        $0.value = ""
                         $0.selectorTitle = "Choose an Emoji!"
+                        num += 1
                         }.onChange({ (row) in
-                            print(row.value)
+                            let user = self.realm.objects(Userdata.self)
+                            let result = RegularVoteResult()
+//                            print(row.value)
+//                            print(row.tag)
+                            let tagNum:Int = Int(row.tag!)!
+                            if self.realm.objects(RegularVoteResult.self).filter("questionID == %@",self.questionArray[tagNum].questionID).count != 0{
+                                let data = self.realm.objects(RegularVoteResult.self).filter("questionID == %@",self.questionArray[tagNum].questionID).first
+                                try! self.realm.write() {
+                                    data?.questionAnswer = row.value!
+                                    self.db.collection("users").document(user[0].userID).updateData([
+                                        self.questionArray[tagNum].questionID : row.value!
+                                        ])
+                                }
+                                
+                            }else{
+                                result.questionID = self.questionArray[tagNum].questionID
+                                result.questionTitle = row.title!
+                                result.questionAnswer = row.value!
+                                try! self.realm.write() {
+                                    self.realm.add(result)
+                                    self.db.collection("users").document(user[0].userID).updateData([
+                                        self.questionArray[tagNum].questionID : row.value!
+                                        ])
+                                }
+                            }
+
                         })
                         .onPresent { from, to in
                             to.dismissOnSelection = false
                             to.dismissOnChange = false
+                            
                 }
             }
         }
