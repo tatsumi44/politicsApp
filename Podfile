@@ -17,6 +17,7 @@ target 'Politics' do
   pod 'Eureka'
   pod 'WCLShineButton'
   pod 'Nuke'
+  pod 'FirebaseUI/Storage'
   # Pods for Politics
 
 end

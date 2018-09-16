@@ -7,11 +7,11 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseStorage
 class ProfileSettingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sexLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!

@@ -10,8 +10,9 @@ import UIKit
 import RealmSwift
 import Firebase
 import Nuke
+import FirebaseStorageUI
 class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    
+
     @IBOutlet weak var mainTable: UITableView!
     let sectionArray = ["あなたの登録情報","投票関連","あなたの投稿関連","ニュース関連"]
     let realm = try! Realm()
@@ -19,6 +20,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
     var image:UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mainTable.delegate = self
         mainTable.dataSource = self
         self.mainTable.register(UINib(nibName: "ProfileSettingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileSettingTableViewCell")
@@ -29,6 +31,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         mainTable.reloadData()
     }
     override func didReceiveMemoryWarning() {
@@ -69,9 +72,15 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 cell.sexLabel.text = user.sex
                 cell.placeLabel.text = user.place
                 cell.ageLabel.text = user.age
-                if image != nil{
-                    cell.profileImage.image = image
-                }
+//                if image != nil{
+//                    cell.profileImage.image = image
+//                }
+               
+                let storageRef = Storage.storage().reference()
+                let reference = storageRef.child("image/profile/\(user.userID).jpg")
+                
+                cell.profileImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+                
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEditTableViewCell", for: indexPath) as! ProfileEditTableViewCell
@@ -145,19 +154,27 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
         image = info[UIImagePickerControllerEditedImage] as! UIImage
+        image = image.resize(size: CGSize(width: 200, height: 200))
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let data: Data = UIImageJPEGRepresentation(image!, 0.1)!
-        let imagePath = storageRef.child("image").child("profile").child("sample.jpg")
-        let uploadTask = imagePath.putData(data, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
-                return
+        let data: Data = UIImageJPEGRepresentation(image!, 0.2)!
+        let user = realm.objects(Userdata.self)[0]
+        let imagePath = storageRef.child("image").child("profile").child("\(user.userID).jpg")
+        imagePath.putData(data, metadata: nil) { (metadata, error) in
+            
+            if let error = error{
+                self.alert(message: error.localizedDescription)
+            }else{
+                
+                SDImageCache.shared().clearMemory()
+                SDImageCache.shared().clearDisk()
+                self.mainTable.reloadData()
             }
-            let downloadURL = metadata.downloadURL
-            print(downloadURL)
+            
         }
+        
         dismiss(animated: true, completion: nil)
     }
     
