@@ -8,6 +8,7 @@ target 'Politics' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'PKHUD', '~> 5.0'
@@ -15,6 +16,7 @@ target 'Politics' do
   pod 'PageMenu'
   pod 'Eureka'
   pod 'WCLShineButton'
+  pod 'Nuke'
   # Pods for Politics
 
 end

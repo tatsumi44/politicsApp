@@ -19,6 +19,9 @@ PODS:
   - Firebase/Firestore (4.11.0):
     - Firebase/Core
     - FirebaseFirestore (= 0.10.4)
+  - Firebase/Storage (4.11.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.1.3)
   - FirebaseAnalytics (4.1.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -38,6 +41,10 @@ PODS:
     - Protobuf (~> 3.5)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
+  - FirebaseStorage (2.1.3):
+    - FirebaseAnalytics (~> 4.1)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
@@ -60,12 +67,14 @@ PODS:
   - gRPC/Main (1.10.0):
     - gRPC-Core (= 1.10.0)
     - gRPC-RxLibrary (= 1.10.0)
+  - GTMSessionFetcher/Core (1.1.15)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Nuke (6.1)
   - PageMenu (2.0.0)
   - PKHUD (5.0.0)
   - Protobuf (3.5.0)
@@ -80,6 +89,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
+  - Firebase/Storage
+  - Nuke
   - PageMenu
   - PKHUD (~> 5.0)
   - SwiftDate
@@ -97,13 +108,16 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
   FirebaseFirestore: 796df79c29cf8ecf806564f4d347665bdafa6ef0
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  FirebaseStorage: 9a863a2bb96c406958eeff7c2f1dfa9f44c44a13
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   gRPC: f54f0e6d603052b4562447da442ce2ff30bcdacc
   gRPC-Core: a030b1678ded49c88ec5ba7c90ee8ee5f47ec6e1
   gRPC-ProtoRPC: 22712b23eb1bda656a59715fa5c1da0ea1493ea4
   gRPC-RxLibrary: a41a4652d220f230ba1c0491a94ce2ee04c6180a
+  GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Nuke: 0513c8d156bd9a2adb15db70622c3527f44542c5
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
@@ -111,6 +125,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   WCLShineButton: d8b979b6f6f9f6709f9e241e6e1a4712a1a9b36b
 
-PODFILE CHECKSUM: 68957a376522252a806b38f5467574735321b845
+PODFILE CHECKSUM: ada9a36a9f9b42ac80e571299d33d3b1d04d7c27
 
 COCOAPODS: 1.4.0

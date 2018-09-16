@@ -35,6 +35,12 @@
 		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
 		B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */; };
 		B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */; };
+		B920C9FA214C0F6C00ECF00C /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B920C9F9214C0F6C00ECF00C /* Setting.storyboard */; };
+		B920C9FC214C0FBF00ECF00C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9FB214C0FBF00ECF00C /* SettingViewController.swift */; };
+		B920CA00214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9FE214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift */; };
+		B920CA01214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B920C9FF214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib */; };
+		B920CA04214C261600ECF00C /* ProfileEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920CA02214C261600ECF00C /* ProfileEditTableViewCell.swift */; };
+		B920CA05214C261600ECF00C /* ProfileEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B920CA03214C261600ECF00C /* ProfileEditTableViewCell.xib */; };
 		B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92327C02134360600141A01 /* SNSPostViewController.swift */; };
 		B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9293499211FF4A900637B16 /* ViewResultViewController.swift */; };
 		B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929349B21200D4800637B16 /* TodayResultViewController.swift */; };
@@ -117,6 +123,12 @@
 		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
 		B920C9F32146FACB00ECF00C /* opposeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = opposeTableViewCell.xib; sourceTree = "<group>"; };
 		B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReguralyViewController.swift; sourceTree = "<group>"; };
+		B920C9F9214C0F6C00ECF00C /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		B920C9FB214C0FBF00ECF00C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B920C9FE214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingTableViewCell.swift; sourceTree = "<group>"; };
+		B920C9FF214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSettingTableViewCell.xib; sourceTree = "<group>"; };
+		B920CA02214C261600ECF00C /* ProfileEditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTableViewCell.swift; sourceTree = "<group>"; };
+		B920CA03214C261600ECF00C /* ProfileEditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileEditTableViewCell.xib; sourceTree = "<group>"; };
 		B92327C02134360600141A01 /* SNSPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSPostViewController.swift; sourceTree = "<group>"; };
 		B9293499211FF4A900637B16 /* ViewResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewResultViewController.swift; sourceTree = "<group>"; };
 		B929349B21200D4800637B16 /* TodayResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResultViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +239,7 @@
 				B9085B20211DA2EA0099DBE1 /* Charts */,
 				B9FE614A2125266600DFF419 /* SNS */,
 				B9FC939C212F04F10029EF12 /* News */,
+				B920C9FD214C104100ECF00C /* Setting */,
 				B9085AD3211B3EF50099DBE1 /* Assets.xcassets */,
 				B9085AD5211B3EF50099DBE1 /* LaunchScreen.storyboard */,
 				B9085AD8211B3EF50099DBE1 /* Info.plist */,
@@ -271,6 +284,19 @@
 				B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		B920C9FD214C104100ECF00C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B920C9F9214C0F6C00ECF00C /* Setting.storyboard */,
+				B920C9FB214C0FBF00ECF00C /* SettingViewController.swift */,
+				B920C9FE214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift */,
+				B920C9FF214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib */,
+				B920CA02214C261600ECF00C /* ProfileEditTableViewCell.swift */,
+				B920CA03214C261600ECF00C /* ProfileEditTableViewCell.xib */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		B92327C2213446FF00141A01 /* NewsModel */ = {
@@ -452,17 +478,20 @@
 				B9085AEB211B58FE0099DBE1 /* News.storyboard in Resources */,
 				B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */,
 				B9FC93A0212F09890029EF12 /* NewsTodayTableViewCell.xib in Resources */,
+				B920C9FA214C0F6C00ECF00C /* Setting.storyboard in Resources */,
 				B9F7E0DA213DA0A600A0B99F /* commentWithUrlTableViewCell.xib in Resources */,
 				B9FE61682126F4DB00DFF419 /* TagTableViewCell.xib in Resources */,
 				B9085AD7211B3EF50099DBE1 /* LaunchScreen.storyboard in Resources */,
 				B9FE617B212891BB00DFF419 /* ResponseTableViewCell.xib in Resources */,
 				B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */,
+				B920CA05214C261600ECF00C /* ProfileEditTableViewCell.xib in Resources */,
 				B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */,
 				B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
 				B9FE61642126F43D00DFF419 /* TagCollectionViewCell.xib in Resources */,
 				B9085AD2211B3EF10099DBE1 /* Chart.storyboard in Resources */,
 				B9FE616E21282FF300DFF419 /* commentTableViewCell.xib in Resources */,
+				B920CA01214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib in Resources */,
 				B9085B1F211D8CAF0099DBE1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +510,9 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -501,7 +532,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -582,8 +615,10 @@
 				B9FE616D21282FF300DFF419 /* commentTableViewCell.swift in Sources */,
 				B929349C21200D4800637B16 /* TodayResultViewController.swift in Sources */,
 				B9FE615A2126B3C800DFF419 /* CommentDetailViewController.swift in Sources */,
+				B920CA04214C261600ECF00C /* ProfileEditTableViewCell.swift in Sources */,
 				B9FE614C2125572700DFF419 /* SNSListViewController.swift in Sources */,
 				B9FC93AB212FE5570029EF12 /* ThreeDaysAgoViewController.swift in Sources */,
+				B920CA00214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift in Sources */,
 				B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */,
 				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
 				B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */,
@@ -594,6 +629,7 @@
 				B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */,
 				B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */,
 				B9FE61512125D35000DFF419 /* SNSTableViewCell.swift in Sources */,
+				B920C9FC214C0FBF00ECF00C /* SettingViewController.swift in Sources */,
 				B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */,
 				B92934A821200DD100637B16 /* SixDaysAgoResultViewController.swift in Sources */,
 				B9085ACF211B3EF10099DBE1 /* ViewController.swift in Sources */,
