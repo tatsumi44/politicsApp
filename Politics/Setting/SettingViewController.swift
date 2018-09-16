@@ -25,6 +25,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
         mainTable.dataSource = self
         self.mainTable.register(UINib(nibName: "ProfileSettingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileSettingTableViewCell")
         self.mainTable.register(UINib(nibName: "ProfileEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileEditTableViewCell")
+        self.mainTable.register(UINib(nibName: "ProfileDetailEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileDetailEditTableViewCell")
 
         // Do any additional setup after loading the view.
     }
@@ -45,7 +46,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
+            return 3
         case 1:
             return 0
         case 2:
@@ -82,15 +83,24 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 cell.profileImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 
                 return cell
-            default:
+            case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEditTableViewCell", for: indexPath) as! ProfileEditTableViewCell
                 cell.editBtn.addTarget(self, action: #selector(self.cameraTap(sender:)), for: .touchUpInside)
                 return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDetailEditTableViewCell", for: indexPath) as! ProfileDetailEditTableViewCell
+                cell.editBtn.addTarget(self, action: #selector(self.editTap(sender:)), for: .touchUpInside)
+                return cell
+
             }
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEditTableViewCell", for: indexPath)
+            
             return cell
         }
+    }
+    @objc func editTap(sender:UIButton){
+        performSegue(withIdentifier: "Edit", sender: nil)
     }
     @objc func cameraTap(sender:UIButton){
         let alert: UIAlertController = UIAlertController(title: "どちらか選択して下さい", message: "カメラをかフォトライブラリーかを選択して下さい？", preferredStyle:  UIAlertControllerStyle.actionSheet)

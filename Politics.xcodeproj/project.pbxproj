@@ -30,6 +30,9 @@
 		B911E72A2129B258004728C0 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911E7292129B258004728C0 /* SearchDetailViewController.swift */; };
 		B9179C57213D8260006F4352 /* SNSwithUrlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9179C55213D8260006F4352 /* SNSwithUrlTableViewCell.swift */; };
 		B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */; };
+		B91C27F2214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */; };
+		B91C27F3214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */; };
+		B91C27F5214EB809002477B9 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */; };
 		B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */; };
 		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
 		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
@@ -118,6 +121,9 @@
 		B911E7292129B258004728C0 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		B9179C55213D8260006F4352 /* SNSwithUrlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSwithUrlTableViewCell.swift; sourceTree = "<group>"; };
 		B9179C56213D8260006F4352 /* SNSwithUrlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SNSwithUrlTableViewCell.xib; sourceTree = "<group>"; };
+		B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailEditTableViewCell.swift; sourceTree = "<group>"; };
+		B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailEditTableViewCell.xib; sourceTree = "<group>"; };
+		B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
@@ -295,6 +301,9 @@
 				B920C9FF214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib */,
 				B920CA02214C261600ECF00C /* ProfileEditTableViewCell.swift */,
 				B920CA03214C261600ECF00C /* ProfileEditTableViewCell.xib */,
+				B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */,
+				B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */,
+				B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -476,6 +485,7 @@
 				B96A7A3E213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib in Resources */,
 				B9085AE1211B40530099DBE1 /* SNS.storyboard in Resources */,
 				B9085AEB211B58FE0099DBE1 /* News.storyboard in Resources */,
+				B91C27F3214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib in Resources */,
 				B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */,
 				B9FC93A0212F09890029EF12 /* NewsTodayTableViewCell.xib in Resources */,
 				B920C9FA214C0F6C00ECF00C /* Setting.storyboard in Resources */,
@@ -626,6 +636,7 @@
 				B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */,
 				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
+				B91C27F5214EB809002477B9 /* ProfileEditViewController.swift in Sources */,
 				B911E72821296B51004728C0 /* SearchListViewController.swift in Sources */,
 				B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */,
 				B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */,
@@ -639,6 +650,7 @@
 				B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */,
 				B9085ACD211B3EF10099DBE1 /* AppDelegate.swift in Sources */,
 				B9FC93AD212FE5690029EF12 /* FourDaysAgoViewController.swift in Sources */,
+				B91C27F2214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift in Sources */,
 				B9FC93A5212FE5070029EF12 /* TodayViewController.swift in Sources */,
 				B92934AA21209C2F00637B16 /* WaitResultViewController.swift in Sources */,
 				B9FC93B7213082500029EF12 /* NewsDetailViewController.swift in Sources */,
@@ -819,7 +831,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -839,7 +854,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
