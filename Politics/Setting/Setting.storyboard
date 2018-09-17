@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jiQ-Nj-1Nb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1196" y="-616"/>
+            <point key="canvasLocation" x="2034" y="-500"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="Lpn-Uc-R8j">
@@ -51,11 +51,42 @@
                     <connections>
                         <outlet property="mainTable" destination="UOg-j5-mZk" id="LJ6-YT-itr"/>
                         <segue destination="aRw-yO-BYp" kind="show" identifier="Edit" id="LTV-VP-RgF"/>
+                        <segue destination="TPT-kr-UuG" kind="show" identifier="EvaluationList" id="tu7-91-ltV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iL4-SM-RAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="904.79999999999995" y="124.58770614692655"/>
+        </scene>
+        <!--Evaluation View Controller-->
+        <scene sceneID="dCO-1R-Def">
+            <objects>
+                <viewController id="TPT-kr-UuG" customClass="SNSEvaluationViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="15k-Yn-Hcr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eF7-zE-Rt9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eF7-zE-Rt9" firstAttribute="bottom" secondItem="5Aa-8r-0j0" secondAttribute="bottom" id="A4o-Pl-jWh"/>
+                            <constraint firstItem="eF7-zE-Rt9" firstAttribute="trailing" secondItem="5Aa-8r-0j0" secondAttribute="trailing" id="D4i-Gg-wEs"/>
+                            <constraint firstItem="eF7-zE-Rt9" firstAttribute="top" secondItem="5Aa-8r-0j0" secondAttribute="top" id="mBV-HE-ios"/>
+                            <constraint firstItem="eF7-zE-Rt9" firstAttribute="leading" secondItem="5Aa-8r-0j0" secondAttribute="leading" id="pwS-U7-DUs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5Aa-8r-0j0"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainTable" destination="eF7-zE-Rt9" id="0yS-EM-SkR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g0z-qb-2tB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2024.8" y="377.36131934032989"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JPa-PR-an0">

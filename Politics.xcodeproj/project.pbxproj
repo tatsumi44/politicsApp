@@ -33,6 +33,9 @@
 		B91C27F2214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */; };
 		B91C27F3214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */; };
 		B91C27F5214EB809002477B9 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */; };
+		B91C27F9214F57A4002477B9 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F7214F57A4002477B9 /* SectionTableViewCell.swift */; };
+		B91C27FA214F57A5002477B9 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91C27F8214F57A4002477B9 /* SectionTableViewCell.xib */; };
+		B91C27FD214F5BC0002477B9 /* SNSEvaluationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */; };
 		B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */; };
 		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
 		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
@@ -124,6 +127,9 @@
 		B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailEditTableViewCell.swift; sourceTree = "<group>"; };
 		B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailEditTableViewCell.xib; sourceTree = "<group>"; };
 		B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		B91C27F7214F57A4002477B9 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
+		B91C27F8214F57A4002477B9 /* SectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTableViewCell.xib; sourceTree = "<group>"; };
+		B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSEvaluationViewController.swift; sourceTree = "<group>"; };
 		B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
@@ -292,9 +298,18 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		B91C27FB214F5B55002477B9 /* SNSsection */ = {
+			isa = PBXGroup;
+			children = (
+				B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */,
+			);
+			path = SNSsection;
+			sourceTree = "<group>";
+		};
 		B920C9FD214C104100ECF00C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				B91C27FB214F5B55002477B9 /* SNSsection */,
 				B920C9F9214C0F6C00ECF00C /* Setting.storyboard */,
 				B920C9FB214C0FBF00ECF00C /* SettingViewController.swift */,
 				B920C9FE214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift */,
@@ -304,6 +319,8 @@
 				B91C27F0214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift */,
 				B91C27F1214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib */,
 				B91C27F4214EB809002477B9 /* ProfileEditViewController.swift */,
+				B91C27F7214F57A4002477B9 /* SectionTableViewCell.swift */,
+				B91C27F8214F57A4002477B9 /* SectionTableViewCell.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -495,6 +512,7 @@
 				B9FE617B212891BB00DFF419 /* ResponseTableViewCell.xib in Resources */,
 				B9085AE7211B44C00099DBE1 /* Start.storyboard in Resources */,
 				B920CA05214C261600ECF00C /* ProfileEditTableViewCell.xib in Resources */,
+				B91C27FA214F57A5002477B9 /* SectionTableViewCell.xib in Resources */,
 				B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */,
 				B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
@@ -641,6 +659,7 @@
 				B929349A211FF4A900637B16 /* ViewResultViewController.swift in Sources */,
 				B920C9F82147FAF400ECF00C /* ReguralyViewController.swift in Sources */,
 				B92327C12134360600141A01 /* SNSPostViewController.swift in Sources */,
+				B91C27FD214F5BC0002477B9 /* SNSEvaluationViewController.swift in Sources */,
 				B9FE61512125D35000DFF419 /* SNSTableViewCell.swift in Sources */,
 				B920C9FC214C0FBF00ECF00C /* SettingViewController.swift in Sources */,
 				B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */,
@@ -651,6 +670,7 @@
 				B9085ACD211B3EF10099DBE1 /* AppDelegate.swift in Sources */,
 				B9FC93AD212FE5690029EF12 /* FourDaysAgoViewController.swift in Sources */,
 				B91C27F2214EB4C5002477B9 /* ProfileDetailEditTableViewCell.swift in Sources */,
+				B91C27F9214F57A4002477B9 /* SectionTableViewCell.swift in Sources */,
 				B9FC93A5212FE5070029EF12 /* TodayViewController.swift in Sources */,
 				B92934AA21209C2F00637B16 /* WaitResultViewController.swift in Sources */,
 				B9FC93B7213082500029EF12 /* NewsDetailViewController.swift in Sources */,

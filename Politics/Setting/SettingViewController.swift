@@ -14,8 +14,13 @@ import FirebaseStorageUI
 class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var mainTable: UITableView!
-    let sectionArray = ["あなたの登録情報","投票関連","あなたの投稿関連","ニュース関連"]
+    let sectionArray = ["あなたの登録情報","投票関連","意見投稿関連","ニュース関連"]
+    let voteSectionArray = ["あなたの投票履歴","定期投票の設定"]
+    let snsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたの投稿","あなたが反応した投稿"]
+    let newsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたが反応した投稿"]
     let realm = try! Realm()
+    var evaluationArray = [String]()
+//    var badArray = [String]()
     
     var image:UIImage!
     override func viewDidLoad() {
@@ -26,6 +31,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
         self.mainTable.register(UINib(nibName: "ProfileSettingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileSettingTableViewCell")
         self.mainTable.register(UINib(nibName: "ProfileEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileEditTableViewCell")
         self.mainTable.register(UINib(nibName: "ProfileDetailEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileDetailEditTableViewCell")
+        self.mainTable.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
         // Do any additional setup after loading the view.
     }
@@ -48,11 +54,11 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         case 0:
             return 3
         case 1:
-            return 0
+            return voteSectionArray.count
         case 2:
-            return 0
+            return snsSectionArray.count
         case 3:
-            return 0
+            return newsSectionArray.count
         default:
             return 0
         }
@@ -93,9 +99,23 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 return cell
 
             }
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
+            cell.textLabel?.text = voteSectionArray[indexPath.row]
+            return cell
+
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
+            cell.textLabel?.text = snsSectionArray[indexPath.row]
+            return cell
+
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
+            cell.textLabel?.text = newsSectionArray[indexPath.row]
+            return cell
+//
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEditTableViewCell", for: indexPath)
-            
             return cell
         }
     }
@@ -152,15 +172,43 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = UIColor.orange
         }
+
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0{
-            if indexPath.row == 1{
-
+        switch indexPath.section{
+        case 0:
+            return
+        case 1:
+            return
+        case 2:
+            switch indexPath.row {
+            case 0:
+                 evaluationArray = [String]()
+                let likes = realm.objects(MyLikes.self)
+                likes.forEach { (like) in
+                    evaluationArray.append(like.documentID)
+                }
+                performSegue(withIdentifier: "EvaluationList", sender: nil)
+            case 1:
+                evaluationArray = [String]()
+                let dislikes = realm.objects(MyDisLikes.self)
+                dislikes.forEach { (dislike) in
+                    evaluationArray.append(dislike.documentID)
+                }
+                performSegue(withIdentifier: "EvaluationList", sender: nil)
+            default:
+                return
             }
+        default:
+            return
         }
-        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EvaluationList"{
+            let snsEvaluationController = segue.destination as! SNSEvaluationViewController
+            snsEvaluationController.evaluationList = self.evaluationArray
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
