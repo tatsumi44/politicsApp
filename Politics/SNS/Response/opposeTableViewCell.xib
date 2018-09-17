@@ -98,6 +98,7 @@
                 <outlet property="docIdLabel" destination="4js-YH-Wu7" id="VMS-AS-a67"/>
                 <outlet property="nameLabel" destination="qVl-I6-McA" id="Y7y-AQ-Nmk"/>
                 <outlet property="opposeLabel" destination="boU-cl-hsH" id="OgG-r3-tyT"/>
+                <outlet property="userImage" destination="SV3-bW-DHm" id="8Dr-xL-rSo"/>
             </connections>
             <point key="canvasLocation" x="-28" y="97"/>
         </tableViewCell>

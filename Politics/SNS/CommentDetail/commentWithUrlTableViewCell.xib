@@ -204,6 +204,7 @@
                 <outlet property="titleLabel" destination="EYF-NX-sMv" id="6Mo-ui-YNV"/>
                 <outlet property="urlBtn" destination="xCs-RL-hWS" id="J8Q-dc-2by"/>
                 <outlet property="urlLabel" destination="2hQ-mu-Sru" id="1eW-FY-k7z"/>
+                <outlet property="userImage" destination="O6S-yb-znR" id="dwe-sJ-Lmn"/>
             </connections>
             <point key="canvasLocation" x="94.5" y="83"/>
         </tableViewCell>

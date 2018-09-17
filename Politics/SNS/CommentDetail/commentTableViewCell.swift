@@ -10,6 +10,7 @@ import UIKit
 import WCLShineButton
 class commentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var content: UILabel!

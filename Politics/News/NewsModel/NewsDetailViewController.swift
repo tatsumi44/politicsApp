@@ -11,6 +11,7 @@ import Firebase
 import RealmSwift
 import WCLShineButton
 import SafariServices
+import FirebaseStorageUI
 class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var mainTable: UITableView!
@@ -19,6 +20,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     let db = Firestore.firestore()
     let realm = try! Realm()
+    let storageRef = Storage.storage().reference()
     var mainNews:MainNewsData!
     var date:String!
     var responseArray = [GetResponse]()
@@ -197,6 +199,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTodayTableViewCell", for: indexPath) as! NewsTodayTableViewCell
+            
             cell.titleLabel.text = mainNews.title
             cell.dateLabel.text = mainNews.date
             cell.titleBtn.tag = indexPath.row
@@ -232,6 +235,10 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             switch responseArray[indexPath.row - 1].opponentName {
             case "":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
+                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                cell.userImage.layer.cornerRadius = 20
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.commentLabel.text = responseArray[indexPath.row - 1].comment
                 cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 1].name!)"
                 cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
@@ -241,6 +248,10 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
+                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                cell.userImage.layer.cornerRadius = 20
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = responseArray[indexPath.row - 1].name
                 cell.commentLabel.text = responseArray[indexPath.row - 1].comment
                 cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy-MM-dd HH:mm:ss")

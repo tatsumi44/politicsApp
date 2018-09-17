@@ -10,6 +10,9 @@ import UIKit
 
 class opposeTableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var userImage: UIImageView!
+    
     @IBOutlet weak var opposeLabel: UILabel!
     
     @IBOutlet weak var nameLabel: UILabel!

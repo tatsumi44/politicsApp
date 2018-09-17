@@ -97,6 +97,7 @@
                 <outlet property="dateLabel" destination="NtN-pE-7FJ" id="XYV-zR-h9D"/>
                 <outlet property="docidLabel" destination="0fV-ar-n1L" id="5kk-iI-PLA"/>
                 <outlet property="nameLabel" destination="Fma-hJ-RiB" id="bez-77-6RN"/>
+                <outlet property="userImage" destination="UC9-ox-bBw" id="zCB-I3-1D6"/>
             </connections>
             <point key="canvasLocation" x="40" y="91"/>
         </tableViewCell>

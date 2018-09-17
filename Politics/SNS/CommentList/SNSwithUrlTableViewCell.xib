@@ -311,6 +311,7 @@
                 <outlet property="titleLabel" destination="E0G-Bg-Gnm" id="Qyd-TN-KwB"/>
                 <outlet property="urlBtn" destination="1VB-Ot-hcl" id="5zo-Y9-dPf"/>
                 <outlet property="urlLabel" destination="7Vc-q3-o3g" id="Sqw-vd-pMH"/>
+                <outlet property="userImage" destination="7dE-rc-xHx" id="a67-M9-QiA"/>
             </connections>
             <point key="canvasLocation" x="137.5" y="127"/>
         </tableViewCell>

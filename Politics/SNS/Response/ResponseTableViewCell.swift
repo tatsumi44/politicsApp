@@ -10,6 +10,8 @@ import UIKit
 
 class ResponseTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var userImage: UIImageView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var docidLabel: UILabel!

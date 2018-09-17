@@ -173,6 +173,7 @@
                 <outlet property="likecount" destination="mBW-2s-DNf" id="JjP-Ok-Mll"/>
                 <outlet property="nameLabel" destination="Mg6-Ko-vgt" id="6Qx-zB-J0U"/>
                 <outlet property="title" destination="BT8-wr-FhB" id="ULx-Xa-ePP"/>
+                <outlet property="userImage" destination="E55-EX-z8M" id="pxd-GC-CsT"/>
             </connections>
             <point key="canvasLocation" x="94.5" y="72"/>
         </tableViewCell>

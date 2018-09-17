@@ -13,6 +13,7 @@ import Firebase
 import RealmSwift
 import SwiftDate
 import SafariServices
+import FirebaseStorageUI
 class CommentDetailViewController: UIViewController,UITextViewDelegate {
     let SCREEN_SIZE = UIScreen.main.bounds.size
     @IBOutlet weak var postView: UIView!
@@ -22,6 +23,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     var keysArray = [String]()
     let db = Firestore.firestore()
     let realm = try! Realm()
+    let storageRef = Storage.storage().reference()
     var responseArray = [GetResponse]()
     var goodArray = [String]()
     var badArray = [String]()
@@ -240,6 +242,10 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
             switch content.url{
             case "":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "commentTableViewCell", for: indexPath) as! commentTableViewCell
+                let reference = storageRef.child("image/profile/\(self.content.uid!).jpg")
+                cell.userImage.layer.cornerRadius = 25
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = content.username
                 cell.title.text = content.title
                 cell.content.text = content.contents
@@ -270,6 +276,10 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "commentWithUrlTableViewCell", for: indexPath) as! commentWithUrlTableViewCell
+                let reference = storageRef.child("image/profile/\(self.content.uid!).jpg")
+                cell.userImage.layer.cornerRadius = 25
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = content.username
                 cell.titleLabel.text = content.title
                 cell.contentLabel.text = content.contents
@@ -318,6 +328,10 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
             switch responseArray[indexPath.row - 2].opponentName {
             case "":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
+                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 2].uid!).jpg")
+                cell.userImage.layer.cornerRadius = 20
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 2].name!)"
                 cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
                 cell.commentLabel.text = responseArray[indexPath.row - 2].comment
@@ -327,6 +341,10 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
+                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 2].uid!).jpg")
+                cell.userImage.layer.cornerRadius = 20
+                cell.userImage.layer.masksToBounds = true
+                cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = responseArray[indexPath.row - 2].name
                 cell.commentLabel.text = responseArray[indexPath.row - 2].comment
                 cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")

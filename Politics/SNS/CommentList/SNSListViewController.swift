@@ -19,6 +19,8 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var searchBar: UISearchBar!
     let db = Firestore.firestore()
     let realm = try! Realm()
+//    let storage = Storage.storage()
+    let storageRef = Storage.storage().reference()
     var middleContents = [MiddleGetDtail]()
     var contents = [GetDetail]()
     var resarchmiddleContents = [MiddleGetDtail]()
@@ -123,11 +125,16 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+//        let user = realm.objects(Userdata.self)[0]
         
         switch contents[indexPath.row].url {
         case "":
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
             cell.tag = indexPath.row
+            let reference = storageRef.child("image/profile/\(self.contents[indexPath.row].uid!).jpg")
+            cell.userImage.layer.cornerRadius = 25
+            cell.userImage.layer.masksToBounds = true
+            cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
             cell.nameLabel.text = self.contents[indexPath.row].username
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
@@ -182,6 +189,11 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SNSwithUrlTableViewCell", for: indexPath) as! SNSwithUrlTableViewCell
             cell.tag = indexPath.row
+            let reference = storageRef.child("image/profile/\(self.contents[indexPath.row].uid!).jpg")
+            print("image/profile/\(self.contents[indexPath.row].uid!).jpg")
+            cell.userImage.layer.cornerRadius = 25
+            cell.userImage.layer.masksToBounds = true
+            cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
             cell.nameLabel.text = self.contents[indexPath.row].username
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
