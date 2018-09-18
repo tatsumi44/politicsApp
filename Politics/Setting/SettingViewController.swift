@@ -17,7 +17,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
     let sectionArray = ["あなたの登録情報","投票関連","意見投稿関連","ニュース関連"]
     let voteSectionArray = ["あなたの投票履歴","定期投票の設定"]
     let snsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたの投稿","あなたが反応した投稿"]
-    let newsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたが反応した投稿"]
+    let newsSectionArray = ["あなたが反応した投稿"]
     let realm = try! Realm()
     var evaluationArray = [String]()
 //    var badArray = [String]()
@@ -120,6 +120,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         }
     }
     @objc func editTap(sender:UIButton){
+       
         performSegue(withIdentifier: "Edit", sender: nil)
     }
     @objc func cameraTap(sender:UIButton){
@@ -180,7 +181,14 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         case 0:
             return
         case 1:
-            return
+            switch indexPath.row {
+            case 0:
+               return
+            default:
+                let storyboard: UIStoryboard = UIStoryboard(name: "Chart", bundle: nil)
+                let nv = storyboard.instantiateViewController(withIdentifier: "ReguralyViewController") as! ReguralyViewController
+                self.show(nv, sender: nil)
+            }
         case 2:
             switch indexPath.row {
             case 0:
@@ -189,14 +197,34 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 likes.forEach { (like) in
                     evaluationArray.append(like.documentID)
                 }
-                performSegue(withIdentifier: "EvaluationList", sender: nil)
+                if evaluationArray.count != 0{
+                    performSegue(withIdentifier: "EvaluationList", sender: nil)
+                }else{
+                    self.alert(message: "いいねしたものはありません")
+                }
+                
             case 1:
                 evaluationArray = [String]()
                 let dislikes = realm.objects(MyDisLikes.self)
                 dislikes.forEach { (dislike) in
                     evaluationArray.append(dislike.documentID)
                 }
-                performSegue(withIdentifier: "EvaluationList", sender: nil)
+                if evaluationArray.count != 0{
+                    performSegue(withIdentifier: "EvaluationList", sender: nil)
+                }else{
+                    self.alert(message: "いいねしたものはありません")
+                }
+            case 2:
+                evaluationArray = [String]()
+                let snsID = realm.objects(SNSVote.self)
+                snsID.forEach { (sns) in
+                    evaluationArray.append(sns.snsID)
+                }
+                if evaluationArray.count != 0{
+                    performSegue(withIdentifier: "EvaluationList", sender: nil)
+                }else{
+                    self.alert(message: "いいねしたものはありません")
+                }
             default:
                 return
             }
@@ -225,15 +253,11 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
             if let error = error{
                 self.alert(message: error.localizedDescription)
             }else{
-                
                 SDImageCache.shared().clearMemory()
                 SDImageCache.shared().clearDisk()
                 self.mainTable.reloadData()
             }
-            
         }
-        
         dismiss(animated: true, completion: nil)
     }
-    
 }

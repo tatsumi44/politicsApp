@@ -57,18 +57,35 @@ class ReguralyViewController: FormViewController {
             <<< SwitchRow("Show Next Section") {
                 $0.title = "SwitchRow"
                 let flag = realm.objects(RegularVote.self).first
-                //                let user = self.realm.objects(Userdata.self)
-                $0.value = flag?.flag
+                let flag1 = realm.objects(RegularVote.self)
+                print(flag1.count)
+                if flag1.count != 0{
+                    $0.value = flag?.flag
+                }else{
+                    $0.value = false
+                }
+                
                 }.onChange({ (diff) in
-                    //                    print(diff.value)
+//                                        print(diff.value)
                     let user = self.realm.objects(Userdata.self)
                     let flag = self.realm.objects(RegularVote.self).first
-                    try! self.realm.write() {
-                        flag?.flag = diff.value!
-                        print(user[0].userID)
-                        self.db.collection("users").document(user[0].userID).updateData([
-                            "regularFlag" : diff.value!
-                            ])
+                    let flag1 = self.realm.objects(RegularVote.self)
+                    if flag1.count != 0{
+                        try! self.realm.write() {
+                            flag?.flag = diff.value!
+                            print(user[0].userID)
+                            self.db.collection("users").document(user[0].userID).updateData([
+                                "regularFlag" : diff.value!,
+                                "regularFlagDate": NSDate()
+                                ])
+                        }
+                    }else{
+                        let flag = RegularVote()
+                        flag.flag = diff.value!
+                        print(diff.value!)
+                        try! self.realm.write() {
+                            self.realm.add(flag)
+                        }
                     }
                 })
             +++ Section("投票一覧"){

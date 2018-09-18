@@ -89,7 +89,8 @@ class PostDetailViewController: FormViewController  {
                         print(dateTagArray)
                         if tagArray.count != 0{
                             let postContent = PostDetail(title: title, contents: content, tagArray: dateTagArray, uid: user[0].userID, username: user[0].name, url: self.url, date: date)
-                            self.db.collection("SNS").addDocument(data: [
+                            var ref: DocumentReference? = nil
+                            ref = self.db.collection("SNS").addDocument(data: [
                                 "title": postContent.title,
                                 "content": postContent.contents,
                                 "tags": postContent.tagArray,
@@ -97,8 +98,20 @@ class PostDetailViewController: FormViewController  {
                                 "name": postContent.username,
                                 "url":postContent.url,
                                 "date": postContent.date
-                                ])
-                            self.navigationController?.popToRootViewController(animated: true)
+                            ]){error in
+                                if let error = error{
+                                    print(error.localizedDescription)
+                                }else{
+                                    let sns = SNSVote()
+                                    sns.snsID = ref!.documentID
+                                    sns.snsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(sns)
+                                    }
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }
+                            }
+                            
                         }else{
                             let postContentWithoutTag = PostDetail(title: title, contents: content, tagArray: ["何もありません" : int64], uid: user[0].userID, username: user[0].name, url: self.url, date: date)
                             self.db.collection("SNS").addDocument(data: [

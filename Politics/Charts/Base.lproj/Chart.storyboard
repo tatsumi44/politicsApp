@@ -13,7 +13,7 @@
         <!--Reguraly View Controller-->
         <scene sceneID="S3l-EF-MRh">
             <objects>
-                <viewController id="C7d-r0-CTF" customClass="ReguralyViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ReguralyViewController" storyboardIdentifier="ReguralyViewController" id="C7d-r0-CTF" customClass="ReguralyViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KRG-Lc-yJp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

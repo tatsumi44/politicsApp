@@ -244,11 +244,23 @@ class MyDisLikes: Object {
 
 class NewsLikes: Object {
     @objc dynamic var documentID = ""
+    
 }
 
 
 class NewsDisLikes: Object {
     @objc dynamic var documentID = ""
+    
+}
+class NewsLikes1: Object {
+    @objc dynamic var documentID = ""
+    @objc dynamic var date  = ""
+}
+
+
+class NewsDisLikes1: Object {
+    @objc dynamic var documentID = ""
+    @objc dynamic var date  = ""
 }
 class RegularVote: Object {
     @objc dynamic var flag = false
@@ -260,7 +272,10 @@ class RegularVoteResult: Object {
     @objc dynamic var questionAnswer = ""
 }
 
-
+class SNSVote :Object{
+    @objc dynamic var snsID = ""
+    @objc dynamic var snsDate = Date()
+}
 
 class Qusetions{
     var array:[String]!

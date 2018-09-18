@@ -14,7 +14,7 @@
         <!--Post View Controller-->
         <scene sceneID="NA8-fD-8IF">
             <objects>
-                <viewController id="WXU-HZ-qbF" customClass="SNSPostViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SNSPostViewController" storyboardIdentifier="SNSPostViewController" id="WXU-HZ-qbF" customClass="SNSPostViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4hx-d8-vhT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,7 +77,7 @@
         <!--Comment Detail View Controller-->
         <scene sceneID="9oZ-rt-Xrm">
             <objects>
-                <viewController id="9VS-Wm-Mwq" customClass="CommentDetailViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="CommentDetailViewController" storyboardIdentifier="CommentDetailViewController" id="9VS-Wm-Mwq" customClass="CommentDetailViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xvp-gG-9EB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thX-pP-fJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1719" y="81"/>
+            <point key="canvasLocation" x="1718" y="-579"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VzI-D9-lmo">

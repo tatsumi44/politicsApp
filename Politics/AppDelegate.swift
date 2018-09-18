@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import RealmSwift
+import FirebaseStorageUI
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         print("呼ばれてる")
-        
+        SDImageCache.shared().clearMemory()
+        SDImageCache.shared().clearDisk()
 //        setData.removeObject(forKey: "user")
 
         if  setData.object(forKey: "user") != nil{

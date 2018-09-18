@@ -65,13 +65,13 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeybordWillHideNotification(_:)), name: .UIKeyboardWillHide, object: nil)
-        let likes = realm.objects(NewsLikes.self)
+        let likes = realm.objects(NewsLikes1.self)
         goodArray = [String]()
         badArray = [String]()
         likes.forEach { (like) in
             goodArray.append(like.documentID)
         }
-        let dislikes = realm.objects(NewsDisLikes.self)
+        let dislikes = realm.objects(NewsDisLikes1.self)
         dislikes.forEach { (dislike) in
             badArray.append(dislike.documentID)
         }
@@ -284,8 +284,9 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 if let error = error{
                     self.alert(message: error.localizedDescription)
                 }else{
-                    let likes = NewsLikes()
+                    let likes = NewsLikes1()
                     likes.documentID = urlString
+                    likes.date = self.mainNews.date
                     try! self.realm.write() {
                         self.realm.add(likes)
                         if self.badArray.index(of: urlString) != nil{
@@ -294,7 +295,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                                 if let error = error{
                                     self.alert(message: error.localizedDescription)
                                 }else{
-                                    let dislikes = self.realm.objects(NewsDisLikes.self).filter("documentID == %@",urlString)
+                                    let dislikes = self.realm.objects(NewsDisLikes1.self).filter("documentID == %@",urlString)
                                     try! self.realm.write() {
                                         self.realm.delete(dislikes)
                                         self.badArray.remove(at: self.badArray.index(of: urlString)!)
@@ -324,7 +325,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                     self.alert(message: error.localizedDescription)
                 }else{
                     if self.goodArray.index(of: urlString) != nil{
-                        let likes = self.realm.objects(NewsLikes.self).filter("documentID == %@",urlString)
+                        let likes = self.realm.objects(NewsLikes1.self).filter("documentID == %@",urlString)
                         try! self.realm.write() {
                             self.realm.delete(likes)
                             self.goodArray.remove(at: self.goodArray.index(of: urlString)!)
@@ -350,8 +351,9 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 if let error = error{
                     self.alert(message: error.localizedDescription)
                 }else{
-                    let dislikes = NewsDisLikes()
+                    let dislikes = NewsDisLikes1()
                     dislikes.documentID = urlString
+                    dislikes.date = self.mainNews.date
                     try! self.realm.write() {
                         self.realm.add(dislikes)
                         if self.goodArray.index(of: urlString) != nil{
@@ -360,7 +362,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                                 if let error = error{
                                     self.alert(message: error.localizedDescription)
                                 }else{
-                                    let likes = self.realm.objects(NewsLikes.self).filter("documentID == %@",urlString)
+                                    let likes = self.realm.objects(NewsLikes1.self).filter("documentID == %@",urlString)
                                     try! self.realm.write() {
                                         self.realm.delete(likes)
                                         self.goodArray.remove(at: self.goodArray.index(of: urlString)!)
@@ -390,7 +392,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                     self.alert(message: error.localizedDescription)
                 }else{
                     if self.badArray.index(of: urlString) != nil{
-                        let dislikes = self.realm.objects(NewsDisLikes.self).filter("documentID == %@",urlString)
+                        let dislikes = self.realm.objects(NewsDisLikes1.self).filter("documentID == %@",urlString)
                         try! self.realm.write() {
                             self.realm.delete(dislikes)
                             self.badArray.remove(at: self.badArray.index(of: urlString)!)

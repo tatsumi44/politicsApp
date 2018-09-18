@@ -230,6 +230,17 @@ extension SNSEvaluationViewController:UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        postNum = indexPath.row
+        let storyboard: UIStoryboard = UIStoryboard(name: "SNS", bundle: nil)
+        let nv = storyboard.instantiateViewController(withIdentifier: "CommentDetailViewController") as! CommentDetailViewController
+        nv.content = contents[indexPath.row]
+        self.show(nv, sender: nil)
+    }
+
+    
+    
     @objc func urlTap(sender:UIButton){
         if let url = NSURL(string: contents[sender.tag].url) {
             let safariViewController = SFSafariViewController(url: url as URL)
@@ -238,7 +249,10 @@ extension SNSEvaluationViewController:UITableViewDelegate,UITableViewDataSource{
     }
     @objc func commentTap(sender:UIButton){
         postNum = sender.tag
-        performSegue(withIdentifier: "GoPost", sender: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "SNS", bundle: nil)
+        let snsPostViewController = storyboard.instantiateViewController(withIdentifier: "SNSPostViewController") as! SNSPostViewController
+        snsPostViewController.content = contents[sender.tag]
+        self.show(snsPostViewController, sender: nil)
     }
     
     @objc func likeTap(sender:WCLShineButton){
@@ -282,7 +296,6 @@ extension SNSEvaluationViewController:UITableViewDelegate,UITableViewDataSource{
                             let row = NSIndexPath(row: sender.tag, section: 0)
                             self.mainTable.reloadRows(at: [row as IndexPath], with: .automatic)
                         }
-                        //                        self.mainTable.reloadRows(at: [row as IndexPath], with: .fade)
                     }
                     print("ドキュメント追加")
                 }
@@ -377,6 +390,4 @@ extension SNSEvaluationViewController:UITableViewDelegate,UITableViewDataSource{
         }
         print("Clicked \(sender.isSelected)")
     }
-    
-    
 }
