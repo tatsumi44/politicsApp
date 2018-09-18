@@ -18,6 +18,7 @@ class SNSPostViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = self.realm.objects(Userdata.self)
+        let response = realm.objects(SNSResponse.self)
         title = "コメントする"
         form +++ Section("コメントする")
             <<< TextAreaRow("notes") {
@@ -42,6 +43,31 @@ class SNSPostViewController: FormViewController {
                             if let error = error{
                                 self.alert(message: error.localizedDescription)
                             }else{
+                                print("成功")
+                                if response.count != 0{
+                                    if response.filter("snsID == %@",self.content.docID).count != 0{
+                                        let response1 = response.filter("snsID == %@",self.content.docID)[0]
+                                        try! self.realm.write() {
+                                            response1.snsID = self.content.docID
+                                            response1.snsDate = Date()
+                                        }
+                                        
+                                    }else{
+                                        let response = SNSResponse()
+                                        response.snsID = self.content.docID
+                                        response.snsDate = Date()
+                                        try! self.realm.write() {
+                                            self.realm.add(response)
+                                        }
+                                    }
+                                }else{
+                                    let response = SNSResponse()
+                                    response.snsID = self.content.docID
+                                    response.snsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(response)
+                                    }
+                                }
                                 self.navigationController?.popToRootViewController(animated: true)
                             }
                         }

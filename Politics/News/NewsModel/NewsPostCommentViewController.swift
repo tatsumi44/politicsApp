@@ -18,6 +18,7 @@ class NewsPostCommentViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = self.realm.objects(Userdata.self)
+        let response = realm.objects(NewsResponse.self)
         title = "コメントする"
         form +++ Section("コメントする")
             <<< TextAreaRow("notes") {
@@ -40,13 +41,42 @@ class NewsPostCommentViewController: FormViewController {
                             "uid": user[0].userID,
                             "username":user[0].name,
                             "userImagePath": "/"
-                            ])
-                        self.navigationController?.popToRootViewController(animated: true)
+                        ]){error in
+                            if let error = error{
+                                self.alert(message: error.localizedDescription)
+                            }else{
+                                print("成功")
+                                if response.count != 0{
+                                    if response.filter("newsID == %@",self.newsurlPath(newsURL: self.newsContents.url)).count != 0{
+                                        let response1 = response.filter("newsID == %@",self.newsurlPath(newsURL: self.newsContents.url))[0]
+                                        try! self.realm.write() {
+                                            response1.newsID = self.newsurlPath(newsURL: self.newsContents.url)
+                                            response1.newsDate = Date()
+                                        }
+                                        
+                                    }else{
+                                        let response = NewsResponse()
+                                        response.newsID = self.newsurlPath(newsURL: self.newsContents.url)
+                                        response.newsDate = Date()
+                                        try! self.realm.write() {
+                                            self.realm.add(response)
+                                        }
+                                    }
+                                }else{
+                                    let response = NewsResponse()
+                                    response.newsID = self.newsurlPath(newsURL: self.newsContents.url)
+                                    response.newsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(response)
+                                    }
+                                }
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }
+                        }
                     }else{
                         self.alert(message: "何か入力してください")
                     }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

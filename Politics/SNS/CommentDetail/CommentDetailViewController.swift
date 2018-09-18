@@ -179,6 +179,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     
     @IBAction func decide(_ sender: Any) {
         let user = realm.objects(Userdata.self)
+        let response = realm.objects(SNSResponse.self)
         let date  = NSDate()
         if let post = postTextView.text{
             if post.prefix(1) == "@"{
@@ -198,10 +199,39 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                         "opponentUid":"\(responseArray[commnetNum - 2].uid!)",
                         "opponentDocID":"\(responseArray[commnetNum - 2].docID!)",
                         "date": date
-                        ])
-                    print("成功")
-                    postTextView.text = nil
-                    view.endEditing(true)
+                    ]){error in
+                        if let error = error{
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            print("成功")
+                            if response.count != 0{
+                                if response.filter("snsID == %@",self.content.docID).count != 0{
+                                   let response1 = response.filter("snsID == %@",self.content.docID)[0]
+                                    try! self.realm.write() {
+                                        response1.snsID = self.content.docID
+                                        response1.snsDate = Date()
+                                    }
+                                    
+                                }else{
+                                    let response = SNSResponse()
+                                    response.snsID = self.content.docID
+                                    response.snsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(response)
+                                    }
+                                }
+                            }else{
+                                let response = SNSResponse()
+                                response.snsID = self.content.docID
+                                response.snsDate = Date()
+                                try! self.realm.write() {
+                                    self.realm.add(response)
+                                }
+                            }
+                            self.postTextView.text = nil
+                            self.view.endEditing(true)
+                        }
+                    }
                 }
             }else{
                 db.collection("SNS").document(content.docID).collection("response").addDocument(data: [
@@ -209,9 +239,39 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                     "uid": user[0].userID,
                     "name": user[0].name,
                     "date": date
-                    ])
-                postTextView.text = nil
-                view.endEditing(true)
+                ]){error in
+                    if let error = error{
+                        self.alert(message: error.localizedDescription)
+                    }else{
+                        print("成功")
+                        if response.count != 0{
+                            if response.filter("snsID == %@",self.content.docID).count != 0{
+                                let response1 = response.filter("snsID == %@",self.content.docID)[0]
+                                try! self.realm.write() {
+                                    response1.snsID = self.content.docID
+                                    response1.snsDate = Date()
+                                }
+                                
+                            }else{
+                                let response = SNSResponse()
+                                response.snsID = self.content.docID
+                                response.snsDate = Date()
+                                try! self.realm.write() {
+                                    self.realm.add(response)
+                                }
+                            }
+                        }else{
+                            let response = SNSResponse()
+                            response.snsID = self.content.docID
+                            response.snsDate = Date()
+                            try! self.realm.write() {
+                                self.realm.add(response)
+                            }
+                        }
+                        self.postTextView.text = nil
+                        self.view.endEditing(true)
+                    }
+                }
             }
         }else{
             alert(message: "ちゃんと入力してや！")
@@ -521,8 +581,8 @@ extension CommentDetailViewController:UICollectionViewDelegate,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCollectionViewCell", for: indexPath) as! TagCollectionViewCell
-        cell.layer.cornerRadius = 4
-        cell.layer.masksToBounds = true
+        cell.tagLabel.layer.cornerRadius = 4
+        cell.tagLabel.layer.masksToBounds = true
         cell.tagLabel.text = keysArray[indexPath.row]
         return cell
         

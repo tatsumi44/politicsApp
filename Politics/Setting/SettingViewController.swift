@@ -177,6 +177,10 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+        
         switch indexPath.section{
         case 0:
             return
@@ -217,6 +221,17 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
             case 2:
                 evaluationArray = [String]()
                 let snsID = realm.objects(SNSVote.self)
+                snsID.forEach { (sns) in
+                    evaluationArray.append(sns.snsID)
+                }
+                if evaluationArray.count != 0{
+                    performSegue(withIdentifier: "EvaluationList", sender: nil)
+                }else{
+                    self.alert(message: "いいねしたものはありません")
+                }
+            case 3:
+                evaluationArray = [String]()
+                let snsID = realm.objects(SNSResponse.self)
                 snsID.forEach { (sns) in
                     evaluationArray.append(sns.snsID)
                 }

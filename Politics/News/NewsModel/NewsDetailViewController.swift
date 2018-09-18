@@ -108,6 +108,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func decide(_ sender: Any) {
         let user = self.realm.objects(Userdata.self)
+        let response = realm.objects(NewsResponse.self)
         if let post = commentTextView.text{
             if post.prefix(1) == "@"{
                 if postName == post.prefix(charaNum){
@@ -122,9 +123,39 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                         "opponentName": "\(postName!)",
                         "opponentUid":"\(responseArray[commnetNum - 1].uid!)",
                         "opponentDocID":"\(responseArray[commnetNum - 1].docID!)",
-                        ])
-                    commentTextView.text = nil
-                    view.endEditing(true)
+                    ]){error in
+                        if let error = error{
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            print("成功")
+                            if response.count != 0{
+                                if response.filter("newsID == %@",self.newsurlPath(newsURL: self.mainNews.url)).count != 0{
+                                    let response1 = response.filter("newsID == %@",self.newsurlPath(newsURL: self.mainNews.url))[0]
+                                    try! self.realm.write() {
+                                        response1.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                                        response1.newsDate = Date()
+                                    }
+                                    
+                                }else{
+                                    let response = NewsResponse()
+                                    response.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                                    response.newsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(response)
+                                    }
+                                }
+                            }else{
+                                let response = NewsResponse()
+                                response.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                                response.newsDate = Date()
+                                try! self.realm.write() {
+                                    self.realm.add(response)
+                                }
+                            }
+                            self.commentTextView.text = nil
+                            self.view.endEditing(true)
+                        }
+                    }
                 }else{
                     alert(message: "相手の名前は正しく入力してください")
                 }
@@ -137,9 +168,39 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                     "uid": user[0].userID,
                     "username":user[0].name,
                     "userImagePath": "/"
-                    ])
-                commentTextView.text = nil
-                view.endEditing(true)
+                ]){error in
+                    if let error = error{
+                        self.alert(message: error.localizedDescription)
+                    }else{
+                        print("成功")
+                        if response.count != 0{
+                            if response.filter("newsID == %@",self.newsurlPath(newsURL: self.mainNews.url)).count != 0{
+                                let response1 = response.filter("newsID == %@",self.newsurlPath(newsURL: self.mainNews.url))[0]
+                                try! self.realm.write() {
+                                    response1.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                                    response1.newsDate = Date()
+                                }
+                                
+                            }else{
+                                let response = NewsResponse()
+                                response.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                                response.newsDate = Date()
+                                try! self.realm.write() {
+                                    self.realm.add(response)
+                                }
+                            }
+                        }else{
+                            let response = NewsResponse()
+                            response.newsID = self.newsurlPath(newsURL: self.mainNews.url)
+                            response.newsDate = Date()
+                            try! self.realm.write() {
+                                self.realm.add(response)
+                            }
+                        }
+                        self.commentTextView.text = nil
+                        self.view.endEditing(true)
+                    }
+                }
             }
         }else{
             alert(message: "何か入力してください")

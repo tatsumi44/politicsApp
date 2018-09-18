@@ -277,6 +277,15 @@ class SNSVote :Object{
     @objc dynamic var snsDate = Date()
 }
 
+class SNSResponse: Object {
+    @objc dynamic var snsID = ""
+    @objc dynamic var snsDate = Date()
+}
+class NewsResponse: Object {
+    @objc dynamic var newsID = ""
+    @objc dynamic var newsDate = Date()
+}
+
 class Qusetions{
     var array:[String]!
     var title:String!
@@ -390,9 +399,3 @@ extension UIImage {
         return result
     }
 }
-
-
-
-
-
-
