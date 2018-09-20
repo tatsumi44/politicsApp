@@ -137,6 +137,7 @@
                         <outlet property="mainTable" destination="q60-VI-CGo" id="gPt-zN-wR5"/>
                         <outlet property="postTextView" destination="vkF-Uq-wKg" id="TsP-Gf-iCz"/>
                         <outlet property="postView" destination="6Jy-0J-STI" id="fVA-U4-Bb0"/>
+                        <segue destination="ktj-cP-QkG" kind="show" identifier="alert" id="2Zc-Q4-oLS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTW-1l-mXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -174,6 +175,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAM-BR-V9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1718" y="931"/>
+        </scene>
+        <!--Alert Flag View Controller-->
+        <scene sceneID="UYm-vQ-W1H">
+            <objects>
+                <viewController id="ktj-cP-QkG" customClass="AlertFlagViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MbC-Jd-ECW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="QiY-nb-Mb2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nWC-U3-aU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="1795"/>
         </scene>
         <!--Search Post View Controller-->
         <scene sceneID="f9Q-ne-mWY">
@@ -252,6 +268,7 @@
                         <outlet property="mainTable" destination="RLj-Wf-0u9" id="hrQ-4A-4yY"/>
                         <outlet property="postTextView" destination="gIX-FX-pwi" id="yBi-GX-71b"/>
                         <outlet property="postView" destination="RsR-y2-yhB" id="scK-VH-mTc"/>
+                        <segue destination="ktj-cP-QkG" kind="show" identifier="alert" id="6aV-nQ-sfc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="usX-aI-tAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -295,4 +312,7 @@
     <resources>
         <image name="Send" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="6aV-nQ-sfc"/>
+    </inferredMetricsTieBreakers>
 </document>

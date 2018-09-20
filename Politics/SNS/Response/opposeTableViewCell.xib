@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdp-7b-rBv">
-                        <rect key="frame" x="10" y="93.5" width="270" height="20"/>
+                        <rect key="frame" x="10" y="93.5" width="250" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="CXK-ub-l1w"/>
                         </constraints>
@@ -68,13 +68,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIC-BE-erm">
+                        <rect key="frame" x="280" y="93.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="3T0-Xo-OhZ"/>
+                            <constraint firstAttribute="width" constant="20" id="sN6-Ag-l0x"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="Flag 2"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="jIC-BE-erm" secondAttribute="trailing" constant="20" id="4Xp-Lm-F7z"/>
                     <constraint firstItem="yeZ-pt-ofP" firstAttribute="top" secondItem="SV3-bW-DHm" secondAttribute="bottom" id="6c4-yF-uwG"/>
                     <constraint firstAttribute="trailing" secondItem="4js-YH-Wu7" secondAttribute="trailing" id="CY3-BO-0y5"/>
-                    <constraint firstAttribute="trailing" secondItem="Tdp-7b-rBv" secondAttribute="trailing" constant="40" id="DyD-se-lb3"/>
                     <constraint firstItem="yeZ-pt-ofP" firstAttribute="leading" secondItem="Xce-Lo-yX8" secondAttribute="leading" constant="10" id="IT9-36-VLx"/>
                     <constraint firstItem="yeZ-pt-ofP" firstAttribute="top" secondItem="4js-YH-Wu7" secondAttribute="bottom" id="Kyg-sa-I9g"/>
+                    <constraint firstAttribute="bottom" secondItem="jIC-BE-erm" secondAttribute="bottom" id="Nj8-hQ-Pu0"/>
                     <constraint firstAttribute="trailing" secondItem="yeZ-pt-ofP" secondAttribute="trailing" id="Ou9-1N-Gfs"/>
                     <constraint firstItem="qVl-I6-McA" firstAttribute="top" secondItem="boU-cl-hsH" secondAttribute="bottom" id="Rb3-pI-xJ0"/>
                     <constraint firstItem="Tdp-7b-rBv" firstAttribute="leading" secondItem="Xce-Lo-yX8" secondAttribute="leading" constant="10" id="VNd-r8-Uer"/>
@@ -82,6 +91,7 @@
                     <constraint firstItem="Tdp-7b-rBv" firstAttribute="top" secondItem="yeZ-pt-ofP" secondAttribute="bottom" id="bS4-QA-Odu"/>
                     <constraint firstItem="boU-cl-hsH" firstAttribute="leading" secondItem="Xce-Lo-yX8" secondAttribute="leading" constant="10" id="bjj-pt-ACa"/>
                     <constraint firstAttribute="trailing" secondItem="boU-cl-hsH" secondAttribute="trailing" id="c7H-Jb-BLu"/>
+                    <constraint firstItem="jIC-BE-erm" firstAttribute="top" secondItem="yeZ-pt-ofP" secondAttribute="bottom" id="i88-dd-bL5"/>
                     <constraint firstItem="SV3-bW-DHm" firstAttribute="leading" secondItem="Xce-Lo-yX8" secondAttribute="leading" constant="10" id="jQj-nr-Nnf"/>
                     <constraint firstItem="4js-YH-Wu7" firstAttribute="top" secondItem="qVl-I6-McA" secondAttribute="bottom" id="n3L-0N-Yaq"/>
                     <constraint firstItem="boU-cl-hsH" firstAttribute="top" secondItem="Xce-Lo-yX8" secondAttribute="top" id="nVj-RB-uZd"/>
@@ -89,10 +99,12 @@
                     <constraint firstItem="qVl-I6-McA" firstAttribute="leading" secondItem="SV3-bW-DHm" secondAttribute="trailing" constant="10" id="xWr-up-DRV"/>
                     <constraint firstAttribute="bottom" secondItem="Tdp-7b-rBv" secondAttribute="bottom" id="xdv-8f-c8D"/>
                     <constraint firstItem="4js-YH-Wu7" firstAttribute="leading" secondItem="SV3-bW-DHm" secondAttribute="trailing" constant="10" id="yI8-8B-ANl"/>
+                    <constraint firstItem="jIC-BE-erm" firstAttribute="leading" secondItem="Tdp-7b-rBv" secondAttribute="trailing" constant="20" id="ztL-r3-E1w"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="gP2-gh-uuX"/>
             <connections>
+                <outlet property="alertFlagBtn" destination="jIC-BE-erm" id="FxB-HB-6N0"/>
                 <outlet property="commentLabel" destination="yeZ-pt-ofP" id="pq1-38-Ef9"/>
                 <outlet property="dateLabel" destination="Tdp-7b-rBv" id="SA5-l7-Qri"/>
                 <outlet property="docIdLabel" destination="4js-YH-Wu7" id="VMS-AS-a67"/>
@@ -100,10 +112,11 @@
                 <outlet property="opposeLabel" destination="boU-cl-hsH" id="OgG-r3-tyT"/>
                 <outlet property="userImage" destination="SV3-bW-DHm" id="8Dr-xL-rSo"/>
             </connections>
-            <point key="canvasLocation" x="-28" y="97"/>
+            <point key="canvasLocation" x="-164" y="105"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Flag 2" width="500" height="500"/>
         <image name="sample" width="200" height="200"/>
     </resources>
 </document>

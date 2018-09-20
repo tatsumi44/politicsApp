@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jl3-jK-2II">
-                        <rect key="frame" x="0.0" y="0.0" width="441" height="50"/>
+                        <rect key="frame" x="0.0" y="5" width="441" height="50"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="O6S-yb-znR">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -60,7 +60,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVk-5p-TmV">
-                        <rect key="frame" x="0.0" y="50" width="441" height="17.5"/>
+                        <rect key="frame" x="0.0" y="55" width="441" height="12.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -182,7 +182,7 @@
                     <constraint firstItem="cVk-5p-TmV" firstAttribute="leading" secondItem="TZg-yT-hea" secondAttribute="leading" id="ETN-OF-oS3"/>
                     <constraint firstItem="T4R-KH-sFe" firstAttribute="top" secondItem="cVk-5p-TmV" secondAttribute="bottom" constant="5" id="Gtm-4p-GEZ"/>
                     <constraint firstAttribute="trailing" secondItem="4KX-aR-9Cg" secondAttribute="trailing" id="Igh-VF-FfF"/>
-                    <constraint firstItem="jl3-jK-2II" firstAttribute="top" secondItem="TZg-yT-hea" secondAttribute="top" id="L1X-ih-lhJ"/>
+                    <constraint firstItem="jl3-jK-2II" firstAttribute="top" secondItem="TZg-yT-hea" secondAttribute="top" constant="5" id="L1X-ih-lhJ"/>
                     <constraint firstItem="jl3-jK-2II" firstAttribute="leading" secondItem="TZg-yT-hea" secondAttribute="leading" id="Vpi-9Q-rd6"/>
                     <constraint firstAttribute="trailing" secondItem="cVk-5p-TmV" secondAttribute="trailing" id="a8D-ZS-vl8"/>
                     <constraint firstAttribute="trailing" secondItem="jl3-jK-2II" secondAttribute="trailing" id="aAM-Bi-pR5"/>

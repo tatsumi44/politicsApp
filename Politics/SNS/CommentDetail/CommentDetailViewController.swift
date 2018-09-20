@@ -31,6 +31,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     var charaNum:Int!
     var postName:String!
     var commnetNum:Int!
+    var alertNum :Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.delegate = self
@@ -53,17 +54,27 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
             }else{
                 for doc in snap!.documents{
                     let data = doc.data()
-                    if data["opponentName"] as? String != nil{
-                        print("返信の返信")
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
-                    }else{
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
-                    }
-                    
+                    self.db.collection("SNS").document(self.content.docID).collection("response").document(doc.documentID).collection("alert").getDocuments(completion: { (snap1, error) in
+                        if let error = error {
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            let alertCount = snap1?.count
+                            if data["opponentName"] as? String != nil{
+                                print("返信の返信")
+                                
+                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: alertCount!, date: data["date"] as! NSDate))
+                            }else{
+                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: alertCount!, date: data["date"] as! NSDate))
+                            }
+                            if self.responseArray.count == snap?.count{
+                                print(self.responseArray)
+                                print(self.responseArray.count)
+                                self.responseArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                self.mainTable.reloadData()
+                            }
+                        }
+                    })
                 }
-                print(self.responseArray)
-                print(self.responseArray.count)
-                self.mainTable.reloadData()
             }
         }
     }
@@ -102,16 +113,25 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
                             self.responseArray = [GetResponse]()
                             for doc in snap!.documents{
                                 let data = doc.data()
-                                if data["opponentName"] as? String != nil{
-                                    print("返信の返信")
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
-                                }else{
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
-                                }
+                                self.db.collection("SNS").document(self.content.docID).collection("response").document(doc.documentID).collection("alert").getDocuments(completion: { (snap1, error) in
+                                    if let error = error{
+                                        self.alert(message: error.localizedDescription)
+                                    }else{
+                                        let alertCount = snap1?.count
+                                        if data["opponentName"] as? String != nil{
+                                            print("返信の返信")
+                                            self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: alertCount!, date: data["date"] as! NSDate))
+                                        }else{
+                                            self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["name"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: alertCount!, date: data["date"] as! NSDate))
+                                        }
+                                        if self.responseArray.count == snap?.count{
+                                            self.responseArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                            self.mainTable.reloadData()
+                                        }
+                                    }
+                                })
+
                             }
-                            print(self.responseArray)
-                            self.mainTable.reloadData()
-                            
                         }
                     }
                 }
@@ -397,7 +417,9 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                 cell.commentLabel.text = responseArray[indexPath.row - 2].comment
                 cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
                 cell.commentBtn.tag = indexPath.row
+                cell.alertFlagBtn.tag = indexPath.row - 2
                 cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
+                cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
@@ -407,12 +429,27 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                 cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 cell.nameLabel.text = responseArray[indexPath.row - 2].name
                 cell.commentLabel.text = responseArray[indexPath.row - 2].comment
+                cell.alertFlagBtn.tag = indexPath.row - 2
+                cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
                 cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
                 cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 2].opponentName!)＆返信先のID \(responseArray[indexPath.row - 2].opponentDocID!)"
                 cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
                 return cell
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "alert"{
+            let alertFlagViewController = segue.destination as! AlertFlagViewController
+            alertFlagViewController.content = self.content
+            alertFlagViewController.response = self.responseArray[alertNum]
+        }
+    }
+    
+    @objc func alertTap(sender:UIButton){
+        alertNum = sender.tag
+        performSegue(withIdentifier: "alert", sender: nil)
     }
     @objc func commnetTap(sender:UIButton){
         

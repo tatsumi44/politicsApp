@@ -23,7 +23,8 @@ class opposeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var docIdLabel: UILabel!
     
-
+    @IBOutlet weak var alertFlagBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

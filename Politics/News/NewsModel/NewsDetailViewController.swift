@@ -48,9 +48,9 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 for doc in snap!.documents{
                     let data = doc.data()
                     if data["opponentName"] as? String != nil{
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
                     }else{
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
                     }
                 }
                 print(self.responseArray)
@@ -91,9 +91,9 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                             for doc in snap!.documents{
                                 let data = doc.data()
                                 if data["opponentName"] as? String != nil{
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, date: data["date"] as! NSDate))
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
                                 }else{
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", date: data["date"] as! NSDate))
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
                                 }
                             }
                             self.mainTable.reloadData()
