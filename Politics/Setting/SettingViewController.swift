@@ -63,6 +63,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return sectionArray[section]

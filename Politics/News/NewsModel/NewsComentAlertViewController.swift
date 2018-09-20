@@ -1,8 +1,8 @@
 //
-//  AlertFlagViewController.swift
+//  NewsComentAlertViewController.swift
 //  Politics
 //
-//  Created by tatsumi kentaro on 2018/09/20.
+//  Created by tatsumi kentaro on 2018/09/21.
 //  Copyright © 2018年 tatsumi kentaro. All rights reserved.
 //
 
@@ -10,11 +10,12 @@ import UIKit
 import Eureka
 import Firebase
 import RealmSwift
-class AlertFlagViewController: FormViewController {
+class NewsComentAlertViewController: FormViewController {
     var db = Firestore.firestore()
     let realm = try! Realm()
-    var content: GetDetail!
-    var response : GetResponse!
+    var mainNews:MainNewsData!
+    var response :GetResponse!
+    var date:String!
     override func viewDidLoad() {
         super.viewDidLoad()
         let continents = ["ハラスメントな投稿である", "暴力的な投稿である", "嫌がらせを意図する投稿である", "フェイクニュース", "スパム", "無関係な投稿", "ヘイトスピーチ"]
@@ -48,9 +49,8 @@ class AlertFlagViewController: FormViewController {
                         array[item] = values[item] as? String
                     }
                 }
-                print(array)
                 let user = self.realm.objects(Userdata.self)
-                self.db.collection("SNS").document(self.content.docID).collection("response").document(self.response.docID).collection("alert").addDocument(data: [
+                self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: self.mainNews.url)).document(self.response.docID).collection("alert").addDocument(data: [
                     "alert" : array,
                     "alertingUid":user[0].userID,
                     "alertedUid":self.response.uid,
@@ -65,6 +65,11 @@ class AlertFlagViewController: FormViewController {
         }
         // Do any additional setup after loading the view.
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     override func valueHasBeenChanged(for row: BaseRow, oldValue: Any?, newValue: Any?) {
         if row.section === form[0] {
             print("Single Selection:\((row.section as! SelectableSection<ImageCheckRow<String>>).selectedRow()?.baseValue ?? "No row selected")")
@@ -73,12 +78,4 @@ class AlertFlagViewController: FormViewController {
             print("Mutiple Selection:\((row.section as! SelectableSection<ImageCheckRow<String>>).selectedRows().map({$0.baseValue}))")
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
-
-

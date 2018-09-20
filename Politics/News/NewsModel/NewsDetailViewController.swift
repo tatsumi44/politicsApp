@@ -29,6 +29,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     var charaNum:Int!
     var postName:String!
     var commnetNum:Int!
+    var alertNum:Int!
     //    let comviewPosy = self.commentView.frame.origin.y
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -306,6 +307,8 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
                 cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
                 cell.commentBtn.tag = indexPath.row
+                cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
+                cell.alertFlagBtn.tag = indexPath.row - 1
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
@@ -323,6 +326,12 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
     }
+    
+    @objc func alertTap(sender:UIButton){
+        alertNum = sender.tag
+        performSegue(withIdentifier: "alert", sender: nil)
+    }
+    
     @objc func commnetTap(sender:UIButton){
         
         commnetNum = sender.tag
@@ -479,6 +488,12 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "alert"{
+            let newsCommnetAlertViewController = segue.destination as! NewsComentAlertViewController
+            newsCommnetAlertViewController.mainNews = self.mainNews
+            newsCommnetAlertViewController.response = self.responseArray[alertNum]
+            newsCommnetAlertViewController.date = self.date
+        }
     }
     
 }

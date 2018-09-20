@@ -62,6 +62,7 @@
 		B92934B02120BA4800637B16 /* PastChartsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */; };
 		B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934B12120C62B00637B16 /* MyPastFormViewController.swift */; };
 		B95FC8FA21531DE100F85A4F /* AlertFlagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95FC8F921531DE100F85A4F /* AlertFlagViewController.swift */; };
+		B95FC8FF21541F6E00F85A4F /* NewsComentAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95FC8FE21541F6E00F85A4F /* NewsComentAlertViewController.swift */; };
 		B96A7A3D213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */; };
 		B96A7A3E213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */; };
 		B96A7A40213AE25B0022CDE0 /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */; };
@@ -157,6 +158,7 @@
 		B92934AF2120BA4800637B16 /* PastChartsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastChartsTableViewCell.swift; sourceTree = "<group>"; };
 		B92934B12120C62B00637B16 /* MyPastFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPastFormViewController.swift; sourceTree = "<group>"; };
 		B95FC8F921531DE100F85A4F /* AlertFlagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFlagViewController.swift; sourceTree = "<group>"; };
+		B95FC8FE21541F6E00F85A4F /* NewsComentAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsComentAlertViewController.swift; sourceTree = "<group>"; };
 		B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultListTableViewCell.swift; sourceTree = "<group>"; };
 		B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartsResultListTableViewCell.xib; sourceTree = "<group>"; };
 		B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				B9FC93A1212FE4710029EF12 /* NewsMainViewController.swift */,
 				B9FC93B2213002EC0029EF12 /* NewsViewController.swift */,
 				B9FC93B6213082500029EF12 /* NewsDetailViewController.swift */,
+				B95FC8FE21541F6E00F85A4F /* NewsComentAlertViewController.swift */,
 			);
 			path = NewsModel;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				B9FC93AF212FE5750029EF12 /* FiveDaysAgoViewController.swift in Sources */,
 				B9FC93A9212FE5490029EF12 /* TwoDaysAgoViewController.swift in Sources */,
 				B95FC8FA21531DE100F85A4F /* AlertFlagViewController.swift in Sources */,
+				B95FC8FF21541F6E00F85A4F /* NewsComentAlertViewController.swift in Sources */,
 				B9085AE5211B444E0099DBE1 /* StartViewController.swift in Sources */,
 				B92934B02120BA4800637B16 /* PastChartsTableViewCell.swift in Sources */,
 				B96A7A3D213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift in Sources */,
