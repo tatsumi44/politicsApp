@@ -24,12 +24,15 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     var mainNews:MainNewsData!
     var date:String!
     var responseArray = [GetResponse]()
+    var alertArray = [GetResponse]()
     var goodArray = [String]()
     var badArray = [String]()
     var charaNum:Int!
     var postName:String!
     var commnetNum:Int!
     var alertNum:Int!
+    var foldingFlg2 = false
+    let titleArray = ["","不適切な投稿"]
     //    let comviewPosy = self.commentView.frame.origin.y
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +51,37 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             }else{
                 for doc in snap!.documents{
                     let data = doc.data()
-                    if data["opponentName"] as? String != nil{
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
-                    }else{
-                        self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
-                    }
+                    self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: self.mainNews.url)).document(doc.documentID).collection("alert").getDocuments(completion: { (snap1, error) in
+                        if let error = error {
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            let alertCount = snap1?.count
+                            if alertCount != 0{
+                                if data["opponentName"] as? String != nil{
+                                    self.alertArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
+                                }else{
+                                    self.alertArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
+                                }
+                            }else{
+                                if data["opponentName"] as? String != nil{
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
+                                }else{
+                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
+                                }
+                            }
+                            if (self.responseArray.count + self.alertArray.count) == snap?.count{
+                                self.responseArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                self.alertArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                self.mainTable.reloadData()
+                            }
+                        }
+                    })
                 }
-                print(self.responseArray)
-                self.mainTable.reloadData()
+//                print(self.responseArray)
+//                self.mainTable.reloadData()
             }
         }
-        
-        
-        // Do any additional setup after loading the view.
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -89,22 +110,40 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                             self.alert(message: error.localizedDescription)
                         }else{
                             self.responseArray = [GetResponse]()
+                            self.alertArray = [GetResponse]()
                             for doc in snap!.documents{
                                 let data = doc.data()
-                                if data["opponentName"] as? String != nil{
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: 0, date: data["date"] as! NSDate))
-                                }else{
-                                    self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: 0, date: data["date"] as! NSDate))
-                                }
+                                self.db.collection("news").document(self.date).collection(self.newsurlPath(newsURL: self.mainNews.url)).document(doc.documentID).collection("alert").getDocuments(completion: { (snap1, error) in
+                                    if let error = error {
+                                        self.alert(message: error.localizedDescription)
+                                    }else{
+                                        let alertCount = snap1?.count
+                                        if alertCount != 0{
+                                            if data["opponentName"] as? String != nil{
+                                                self.alertArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: alertCount!, date: data["date"] as! NSDate))
+                                            }else{
+                                                self.alertArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: alertCount!, date: data["date"] as! NSDate))
+                                            }
+                                        }else{
+                                            if data["opponentName"] as? String != nil{
+                                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: data["opponentName"] as! String, opponentUid: data["opponentUid"] as! String, opponentDocID: data["opponentDocID"] as! String, alertNum: alertCount!, date: data["date"] as! NSDate))
+                                            }else{
+                                                self.responseArray.append(GetResponse(docID: doc.documentID, comment: data["comment"] as! String, uid: data["uid"] as! String, name: data["username"] as! String, opponentName: "", opponentUid: "", opponentDocID: "", alertNum: alertCount!, date: data["date"] as! NSDate))
+                                            }
+                                        }
+                                        if (self.responseArray.count + self.alertArray.count) == snap?.count{
+                                            self.responseArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                            self.alertArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                            self.mainTable.reloadData()
+                                        }
+                                    }
+                                })
                             }
-                            self.mainTable.reloadData()
                         }
                     })
-                    
                 }
             })
         }
-        
     }
     
     @IBAction func decide(_ sender: Any) {
@@ -251,60 +290,168 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return responseArray.count + 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
+        return titleArray[section]
+    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return responseArray.count + 1
+//
+//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 1:
+            // セクションのヘッダとなるビューを作成する。
+            let myView: UIView = UIView()
+            
+            let label:UILabel = UILabel()
+            label.text = "不適切な投稿"
+            label.sizeToFit()
+            label.textColor = UIColor.black
+            
+            myView.addSubview(label)
+            myView.backgroundColor = UIColor(rgb: (r: 226, g: 226, b: 226))
+            myView.alpha = 0.6
+            // セクションのビューに対応する番号を設定する。
+            myView.tag = section
+            // セクションのビューにタップジェスチャーを設定する。
+            myView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(gestureRecognizer:))))
+            
+            return myView
+        default:
+            let myView: UIView = UIView()
+            return  myView
+        }
+    }
+    
+    @objc func tapHeader(gestureRecognizer: UITapGestureRecognizer) {
+        // タップされたセクションを取得する。
+        guard let section = gestureRecognizer.view?.tag as Int? else {
+            return
+        }
+        print(section)
+        // フラグを設定する。
+        switch section {
+            //        case 0:
+        //            foldingFlg1 = foldingFlg1 ? false : true
+        case 1:
+            if foldingFlg2 == false{
+                foldingFlg2 = true
+            }else{
+                foldingFlg2 = false
+            }
+        default:
+            break
+        }
+        // タップされたセクションを再読込する。
+        mainTable.reloadSections(NSIndexSet(index: section) as IndexSet, with: .none)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return responseArray.count + 1
+        default:
+            switch foldingFlg2 {
+            case false:
+                return 0
+            default:
+                return alertArray.count
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0
+        default:
+            return 25
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTodayTableViewCell", for: indexPath) as! NewsTodayTableViewCell
-            
-            cell.titleLabel.text = mainNews.title
-            cell.dateLabel.text = mainNews.date
-            cell.titleBtn.tag = indexPath.row
-            cell.titleBtn.addTarget(self, action: #selector(self.titleTap(sender:)), for: .touchUpInside)
-            var param2 = WCLShineParams()
-            param2.bigShineColor = UIColor(rgb: (255, 195, 55))
-            cell.likeLabel.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
-            cell.likeLabel.params = param2
-            cell.likeLabel.tag = indexPath.row
-            if self.goodArray.index(of: newsurlPath(newsURL: mainNews.url)) != nil{
-                cell.likeLabel.isSelected = true
-            }else{
-                cell.likeLabel.isSelected = false
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTodayTableViewCell", for: indexPath) as! NewsTodayTableViewCell
+                cell.titleLabel.text = mainNews.title
+                cell.dateLabel.text = mainNews.date
+                cell.titleBtn.tag = indexPath.row
+                cell.titleBtn.addTarget(self, action: #selector(self.titleTap(sender:)), for: .touchUpInside)
+                var param2 = WCLShineParams()
+                param2.bigShineColor = UIColor(rgb: (255, 195, 55))
+                cell.likeLabel.image = .defaultAndSelect(#imageLiteral(resourceName: "Like_before"), #imageLiteral(resourceName: "LIke"))
+                cell.likeLabel.params = param2
+                cell.likeLabel.tag = indexPath.row
+                if self.goodArray.index(of: newsurlPath(newsURL: mainNews.url)) != nil{
+                    cell.likeLabel.isSelected = true
+                }else{
+                    cell.likeLabel.isSelected = false
+                }
+                cell.likeLabel.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
+                var param3 = WCLShineParams()
+                param3.bigShineColor = UIColor(rgb: (18, 255, 255))
+                cell.disLikeLabel.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
+                cell.disLikeLabel.params = param3
+                cell.disLikeLabel.tag = indexPath.row
+                if self.badArray.index(of: newsurlPath(newsURL: mainNews.url)) != nil{
+                    cell.disLikeLabel.isSelected = true
+                }else{
+                    cell.disLikeLabel.isSelected = false
+                }
+                cell.disLikeLabel.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
+                cell.likeCount.text = "\(mainNews.likeCount!) good"
+                cell.disLikeCount.text = "\(mainNews.disLikeCount!) bad"
+                cell.commentCount.text = "\(mainNews.commentCount!) comment"
+                return cell
+                
+            default:
+                switch responseArray[indexPath.row - 1].opponentName {
+                case "":
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
+                    let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                    cell.userImage.layer.cornerRadius = 20
+                    cell.userImage.layer.masksToBounds = true
+                    cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+                    cell.commentLabel.text = responseArray[indexPath.row - 1].comment
+                    cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 1].name!)"
+                    cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
+                    cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
+                    cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
+                    cell.commentBtn.tag = indexPath.row
+                    cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
+                    cell.alertFlagBtn.tag = indexPath.row - 1
+                    return cell
+                default:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
+                    let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                    cell.userImage.layer.cornerRadius = 20
+                    cell.userImage.layer.masksToBounds = true
+                    cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+                    cell.nameLabel.text = responseArray[indexPath.row - 1].name
+                    cell.commentLabel.text = responseArray[indexPath.row - 1].comment
+                    cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy-MM-dd HH:mm:ss")
+                    cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 1].opponentName!)＆返信先のID \(responseArray[indexPath.row - 1].opponentDocID!)"
+                    cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
+                    return cell
+                }
             }
-            cell.likeLabel.addTarget(self, action: #selector(self.likeTap(sender:)), for: .touchUpInside)
-            var param3 = WCLShineParams()
-            param3.bigShineColor = UIColor(rgb: (18, 255, 255))
-            cell.disLikeLabel.image = .defaultAndSelect(#imageLiteral(resourceName: "bud"), #imageLiteral(resourceName: "bud_before"))
-            cell.disLikeLabel.params = param3
-            cell.disLikeLabel.tag = indexPath.row
-            if self.badArray.index(of: newsurlPath(newsURL: mainNews.url)) != nil{
-                cell.disLikeLabel.isSelected = true
-            }else{
-                cell.disLikeLabel.isSelected = false
-            }
-            cell.disLikeLabel.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
-            cell.likeCount.text = "\(mainNews.likeCount!) good"
-            cell.disLikeCount.text = "\(mainNews.disLikeCount!) bad"
-            cell.commentCount.text = "\(mainNews.commentCount!) comment"
-            return cell
-            
         default:
-            switch responseArray[indexPath.row - 1].opponentName {
+            switch alertArray[indexPath.row].opponentName {
             case "":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ResponseTableViewCell", for: indexPath) as! ResponseTableViewCell
-                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                let reference = storageRef.child("image/profile/\(alertArray[indexPath.row].uid!).jpg")
                 cell.userImage.layer.cornerRadius = 20
                 cell.userImage.layer.masksToBounds = true
                 cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                cell.commentLabel.text = responseArray[indexPath.row - 1].comment
-                cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 1].name!)"
-                cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
-                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
+                cell.commentLabel.text = alertArray[indexPath.row].comment
+                cell.nameLabel.text = "投稿者 \(alertArray[indexPath.row].name!)"
+                cell.docidLabel.text = "投稿ID \(alertArray[indexPath.row].docID!)"
+                cell.dateLabel.text = stringFromDate(date: alertArray[indexPath.row].date, format: "yyyy年MM月dd日 HH時mm分ss秒")
                 cell.commentBtn.addTarget(self, action: #selector(self.commnetTap(sender:)), for: .touchUpInside)
                 cell.commentBtn.tag = indexPath.row
                 cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
@@ -312,19 +459,19 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "opposeTableViewCell", for: indexPath) as! opposeTableViewCell
-                let reference = storageRef.child("image/profile/\(self.responseArray[indexPath.row - 1].uid!).jpg")
+                let reference = storageRef.child("image/profile/\(alertArray[indexPath.row].uid!).jpg")
                 cell.userImage.layer.cornerRadius = 20
                 cell.userImage.layer.masksToBounds = true
                 cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                cell.nameLabel.text = responseArray[indexPath.row - 1].name
-                cell.commentLabel.text = responseArray[indexPath.row - 1].comment
-                cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 1].date, format: "yyyy-MM-dd HH:mm:ss")
-                cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 1].opponentName!)＆返信先のID \(responseArray[indexPath.row - 1].opponentDocID!)"
-                cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 1].docID!)"
+                cell.nameLabel.text = alertArray[indexPath.row].name
+                cell.commentLabel.text = alertArray[indexPath.row].comment
+                cell.dateLabel.text = stringFromDate(date: alertArray[indexPath.row].date, format: "yyyy-MM-dd HH:mm:ss")
+                cell.opposeLabel.text = "<=  返信先 \(alertArray[indexPath.row].opponentName!)＆返信先のID \(alertArray[indexPath.row].opponentDocID!)"
+                cell.docIdLabel.text = "投稿ID \(alertArray[indexPath.row].docID!)"
                 return cell
             }
-
         }
+
     }
     
     @objc func alertTap(sender:UIButton){
