@@ -30,6 +30,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var badArray = [String]()
     var lastDate:NSDate!
     var addFlag = true
+    var searchText: String!
 //    var num1 = 7
     var num2 = 7
     var backedNum: Int!
@@ -71,7 +72,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     }
     override func viewDidAppear(_ animated: Bool) {
-        
+        super.viewDidAppear(animated)
         if backedNum != nil{
             print("cellnum: \(num)")
             print("commentCount: \(backedNum)")
@@ -447,7 +448,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             commentTableViewController.presentNum = self.num
         }else if segue.identifier == "Search"{
             let responseTableViewController = segue.destination as! SearchListViewController
-            responseTableViewController.resarchContents = self.resarchContents
+            responseTableViewController.searchText = self.searchText
         }else if segue.identifier == "GoPost"{
             let snsPostViewController = segue.destination as! SNSPostViewController
             snsPostViewController.content = self.contents[postNum]
@@ -459,9 +460,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         print(indexPath.row)
         print(contents.count)
         print(mainTable.isDragging)
-//        if indexPath.row == contents.count - 1 && addFlag == true {
-//            print("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
-//        }
+
         if indexPath.row == contents.count - 1 && mainTable.isDragging && addFlag == true{
             addFlag = false
             print(lastDate)
@@ -490,7 +489,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         if let error = error {
                             self.alert(message: error.localizedDescription)
                         }else{
-                            print(snap?.count)
+//                            print(snap?.count)
                             self.addFlag = true
                             let count = snap!.count
                             var num = 0
@@ -531,8 +530,6 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                                                 })
                                             }
                                         })
-
-
                                 }
                             }else{
                                 HUD.hide()
@@ -552,58 +549,14 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
 extension SNSListViewController:UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        HUD.show(.progress)
         if let text = searchBar.text{
-            db.collection("SNS").whereField("tags.\(text)", isGreaterThan: 0).order(by: "tags.\(text)", descending: true).getDocuments { (snap, error) in
-                if let error = error{
-                    self.alert(message: error.localizedDescription)
-                }else{
-                    if snap?.count == 0{
-                        searchBar.text = nil
-                        self.view.endEditing(true)
-                        HUD.hide()
-                        self.alert(message: "何もないです")
-                    }else{
-                        var num = 0
-                        for doc in snap!.documents{
-                            let data = doc.data()
-                            self.resarchmiddleContents.append(MiddleGetDtail(num: num, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, url: data["url"] as! String, date: data["date"] as! NSDate))
-                            num += 1
-                        }
-                        for content in self.resarchmiddleContents{
-                            self.db.collection("SNS").document(content.docID).collection("good").getDocuments(completion: { (snap, error) in
-                                if let error = error {
-                                    self.alert(message: error.localizedDescription)
-                                }else{
-                                    let likesNum = snap?.count
-                                    self.db.collection("SNS").document(content.docID).collection("bad").getDocuments(completion: { (snap, error) in
-                                        if let error = error{
-                                            self.alert(message: error.localizedDescription)
-                                        }else{
-                                            let disLikeNum = snap?.count
-                                            self.db.collection("SNS").document(content.docID).collection("response").getDocuments(completion: { (snap, error) in
-                                                if let error = error {
-                                                    self.alert(message: error.localizedDescription)
-                                                }else{
-                                                    let commentNum = snap?.count
-                                                    self.resarchContents.append(GetDetail(num: content.num, title: content.title, contents: content.contents, tagArray: content.tagArray, uid: content.uid, username: content.username, docID: content.docID, url: content.url, likeCount: likesNum!, disLikeCount: disLikeNum!, commentCount: commentNum!, date: content.date))
-                                                }
-                                                if self.resarchContents.count == self.resarchmiddleContents.count{
-                                                    print(self.resarchContents)
-                                                    self.performSegue(withIdentifier: "Search", sender: nil)
-                                                    HUD.hide()
-                                                    self.view.endEditing(true)
-                                                    searchBar.text = nil
-                                                }
-                                            })
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    }
-                }
-            }
+            searchText = text
+            searchBar.text = nil
+            self.view.endEditing(true)
+            self.performSegue(withIdentifier: "Search", sender: nil)
+            
+        }else{
+            alert(message: "何か入力してください")
         }
     }
 }

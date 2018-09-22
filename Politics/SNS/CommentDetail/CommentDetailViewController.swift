@@ -779,6 +779,11 @@ extension CommentDetailViewController:UINavigationControllerDelegate{
             controller.contents[presentNum].likeCount = self.content.likeCount
             controller.contents[presentNum].disLikeCount = self.content.disLikeCount
             controller.backedNum = self.presentNum
+        }else if let controller = viewController as? SearchListViewController{
+            controller.resarchContents[presentNum].commentCount = responseArray.count
+            controller.resarchContents[presentNum].likeCount = self.content.likeCount
+            controller.resarchContents[presentNum].disLikeCount = self.content.disLikeCount
+            controller.backedNum = self.presentNum
         }
     }
 }
