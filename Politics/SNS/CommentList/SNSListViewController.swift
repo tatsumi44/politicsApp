@@ -19,7 +19,6 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var searchBar: UISearchBar!
     let db = Firestore.firestore()
     let realm = try! Realm()
-//    let storage = Storage.storage()
     let storageRef = Storage.storage().reference()
     var middleContents = [MiddleGetDtail]()
     var contents = [GetDetail]()
@@ -29,7 +28,15 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var postNum:Int!
     var goodArray = [String]()
     var badArray = [String]()
+    var lastDate:NSDate!
+    var addFlag = true
+//    var num1 = 7
+    var num2 = 7
+    var backedNum: Int!
+    var postedContent: GetDetail!
+    var getnum = 0
     override func viewDidLoad() {
+        print("viewDidLoad()")
         super.viewDidLoad()
         mainTable.dataSource = self
         mainTable.delegate = self
@@ -37,16 +44,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         num = -1
         self.mainTable.register(UINib(nibName: "SNSTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell2")
         self.mainTable.register(UINib(nibName: "SNSwithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "SNSwithUrlTableViewCell")
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         resarchmiddleContents = [MiddleGetDtail]()
         resarchContents = [GetDetail]()
         getData()
     }
-    func getData() {
-        HUD.show(.progress)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let likes = realm.objects(MyLikes.self)
         goodArray = [String]()
         badArray = [String]()
@@ -65,7 +68,36 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         print("goodArray\(goodArray)")
         print("badArray\(badArray)")
-        db.collection("SNS").order(by: "date", descending: true).getDocuments { (snap, error) in
+
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if backedNum != nil{
+            print("cellnum: \(num)")
+            print("commentCount: \(backedNum)")
+            print("こっち")
+//            contents[num].commentCount = backedNum
+            let row = NSIndexPath(row: num, section: 0)
+            self.mainTable.reloadRows(at: [row as IndexPath], with: .automatic)
+            backedNum = nil
+        }else{
+            print("nilだよん")
+        }
+        print(postedContent)
+        if postedContent != nil{
+            contents.insert(postedContent, at: 0)
+            print("これがね　\(contents.count)")
+            num2 += 1
+            print(contents.count)
+            self.mainTable.reloadData()
+            postedContent = nil
+        }else{
+            print("nilだよ")
+        }
+    }
+    func getData() {
+        HUD.show(.progress)
+        db.collection("SNS").order(by: "date", descending: true).limit(to: 7).getDocuments { (snap, error) in
             self.contents = [GetDetail]()
             self.middleContents = [MiddleGetDtail]()
             if let error = error{
@@ -105,7 +137,8 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                                         }
                                         if self.contents.count == self.middleContents.count{
                                             print("apple")
-                                            self.contents.sort(by: {$0.num < $1.num})
+                                            self.contents.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                            self.lastDate = (self.contents.last?.date)!
                                             self.mainTable.reloadData()
                                             HUD.hide()
                                         }
@@ -124,9 +157,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let user = realm.objects(Userdata.self)[0]
-        
+
         switch contents[indexPath.row].url {
         case "":
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! SNSTableViewCell
@@ -313,7 +344,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                             let row = NSIndexPath(row: sender.tag, section: 0)
                             self.mainTable.reloadRows(at: [row as IndexPath], with: .automatic)
                         }
-//                        self.mainTable.reloadRows(at: [row as IndexPath], with: .fade)
+                        //                        self.mainTable.reloadRows(at: [row as IndexPath], with: .fade)
                     }
                     print("ドキュメント追加")
                 }
@@ -327,9 +358,9 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     let likes = self.realm.objects(MyLikes.self).filter("documentID == %@",self.contents[sender.tag].docID)
                     try! self.realm.write() {
                         self.realm.delete(likes)
-//                        if self.goodArray.index(of: self.contents[sender.tag].docID) != nil{
-                            self.goodArray.remove(at: self.goodArray.index(of: self.contents[sender.tag].docID)!)
-//                        }
+                        //                        if self.goodArray.index(of: self.contents[sender.tag].docID) != nil{
+                        self.goodArray.remove(at: self.goodArray.index(of: self.contents[sender.tag].docID)!)
+                        //                        }
                         self.contents[sender.tag].likeCount = self.contents[sender.tag].likeCount - 1
                         let row = NSIndexPath(row: sender.tag, section: 0)
                         self.mainTable.reloadRows(at: [row as IndexPath], with: .automatic)
@@ -341,6 +372,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         print("Clicked \(sender.isSelected)")
         
     }
+    
     @objc func dislikeTap(sender:WCLShineButton){
         let user = realm.objects(Userdata.self)
         if sender.isSelected == false{
@@ -364,9 +396,9 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                                     let likes = self.realm.objects(MyLikes.self).filter("documentID == %@",self.contents[sender.tag].docID)
                                     try! self.realm.write() {
                                         self.realm.delete(likes)
-//                                        if self.goodArray.index(of: self.contents[sender.tag].docID) != nil{
-                                            self.goodArray.remove(at: self.goodArray.index(of: self.contents[sender.tag].docID)!)
-//                                        }
+                                        //                                        if self.goodArray.index(of: self.contents[sender.tag].docID) != nil{
+                                        self.goodArray.remove(at: self.goodArray.index(of: self.contents[sender.tag].docID)!)
+                                        //                                        }
                                         self.badArray.append(self.contents[sender.tag].docID)
                                         self.contents[sender.tag].disLikeCount = self.contents[sender.tag].disLikeCount + 1
                                         self.contents[sender.tag].likeCount = self.contents[sender.tag].likeCount - 1
@@ -412,6 +444,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         if segue.identifier == "Go"{
             let commentTableViewController = segue.destination as! CommentDetailViewController
             commentTableViewController.content = self.contents[num]
+            commentTableViewController.presentNum = self.num
         }else if segue.identifier == "Search"{
             let responseTableViewController = segue.destination as! SearchListViewController
             responseTableViewController.resarchContents = self.resarchContents
@@ -421,12 +454,100 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         
     }
+//    ページングの処理
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        print(contents.count)
+        print(mainTable.isDragging)
+//        if indexPath.row == contents.count - 1 && addFlag == true {
+//            print("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
+//        }
+        if indexPath.row == contents.count - 1 && mainTable.isDragging && addFlag == true{
+            addFlag = false
+            print(lastDate)
+            print("一番下")
+            HUD.show(.progress)
+                let first = db.collection("SNS").order(by: "date", descending: true).limit(to: num2)
+                first.addSnapshotListener { (snapshot, error) in
+                    guard let snapshot = snapshot else {
+                        print("Error retreving cities: \(error.debugDescription)")
+                        return
+                    }
+                    
+                    guard let lastSnapshot = snapshot.documents.last else {
+                        // The collection is empty.
+                        return
+                    }
+                    
+                    guard self.getnum == 0 && self.mainTable.isDragging  else{
+                        return
+                    }
+                    self.getnum += 1
+                    
+                    let next = self.db.collection("SNS").order(by: "date", descending: true)
+                        .start(afterDocument: lastSnapshot).limit(to: 7)
+                    next.getDocuments(completion: { (snap, error) in
+                        if let error = error {
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            print(snap?.count)
+                            self.addFlag = true
+                            let count = snap!.count
+                            var num = 0
+                            if count != 0{
+                                for doc in snap!.documents{
+                                    let data = doc.data()
+
+                                        self.db.collection("SNS").document(doc.documentID).collection("good").getDocuments(completion: { (snap, error) in
+                                            if let error = error{
+                                                self.alert(message: error.localizedDescription)
+                                            }else{
+                                                let goodCount = snap?.count
+                                                self.db.collection("SNS").document(doc.documentID).collection("bad").getDocuments(completion: { (snap, error) in
+                                                    if let error = error{
+                                                        self.alert(message: error.localizedDescription)
+                                                    }else{
+                                                        let badCount = snap?.count
+                                                        
+                                                        print("getnum\(self.getnum)")
+                                                        self.db.collection("SNS").document(doc.documentID).collection("response").getDocuments(completion: { (snap, error) in
+                                                            if let error = error{
+                                                                self.alert(message: error.localizedDescription)
+                                                            }else{
+                                                                let responseCount = snap?.count
+                                                                self.contents.append(GetDetail(num: 1, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, url: data["url"] as! String, likeCount: goodCount!, disLikeCount: badCount!, commentCount: responseCount!, date: data["date"] as! NSDate))
+                                                                num += 1
+                                                            }
+                                                            if num == count{
+                                                                self.contents.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+                                                                self.mainTable.reloadData()
+                                                                self.addFlag = true
+                                                                self.num2 = self.num2 + 7
+                                                                self.getnum = 0
+                                                                HUD.hide()
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        })
+
+
+                                }
+                            }else{
+                                HUD.hide()
+                            }
+                        }
+                    })
+
+                }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
 }
 
 extension SNSListViewController:UISearchBarDelegate{

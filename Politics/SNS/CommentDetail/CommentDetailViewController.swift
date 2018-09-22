@@ -33,7 +33,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
     var postName:String!
     var commnetNum:Int!
     var alertNum :Int!
-    var foldingFlg1 = false
+    var presentNum:Int!
     var foldingFlg2 = false
     let titleArray = ["","不適切な投稿"]
     override func viewDidLoad() {
@@ -41,6 +41,7 @@ class CommentDetailViewController: UIViewController,UITextViewDelegate {
         mainTable.delegate = self
         mainTable.dataSource = self
         postTextView.delegate = self
+        navigationController?.delegate = self
         postTextView.layer.borderColor = UIColor.black.cgColor
         postTextView.layer.borderWidth = 1
         let transform = CGAffineTransform(translationX: 0, y: -(postView.frame.height + 2))
@@ -762,5 +763,22 @@ extension CommentDetailViewController:UICollectionViewDelegate,UICollectionViewD
         cell.tagLabel.text = keysArray[indexPath.row]
         return cell
         
+    }
+}
+
+extension CommentDetailViewController:UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
+//        content.commentCount = responseArray.count
+        // 遷移先が、AViewControllerだったら……
+        if let controller = viewController as? SNSListViewController {
+            print("戻るでー")
+            print("前\(responseArray.count)")
+            // AViewControllerのプロパティvalueの値変更。
+            controller.contents[presentNum].commentCount = responseArray.count
+            controller.contents[presentNum].likeCount = self.content.likeCount
+            controller.contents[presentNum].disLikeCount = self.content.disLikeCount
+            controller.backedNum = self.presentNum
+        }
     }
 }

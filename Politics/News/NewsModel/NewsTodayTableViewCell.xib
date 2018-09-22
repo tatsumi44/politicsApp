@@ -193,7 +193,7 @@
                 <outlet property="titleBtn" destination="wZ1-2d-slW" id="qwC-lS-Q5l"/>
                 <outlet property="titleLabel" destination="8ug-V1-ufR" id="ueE-XW-P6I"/>
             </connections>
-            <point key="canvasLocation" x="40" y="87.5"/>
+            <point key="canvasLocation" x="-198" y="-885"/>
         </tableViewCell>
     </objects>
     <resources>

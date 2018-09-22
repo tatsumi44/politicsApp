@@ -20,13 +20,12 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
         super.viewDidLoad()
         mainTable.dataSource = self
         mainTable.delegate = self
-         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         mainQuestionArray = appDelegate.mainQuestionArray
         print(mainQuestionArray)
-         day = nowDate(num: 0)
+        day = nowDate(num: 0)
         questionArray = mainQuestionArray[day]!
        
-
         // Do any additional setup after loading the view.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

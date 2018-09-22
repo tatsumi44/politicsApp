@@ -21,6 +21,7 @@ class NewsMainViewController: UIViewController {
             let date = nowDate(num: i)
             dateArray.append(date)
         }
+        
         print(dateArray)
         var controllers : [UIViewController] = []
         let vc = UIStoryboard(name: "News", bundle: nil).instantiateViewController(withIdentifier: "TodayViewController")
@@ -30,6 +31,7 @@ class NewsMainViewController: UIViewController {
         let vc4 = UIStoryboard(name: "News", bundle: nil).instantiateViewController(withIdentifier: "FourDaysAgoViewController")
         let vc5 = UIStoryboard(name: "News", bundle: nil).instantiateViewController(withIdentifier: "FiveDaysAgoViewController")
         let vc6 = UIStoryboard(name: "News", bundle: nil).instantiateViewController(withIdentifier: "SixDaysAgoViewController")
+        
         vc.title = dateArray[0]
         vc1.title = dateArray[1]
         vc2.title = dateArray[2]
@@ -55,13 +57,14 @@ class NewsMainViewController: UIViewController {
             .menuItemWidth(90.0),
             .centerMenuItems(true),
             .addBottomMenuHairline(true),
-            
             ]
+        
+        
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         self.navBarHeight = appDelegate.navBarHeight
         let tabheight = appDelegate.tabheight
-        print("navBarHeight  \(self.navBarHeight)")
         
+        print("navBarHeight  \(self.navBarHeight)")
         pageMenu = CAPSPageMenu(
             viewControllers: controllers,
             frame:           CGRect(x: 0.0, y: navBarHeight, width:  self.view.frame.width, height:  self.view.frame.height - navBarHeight - tabheight!),

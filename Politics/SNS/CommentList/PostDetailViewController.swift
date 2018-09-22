@@ -15,9 +15,11 @@ class PostDetailViewController: FormViewController  {
     let db = Firestore.firestore()
     let realm = try! Realm()
     var url:String!
+    var postedContent: GetDetail!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.delegate = self
         title = "投稿する"
         
         form +++ Section()
@@ -80,6 +82,7 @@ class PostDetailViewController: FormViewController  {
                             print(tag)
                             dateTagArray["\(tag)"] = int64
                         }
+                        print("url : \(values["url"] as? String)")
                         if values["url"] as? String != nil{
                             self.url = values["url"] as? String
                         }else{
@@ -102,6 +105,7 @@ class PostDetailViewController: FormViewController  {
                                 if let error = error{
                                     print(error.localizedDescription)
                                 }else{
+                                    self.postedContent = GetDetail(num: 0, title: title, contents: content, tagArray: dateTagArray, uid: user[0].userID,username: user[0].name, docID: ref!.documentID, url: self.url, likeCount: 0, disLikeCount: 0, commentCount: 0, date: NSDate())
                                     let sns = SNSVote()
                                     sns.snsID = ref!.documentID
                                     sns.snsDate = Date()
@@ -114,7 +118,8 @@ class PostDetailViewController: FormViewController  {
                             
                         }else{
                             let postContentWithoutTag = PostDetail(title: title, contents: content, tagArray: ["何もありません" : int64], uid: user[0].userID, username: user[0].name, url: self.url, date: date)
-                            self.db.collection("SNS").addDocument(data: [
+                             var ref: DocumentReference? = nil
+                            ref = self.db.collection("SNS").addDocument(data: [
                                 "title": postContentWithoutTag.title,
                                 "content": postContentWithoutTag.contents,
                                 "tags": postContentWithoutTag.tagArray,
@@ -122,8 +127,22 @@ class PostDetailViewController: FormViewController  {
                                 "name": postContentWithoutTag.username,
                                 "url":postContentWithoutTag.url,
                                 "date": postContentWithoutTag.date
-                                ])
-                            self.navigationController?.popToRootViewController(animated: true)
+                            ]){error in
+                                if let error = error{
+                                    print(error.localizedDescription)
+                                }else{
+                                    
+                                    self.postedContent = GetDetail(num: 0, title: postContentWithoutTag.title, contents: postContentWithoutTag.contents, tagArray: postContentWithoutTag.tagArray, uid: user[0].userID,username: user[0].name, docID: ref!.documentID, url: self.url, likeCount: 0, disLikeCount: 0, commentCount: 0, date: NSDate())
+                                    let sns = SNSVote()
+                                    sns.snsID = ref!.documentID
+                                    sns.snsDate = Date()
+                                    try! self.realm.write() {
+                                        self.realm.add(sns)
+                                    }
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }
+                            }
+//                            self.navigationController?.popToRootViewController(animated: true)
                         }
                     }else{
                         self.alert(message: "titleとnoteは必ず入力してください")
@@ -136,5 +155,18 @@ class PostDetailViewController: FormViewController  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+extension PostDetailViewController: UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        print(self.postedContent)
+        //        content.commentCount = responseArray.count
+        // 遷移先が、AViewControllerだったら……
+        if let controller = viewController as? SNSListViewController {
+            print("いくデー")
+            // AViewControllerのプロパティvalueの値変更。
+            controller.postedContent = self.postedContent
+            
+        }
     }
 }
