@@ -490,7 +490,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                             self.alert(message: error.localizedDescription)
                         }else{
 //                            print(snap?.count)
-                            self.addFlag = true
+//                            self.addFlag = true
                             let count = snap!.count
                             var num = 0
                             if count != 0{
@@ -537,7 +537,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         }
                     })
 
-                }
+            }
         }
     }
     

@@ -27,6 +27,9 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
     let storageRef = Storage.storage().reference()
     var searchText: String!
     var backedNum: Int!
+    var addFlag = true
+    var pagingNum = 5
+    var getnum = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.dataSource = self
@@ -408,12 +411,86 @@ class SearchListViewController: ViewController,UITableViewDataSource,UITableView
             searchPostViewController.resarchContent = self.resarchContents[postNum]
         }
     }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//
+//        if indexPath.row == resarchContents.count - 1 && mainTable.isDragging && addFlag == true{
+//            print("一番下")
+//            print(mainTable.isDragging)
+//            addFlag = false
+//            HUD.show(.progress)
+//            let first = db.collection("SNS").whereField("tags.\(searchText)", isGreaterThan: 0).order(by: "tags.\(searchText)", descending: true).limit(to: pagingNum)
+//            first.addSnapshotListener { (snapshot, error) in
+//                guard let snapshot = snapshot else {
+//                    print("Error retreving cities: \(error.debugDescription)")
+//                    return
+//                }
+//                guard let lastSnapshot = snapshot.documents.last else {
+//                    // The collection is empty.
+//                    return
+//                }
+//                guard self.getnum == 0 && self.mainTable.isDragging  else{
+//                    return
+//                }
+//                self.getnum += 1
+//                let next = self.db.collection("SNS").whereField("tags.\(self.searchText)", isGreaterThan: 0).order(by: "tags.\(self.searchText)", descending: true).start(afterDocument: lastSnapshot).limit(to: 5)
+//                next.getDocuments(completion: { (snap, error) in
+//                    if let error = error {
+//                        self.alert(message: error.localizedDescription)
+//                    }else{
+//                        let count = snap!.count
+//                        var num = 0
+//                        guard count != 0 else{
+//                            HUD.hide()
+//                            return
+//                        }
+//                        for doc in snap!.documents{
+//                            let data = doc.data()
+//
+//                            self.db.collection("SNS").document(doc.documentID).collection("good").getDocuments(completion: { (snap, error) in
+//                                if let error = error{
+//                                    self.alert(message: error.localizedDescription)
+//                                }else{
+//                                    let goodCount = snap?.count
+//                                    self.db.collection("SNS").document(doc.documentID).collection("bad").getDocuments(completion: { (snap, error) in
+//                                        if let error = error{
+//                                            self.alert(message: error.localizedDescription)
+//                                        }else{
+//                                            let badCount = snap?.count
+//
+//                                            print("getnum\(self.getnum)")
+//                                            self.db.collection("SNS").document(doc.documentID).collection("response").getDocuments(completion: { (snap, error) in
+//                                                if let error = error{
+//                                                    self.alert(message: error.localizedDescription)
+//                                                }else{
+//                                                    let responseCount = snap?.count
+//                                                    self.resarchContents.append(GetDetail(num: 1, title: data["title"] as! String, contents: data["content"] as! String, tagArray: data["tags"] as! [String : Int64], uid: data["uid"] as! String, username: data["name"] as! String, docID: doc.documentID, url: data["url"] as! String, likeCount: goodCount!, disLikeCount: badCount!, commentCount: responseCount!, date: data["date"] as! NSDate))
+//                                                    num += 1
+//                                                }
+//                                                if num == count{
+//                                                    self.resarchContents.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+//                                                    self.mainTable.reloadData()
+//                                                    self.addFlag = true
+//                                                    self.pagingNum = self.pagingNum + 5
+//                                                    self.getnum = 0
+//                                                    HUD.hide()
+//                                                }
+//                                            })
+//                                        }
+//                                    })
+//                                }
+//                            })
+//                        }
+//                    }
+//                })
+//            }
+//        }
+//
+//    }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
 }
