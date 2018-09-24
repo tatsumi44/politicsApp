@@ -86,6 +86,8 @@ PODS:
   - SDWebImage/Core (4.3.3)
   - SwiftDate (4.5.1)
   - SwiftyJSON (4.0.0)
+  - ViewRow (0.3.0):
+    - Eureka (>= 4.0.0)
   - WCLShineButton (1.0.7)
 
 DEPENDENCIES:
@@ -102,7 +104,17 @@ DEPENDENCIES:
   - PKHUD (~> 5.0)
   - SwiftDate
   - SwiftyJSON
+  - ViewRow (from `https://github.com/EurekaCommunity/ViewRow`)
   - WCLShineButton
+
+EXTERNAL SOURCES:
+  ViewRow:
+    :git: https://github.com/EurekaCommunity/ViewRow
+
+CHECKOUT OPTIONS:
+  ViewRow:
+    :commit: 4228f70075419e9c749f7378eab6369d5878ee9f
+    :git: https://github.com/EurekaCommunity/ViewRow
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
@@ -132,8 +144,9 @@ SPEC CHECKSUMS:
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  ViewRow: e278428ff53da5eab18b191d3e19a16f3e299fc1
   WCLShineButton: d8b979b6f6f9f6709f9e241e6e1a4712a1a9b36b
 
-PODFILE CHECKSUM: fc6ba94963eef770a1f388859fcc207050581a69
+PODFILE CHECKSUM: 517550a8cf667dcee25cb4a1c79a8d44b1497ccc
 
 COCOAPODS: 1.4.0

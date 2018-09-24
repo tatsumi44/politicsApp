@@ -25,6 +25,8 @@ class SNSwithUrlTableViewCell: UITableViewCell {
     @IBOutlet weak var commnetCount: UILabel!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var disLikeCount: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

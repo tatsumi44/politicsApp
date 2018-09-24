@@ -18,6 +18,7 @@ target 'Politics' do
   pod 'WCLShineButton'
   pod 'Nuke'
   pod 'FirebaseUI/Storage'
+  pod 'ViewRow', :git => 'https://github.com/EurekaCommunity/ViewRow'
   # Pods for Politics
 
 end

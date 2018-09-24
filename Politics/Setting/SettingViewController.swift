@@ -15,7 +15,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
 
     @IBOutlet weak var mainTable: UITableView!
     let sectionArray = ["あなたの登録情報","投票関連","意見投稿関連","ニュース関連"]
-    let voteSectionArray = ["あなたの投票履歴","定期投票の設定"]
+    let voteSectionArray = ["定期投票の設定"]
     let snsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたの投稿","あなたが反応した投稿"]
     let newsSectionArray = ["あなたが反応した投稿"]
     let realm = try! Realm()
@@ -25,7 +25,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
     var image:UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         mainTable.delegate = self
         mainTable.dataSource = self
         self.mainTable.register(UINib(nibName: "ProfileSettingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileSettingTableViewCell")
@@ -80,13 +80,11 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 cell.sexLabel.text = user.sex
                 cell.placeLabel.text = user.place
                 cell.ageLabel.text = user.age
-//                if image != nil{
-//                    cell.profileImage.image = image
-//                }
-               
                 let storageRef = Storage.storage().reference()
                 let reference = storageRef.child("image/profile/\(user.userID).jpg")
-                
+                let width = cell.profileImage.frame.width
+                cell.profileImage.layer.masksToBounds = true
+                cell.profileImage.layer.cornerRadius = width/2 + 10
                 cell.profileImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
                 
                 return cell

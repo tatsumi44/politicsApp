@@ -21,6 +21,7 @@ class SelectViewController: UIViewController {
     var idArray = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         voteBtn.layer.borderColor = UIColor.orange.cgColor
         voteBtn.layer.borderWidth = 4
         voteBtn.layer.cornerRadius = 8

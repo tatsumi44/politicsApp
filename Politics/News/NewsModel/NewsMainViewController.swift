@@ -16,7 +16,7 @@ class NewsMainViewController: UIViewController {
     var navBarHeight:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         for i in 0..<7{
             let date = nowDate(num: i)
             dateArray.append(date)

@@ -617,47 +617,10 @@
                     <view key="view" contentMode="scaleToFill" id="zZj-El-7oj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-9Q-Bz8">
-                                <rect key="frame" x="50" y="124" width="275" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5Y-Pt-Q0Y">
-                                <rect key="frame" x="127.5" y="364.5" width="120" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="5FR-Z4-42T"/>
-                                    <constraint firstAttribute="width" constant="120" id="WOf-pM-SOI"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="6660"/>
-                                <connections>
-                                    <action selector="vote:" destination="QNa-g3-Zsc" eventType="touchUpInside" id="4EQ-Lf-u1W"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A50-lu-3jA">
-                                <rect key="frame" x="50" y="214.5" width="275" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="4eB-9Q-Bz8" firstAttribute="top" secondItem="KCv-XY-7Yo" secondAttribute="top" constant="60" id="5LG-vh-bgt"/>
-                            <constraint firstItem="T5Y-Pt-Q0Y" firstAttribute="top" secondItem="A50-lu-3jA" secondAttribute="bottom" constant="120" id="ESh-f0-cA7"/>
-                            <constraint firstItem="KCv-XY-7Yo" firstAttribute="trailing" secondItem="4eB-9Q-Bz8" secondAttribute="trailing" constant="50" id="QBp-ev-Ot3"/>
-                            <constraint firstItem="A50-lu-3jA" firstAttribute="top" secondItem="4eB-9Q-Bz8" secondAttribute="bottom" constant="70" id="bK5-Rj-hsW"/>
-                            <constraint firstItem="KCv-XY-7Yo" firstAttribute="trailing" secondItem="A50-lu-3jA" secondAttribute="trailing" constant="50" id="gSE-uL-V3y"/>
-                            <constraint firstItem="A50-lu-3jA" firstAttribute="leading" secondItem="KCv-XY-7Yo" secondAttribute="leading" constant="50" id="hV4-E4-fjM"/>
-                            <constraint firstItem="4eB-9Q-Bz8" firstAttribute="leading" secondItem="KCv-XY-7Yo" secondAttribute="leading" constant="50" id="qL9-Rn-Qvd"/>
-                            <constraint firstItem="T5Y-Pt-Q0Y" firstAttribute="centerX" secondItem="zZj-El-7oj" secondAttribute="centerX" id="sT2-F9-3Hp"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KCv-XY-7Yo"/>
                     </view>
                     <connections>
-                        <outlet property="choiceLabel" destination="A50-lu-3jA" id="oac-D4-53J"/>
-                        <outlet property="titleLabel" destination="4eB-9Q-Bz8" id="Iah-Ia-RKC"/>
                         <segue destination="d1L-DR-lFt" kind="show" identifier="GoResult" id="OMm-8D-ApE"/>
                     </connections>
                 </viewController>
@@ -748,7 +711,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="6660" width="1911" height="2749"/>
         <image name="sort descending" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

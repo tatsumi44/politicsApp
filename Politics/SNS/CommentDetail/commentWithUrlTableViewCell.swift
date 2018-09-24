@@ -20,6 +20,7 @@ class commentWithUrlTableViewCell: UITableViewCell {
     @IBOutlet weak var disLikeBtn: WCLShineButton!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var disLikeCount: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

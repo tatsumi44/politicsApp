@@ -37,6 +37,7 @@ class AlertFlagViewController: FormViewController {
             $0.title = "本文"
             $0.textAreaHeight = .dynamic(initialTextViewHeight: 150)
         }
+        
         form.last! <<< ButtonRow(){
             $0.title = "通報する"
             $0.cell.tintColor = UIColor.orange
@@ -63,6 +64,8 @@ class AlertFlagViewController: FormViewController {
                     }
                 }
         }
+        
+
         // Do any additional setup after loading the view.
     }
     override func valueHasBeenChanged(for row: BaseRow, oldValue: Any?, newValue: Any?) {

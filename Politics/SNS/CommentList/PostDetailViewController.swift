@@ -72,6 +72,7 @@ class PostDetailViewController: FormViewController  {
                 }.onCellSelection(){i, to in
                     let values = self.form.values()
                     print(values)
+//                    print("url : \(values["url"] as? URL)")
                     if let title:String = values["title"] as? String,let content:String = values["notes"] as? String{
                         let tagArray:[String] = (values["textfields"] as? [String])!
                         var dateTagArray = [String:Int64]()
@@ -82,9 +83,10 @@ class PostDetailViewController: FormViewController  {
                             print(tag)
                             dateTagArray["\(tag)"] = int64
                         }
-                        print("url : \(values["url"] as? String)")
-                        if values["url"] as? String != nil{
-                            self.url = values["url"] as? String
+//                        print("url : \(values["url"] as? URL)")
+                        if let sample = values["url"] as? URL {
+                            self.url = sample.absoluteString
+                            print(self.url )
                         }else{
                             self.url = ""
                         }
@@ -115,7 +117,7 @@ class PostDetailViewController: FormViewController  {
                                     self.navigationController?.popToRootViewController(animated: true)
                                 }
                             }
-                            
+
                         }else{
                             let postContentWithoutTag = PostDetail(title: title, contents: content, tagArray: ["何もありません" : int64], uid: user[0].userID, username: user[0].name, url: self.url, date: date)
                              var ref: DocumentReference? = nil
@@ -131,7 +133,7 @@ class PostDetailViewController: FormViewController  {
                                 if let error = error{
                                     print(error.localizedDescription)
                                 }else{
-                                    
+
                                     self.postedContent = GetDetail(num: 0, title: postContentWithoutTag.title, contents: postContentWithoutTag.contents, tagArray: postContentWithoutTag.tagArray, uid: user[0].userID,username: user[0].name, docID: ref!.documentID, url: self.url, likeCount: 0, disLikeCount: 0, commentCount: 0, date: NSDate())
                                     let sns = SNSVote()
                                     sns.snsID = ref!.documentID
@@ -166,7 +168,7 @@ extension PostDetailViewController: UINavigationControllerDelegate{
             print("いくデー")
             // AViewControllerのプロパティvalueの値変更。
             controller.postedContent = self.postedContent
-            
+
         }
     }
 }

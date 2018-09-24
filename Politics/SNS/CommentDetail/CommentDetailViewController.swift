@@ -431,7 +431,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 25
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = content.username
+                    cell.nameLabel.text = "投稿者 : \(content.username!)"
                     cell.title.text = content.title
                     cell.content.text = content.contents
                     var param2 = WCLShineParams()
@@ -458,6 +458,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.btn2.addTarget(self, action: #selector(self.dislikeTap(sender:)), for: .touchUpInside)
                     cell.likecount.text = "\(content.likeCount!) good"
                     cell.dislikecount.text = "\(content.disLikeCount!) bad"
+                    cell.dateLabel.text = stringFromDate(date: content.date, format: "yyyy-MM-dd HH:mm:ss")
                     return cell
                 default:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "commentWithUrlTableViewCell", for: indexPath) as! commentWithUrlTableViewCell
@@ -465,7 +466,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 25
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = content.username
+                    cell.nameLabel.text = "投稿者 : \(content.username!)"
                     cell.titleLabel.text = content.title
                     cell.contentLabel.text = content.contents
                     var param2 = WCLShineParams()
@@ -495,6 +496,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.urlLabel.text = content.url
                     cell.urlBtn.tag = indexPath.row
                     cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
+                    cell.dateLabel.text = stringFromDate(date: content.date, format: "yyyy-MM-dd HH:mm:ss")
                     return cell
                 }
                 

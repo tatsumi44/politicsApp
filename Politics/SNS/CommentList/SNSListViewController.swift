@@ -51,6 +51,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         let likes = realm.objects(MyLikes.self)
         goodArray = [String]()
         badArray = [String]()
@@ -167,7 +168,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.userImage.layer.cornerRadius = 25
             cell.userImage.layer.masksToBounds = true
             cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            cell.nameLabel.text = self.contents[indexPath.row].username
+            cell.nameLabel.text = "投稿者 : \(self.contents[indexPath.row].username!)"
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
             var param2 = WCLShineParams()
@@ -217,6 +218,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.commenNum.text = "\(contents[indexPath.row].commentCount!) comments"
             cell.likeNum.text = "\(contents[indexPath.row].likeCount!) good"
             cell.disLikeNum.text = "\(contents[indexPath.row].disLikeCount!) bad"
+            cell.dateLabel.text =  stringFromDate(date: contents[indexPath.row].date, format: "yyyy-MM-dd HH:mm:ss")
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SNSwithUrlTableViewCell", for: indexPath) as! SNSwithUrlTableViewCell
@@ -226,7 +228,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.userImage.layer.cornerRadius = 25
             cell.userImage.layer.masksToBounds = true
             cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            cell.nameLabel.text = self.contents[indexPath.row].username
+            cell.nameLabel.text = "投稿者 : \(self.contents[indexPath.row].username!)"
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
             var param2 = WCLShineParams()
@@ -280,6 +282,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.urlLabel.text = contents[indexPath.row].url
             cell.urlBtn.tag = indexPath.row
             cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
+            cell.dateLabel.text =  stringFromDate(date: contents[indexPath.row].date, format: "yyyy-MM-dd HH:mm:ss")
             return cell
             
         }

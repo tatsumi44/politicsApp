@@ -18,7 +18,7 @@ class commentTableViewCell: UITableViewCell {
     @IBOutlet weak var btn2: WCLShineButton!
     @IBOutlet weak var likecount: UILabel!
     @IBOutlet weak var dislikecount: UILabel!
-
+    @IBOutlet weak var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

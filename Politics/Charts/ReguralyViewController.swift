@@ -55,7 +55,7 @@ class ReguralyViewController: FormViewController {
     func createNormalForm(forms: [Qusetions]){
         form = Section("定期投票を行うには、ONにして下さい")
             <<< SwitchRow("Show Next Section") {
-                $0.title = "SwitchRow"
+                $0.title = "定期投票の設定をして下さい"
                 let flag = realm.objects(RegularVote.self).first
                 let flag1 = realm.objects(RegularVote.self)
                 print(flag1.count)
