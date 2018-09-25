@@ -32,12 +32,15 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
     var commnetNum:Int!
     var alertNum:Int!
     var foldingFlg2 = false
+    var detailnum:Int!
+    var dateNum:Int!
     let titleArray = ["","不適切な投稿"]
     //    let comviewPosy = self.commentView.frame.origin.y
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.dataSource = self
         mainTable.delegate = self
+        navigationController?.delegate = self
         commentTextView.layer.borderColor = UIColor.black.cgColor
         commentTextView.layer.borderWidth = 0.5
         let transform = CGAffineTransform(translationX: 0, y: -(commentView.frame.height + 2))
@@ -77,11 +80,11 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                         }
                     })
                 }
-//                print(self.responseArray)
-//                self.mainTable.reloadData()
+                //                print(self.responseArray)
+                //                self.mainTable.reloadData()
             }
         }
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -297,11 +300,11 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
         
         return titleArray[section]
     }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return responseArray.count + 1
-//
-//    }
+    //
+    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //        return responseArray.count + 1
+    //
+    //    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 1:
@@ -471,7 +474,7 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
                 return cell
             }
         }
-
+        
     }
     
     @objc func alertTap(sender:UIButton){
@@ -641,6 +644,30 @@ class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             newsCommnetAlertViewController.response = self.responseArray[alertNum]
             newsCommnetAlertViewController.date = self.date
         }
+    }
+    
+}
+
+extension NewsDetailViewController: UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
+        
+        if viewController is NewsMainViewController{
+            print("OK")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dateNum = self.dateNum
+            appDelegate.responseNum = responseArray.count
+            appDelegate.goodNum = mainNews.likeCount
+            appDelegate.badNum = mainNews.disLikeCount
+            appDelegate.backedNum = self.detailnum
+        }
+        
+//        let controller = viewController as! TodayViewController
+//        controller.mainNewsArray[detailnum].commentCount = responseArray.count
+//        controller.mainNewsArray[detailnum].likeCount = mainNews.likeCount
+//        controller.mainNewsArray[detailnum].disLikeCount = mainNews.disLikeCount
+//        controller.backedNum = self.detailnum
+        
     }
     
 }

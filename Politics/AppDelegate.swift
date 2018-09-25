@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mainQuestionArray = [String:[Qusetions]]()
     var navBarHeight:CGFloat!
     var tabheight:CGFloat!
+    var dateNum:Int!
+    var responseNum:Int!
+    var goodNum:Int!
+    var badNum:Int!
+    var backedNum:Int!
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         print("呼ばれてる")
@@ -54,7 +59,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

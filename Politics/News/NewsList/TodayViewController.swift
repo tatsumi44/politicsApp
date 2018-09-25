@@ -29,29 +29,16 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var date:String!
     var goodArray = [String]()
     var badArray = [String]()
+    var backedNum:Int!
+    var dateNum:Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.delegate = self
         mainTable.dataSource = self
-        
-        
-        //        mainTable.frame.size.height = UIScreen.main.bounds.height - navBarHeight - 40 - tabheight
-
         self.mainTable.register(UINib(nibName: "NewsTodayTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTodayTableViewCell")
-        
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-    }
-    
-    func getNews(date:String){
-        HUD.show(.progress)
         let likes = realm.objects(NewsLikes1.self)
         goodArray = [String]()
         badArray = [String]()
@@ -64,6 +51,10 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }
         print("goodArray\(goodArray)")
         print("badArray\(badArray)")
+    }
+    
+    func getNews(date:String){
+        HUD.show(.progress)
         db.collection("news").document(date).getDocument { (snap, error) in
             if let error = error{
                 self.alert(message: error.localizedDescription)
@@ -73,7 +64,6 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                     self.mainNewsArray = [MainNewsData]()
                 }
                 var num = 0
-                
                 if let data = snap?.data(){
                     let jsons = data["json"] as! [[String : String]]
                     if jsons.count == 0{
@@ -329,6 +319,8 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             let newsDetailViewController = segue.destination as! NewsDetailViewController
             newsDetailViewController.mainNews = self.mainNewsArray[detailnum]
             newsDetailViewController.date = self.date
+            newsDetailViewController.detailnum = self.detailnum
+            newsDetailViewController.dateNum = self.dateNum
         }
         
     }

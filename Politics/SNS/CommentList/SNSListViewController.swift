@@ -199,6 +199,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let content = self.contents[indexPath.row].tagArray
             var keys = [String](content!.keys)
             print(keys)
+            cell.label1.layer.cornerRadius = 4
+            cell.label1.layer.masksToBounds = true
+            cell.label2.layer.cornerRadius = 4
+            cell.label2.layer.masksToBounds = true
+            cell.label3.layer.cornerRadius = 4
+            cell.label3.layer.masksToBounds = true
             switch keys.count {
             case 1:
                 cell.label1.text = keys[0]
@@ -259,6 +265,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let content = self.contents[indexPath.row].tagArray
             var keys = [String](content!.keys)
             print(keys)
+            cell.tag1Label.layer.cornerRadius = 4
+            cell.tag1Label.layer.masksToBounds = true
+            cell.tag2Label.layer.cornerRadius = 4
+            cell.tag2Label.layer.masksToBounds = true
+            cell.tag3Label.layer.cornerRadius = 4
+            cell.tag3Label.layer.masksToBounds = true
             switch keys.count {
             case 1:
                 cell.tag1Label.text = keys[0]
@@ -284,9 +296,7 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.urlBtn.addTarget(self, action: #selector(self.urlTap(sender:)), for: .touchUpInside)
             cell.dateLabel.text =  stringFromDate(date: contents[indexPath.row].date, format: "yyyy-MM-dd HH:mm:ss")
             return cell
-            
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

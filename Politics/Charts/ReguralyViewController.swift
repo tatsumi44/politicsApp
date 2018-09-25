@@ -142,7 +142,6 @@ class ReguralyViewController: FormViewController {
                         .onPresent { from, to in
                             to.dismissOnSelection = false
                             to.dismissOnChange = false
-                            
                 }
             }
         }
