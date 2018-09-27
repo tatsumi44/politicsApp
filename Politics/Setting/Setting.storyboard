@@ -88,6 +88,36 @@
             </objects>
             <point key="canvasLocation" x="2024.8" y="377.36131934032989"/>
         </scene>
+        <!--Url History View Controller-->
+        <scene sceneID="QNn-V3-cLC">
+            <objects>
+                <viewController id="Sf3-Mr-Y7b" customClass="UrlHistoryViewController" customModule="Politics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Cs-Bc-iCv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YaR-LK-dcu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YaR-LK-dcu" firstAttribute="bottom" secondItem="Ndq-ea-erV" secondAttribute="bottom" id="T1u-2r-jW2"/>
+                            <constraint firstItem="YaR-LK-dcu" firstAttribute="trailing" secondItem="Ndq-ea-erV" secondAttribute="trailing" id="TSE-Cg-Fyt"/>
+                            <constraint firstItem="YaR-LK-dcu" firstAttribute="top" secondItem="Ndq-ea-erV" secondAttribute="top" id="f1U-GP-Tmh"/>
+                            <constraint firstItem="YaR-LK-dcu" firstAttribute="leading" secondItem="Ndq-ea-erV" secondAttribute="leading" id="nke-Vq-NEr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ndq-ea-erV"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainTable" destination="YaR-LK-dcu" id="Db4-yH-BRl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X0I-OT-kAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2040.8" y="1185.1574212893554"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="JPa-PR-an0">
             <objects>

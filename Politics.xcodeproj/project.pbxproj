@@ -36,6 +36,7 @@
 		B91C27F9214F57A4002477B9 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27F7214F57A4002477B9 /* SectionTableViewCell.swift */; };
 		B91C27FA214F57A5002477B9 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91C27F8214F57A4002477B9 /* SectionTableViewCell.xib */; };
 		B91C27FD214F5BC0002477B9 /* SNSEvaluationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */; };
+		B91FC352215A9BAA00684B45 /* UrlHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FC351215A9BAA00684B45 /* UrlHistoryViewController.swift */; };
 		B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */; };
 		B920C9F121404C0000ECF00C /* DetailWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */; };
 		B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */; };
@@ -132,6 +133,7 @@
 		B91C27F7214F57A4002477B9 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		B91C27F8214F57A4002477B9 /* SectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTableViewCell.xib; sourceTree = "<group>"; };
 		B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSEvaluationViewController.swift; sourceTree = "<group>"; };
+		B91FC351215A9BAA00684B45 /* UrlHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHistoryViewController.swift; sourceTree = "<group>"; };
 		B920C9EE213EDDEC00ECF00C /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeeklyViewController.swift; sourceTree = "<group>"; };
 		B920C9F22146FACB00ECF00C /* opposeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = opposeTableViewCell.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				B91C27FC214F5BC0002477B9 /* SNSEvaluationViewController.swift */,
+				B91FC351215A9BAA00684B45 /* UrlHistoryViewController.swift */,
 			);
 			path = SNSsection;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				B95FC8FA21531DE100F85A4F /* AlertFlagViewController.swift in Sources */,
 				B95FC8FF21541F6E00F85A4F /* NewsComentAlertViewController.swift in Sources */,
 				B9085AE5211B444E0099DBE1 /* StartViewController.swift in Sources */,
+				B91FC352215A9BAA00684B45 /* UrlHistoryViewController.swift in Sources */,
 				B92934B02120BA4800637B16 /* PastChartsTableViewCell.swift in Sources */,
 				B96A7A3D213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift in Sources */,
 				B9085B2A211EB2120099DBE1 /* ChartsResultTableViewCell.swift in Sources */,

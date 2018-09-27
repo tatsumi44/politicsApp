@@ -201,6 +201,7 @@ extension UIViewController{
             self.date = date
         }
     }
+    
     struct MainNewsData {
         var num: Int!
         var title:String!
@@ -225,6 +226,16 @@ extension UIViewController{
         init(questionID:String,QuestionAnswer:String) {
             self.questionID = questionID
             self.QuestionAnswer = QuestionAnswer
+        }
+    }
+    struct UrlData {
+        var urlID: String!
+        var dateString: String!
+        var date:NSDate!
+        init(urlID: String,dateString: String,date:NSDate) {
+            self.urlID = urlID
+            self.dateString = dateString
+            self.date = date
         }
     }
 }
@@ -284,6 +295,7 @@ class SNSResponse: Object {
     @objc dynamic var snsID = ""
     @objc dynamic var snsDate = Date()
 }
+
 class NewsResponse: Object {
     @objc dynamic var newsID = ""
     @objc dynamic var newsDate = Date()

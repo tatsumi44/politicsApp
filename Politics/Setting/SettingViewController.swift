@@ -11,16 +11,18 @@ import RealmSwift
 import Firebase
 import Nuke
 import FirebaseStorageUI
+import SwiftDate
 class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var mainTable: UITableView!
-    let sectionArray = ["あなたの登録情報","投票関連","意見投稿関連","ニュース関連"]
+    let sectionArray = ["あなたの登録情報","投票関連","意見投稿関連"]
     let voteSectionArray = ["定期投票の設定"]
     let snsSectionArray = ["あなたが高評価した投稿","あなたが低評価した投稿","あなたの投稿","あなたが反応した投稿"]
     let newsSectionArray = ["あなたが反応した投稿"]
     let realm = try! Realm()
     var evaluationArray = [String]()
-//    var badArray = [String]()
+    var urlArray = [UrlData]()
+    //    var badArray = [String]()
     
     var image:UIImage!
     override func viewDidLoad() {
@@ -32,10 +34,10 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
         self.mainTable.register(UINib(nibName: "ProfileEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileEditTableViewCell")
         self.mainTable.register(UINib(nibName: "ProfileDetailEditTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileDetailEditTableViewCell")
         self.mainTable.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -57,8 +59,8 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
             return voteSectionArray.count
         case 2:
             return snsSectionArray.count
-        case 3:
-            return newsSectionArray.count
+//        case 3:
+//            return newsSectionArray.count
         default:
             return 0
         }
@@ -96,30 +98,30 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDetailEditTableViewCell", for: indexPath) as! ProfileDetailEditTableViewCell
                 cell.editBtn.addTarget(self, action: #selector(self.editTap(sender:)), for: .touchUpInside)
                 return cell
-
+                
             }
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
             cell.textLabel?.text = voteSectionArray[indexPath.row]
             return cell
-
+            
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
             cell.textLabel?.text = snsSectionArray[indexPath.row]
             return cell
-
+            
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
             cell.textLabel?.text = newsSectionArray[indexPath.row]
             return cell
-//
+        //
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEditTableViewCell", for: indexPath)
             return cell
         }
     }
     @objc func editTap(sender:UIButton){
-       
+        
         performSegue(withIdentifier: "Edit", sender: nil)
     }
     @objc func cameraTap(sender:UIButton){
@@ -160,11 +162,11 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         alert.addAction(defaultLibralyAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
-    
+        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 4
+        return 3
         
     }
     
@@ -172,7 +174,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = UIColor.orange
         }
-
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -186,7 +188,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         case 1:
             switch indexPath.row {
             case 0:
-               return
+                return
             default:
                 let storyboard: UIStoryboard = UIStoryboard(name: "Chart", bundle: nil)
                 let nv = storyboard.instantiateViewController(withIdentifier: "ReguralyViewController") as! ReguralyViewController
@@ -195,7 +197,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         case 2:
             switch indexPath.row {
             case 0:
-                 evaluationArray = [String]()
+                evaluationArray = [String]()
                 let likes = realm.objects(MyLikes.self)
                 likes.forEach { (like) in
                     evaluationArray.append(like.documentID)
@@ -242,6 +244,27 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
             default:
                 return
             }
+//        case 3:
+//            evaluationArray = [String]()
+//
+//            var lastDate = Date()
+//            lastDate = lastDate - 6.days
+//            let newsID = realm.objects(NewsResponse.self).filter("newsDate >= %@", lastDate)
+//            newsID.forEach { (news) in
+//                let date = news.newsDate
+//                let testFormatter = DateFormatter()
+//                testFormatter.dateFormat = "yyyy_MM_dd"
+//                let dateString = testFormatter.string(from: date)
+//                urlArray.append(UrlData(urlID: news.newsID, dateString: dateString, date: news.newsDate as NSDate))
+//            }
+//
+//            urlArray.sort(by: {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970})
+//            print(urlArray)
+//            if urlArray.count != 0{
+//                self.performSegue(withIdentifier: "url", sender: nil)
+//            }else{
+//                self.alert(message: "反応したものはありません")
+//            }
         default:
             return
         }
@@ -250,6 +273,9 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
         if segue.identifier == "EvaluationList"{
             let snsEvaluationController = segue.destination as! SNSEvaluationViewController
             snsEvaluationController.evaluationList = self.evaluationArray
+        }else if segue.identifier == "url"{
+            let urlHistoryViewController = segue.destination as! UrlHistoryViewController
+            urlHistoryViewController.urlArray = self.urlArray
         }
     }
     

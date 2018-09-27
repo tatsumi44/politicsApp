@@ -431,7 +431,13 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 25
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = "投稿者 : \(content.username!)"
+                    let attrText = NSMutableAttributedString(string: "投稿者 : \(content.username!)")
+                    attrText.addAttributes([
+                        .foregroundColor: UIColor.orange,
+                        .font: UIFont.boldSystemFont(ofSize: 15)
+                        ], range: NSMakeRange(6, (content.username!).count))
+                    cell.nameLabel.attributedText = attrText
+//                    cell.nameLabel.text = "投稿者 : \(content.username!)"
                     cell.title.text = content.title
                     cell.content.text = content.contents
                     var param2 = WCLShineParams()
@@ -466,7 +472,12 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 25
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = "投稿者 : \(content.username!)"
+                    let attrText = NSMutableAttributedString(string: "投稿者 : \(content.username!)")
+                    attrText.addAttributes([
+                        .foregroundColor: UIColor.orange,
+                        .font: UIFont.boldSystemFont(ofSize: 15)
+                        ], range: NSMakeRange(6, (content.username!).count))
+                    cell.nameLabel.attributedText = attrText
                     cell.titleLabel.text = content.title
                     cell.contentLabel.text = content.contents
                     var param2 = WCLShineParams()
@@ -519,8 +530,20 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 20
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 2].name!)"
-                    cell.docidLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
+                    let attrText = NSMutableAttributedString(string: "投稿者 : \(responseArray[indexPath.row - 2].name!)")
+                    attrText.addAttributes([
+                        .foregroundColor: UIColor.orange,
+                        .font: UIFont.boldSystemFont(ofSize: 13)
+                        ], range: NSMakeRange(6,(responseArray[indexPath.row - 2].name!).count))
+                    cell.nameLabel.attributedText = attrText
+//                    cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 2].name!)"
+                    let attrText1 = NSMutableAttributedString(string: "投稿ID : \(responseArray[indexPath.row - 2].docID!)")
+                    attrText1.addAttributes([
+                        .foregroundColor: UIColor.orange,
+                        .font: UIFont.boldSystemFont(ofSize: 13)
+                        ], range: NSMakeRange(7 ,(responseArray[indexPath.row - 2].docID!).count))
+//                    cell.nameLabel.attributedText = attrText1
+                    cell.docidLabel.attributedText = attrText1
                     cell.commentLabel.text = responseArray[indexPath.row - 2].comment
                     cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
                     cell.commentBtn.tag = indexPath.row
@@ -534,13 +557,26 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                     cell.userImage.layer.cornerRadius = 20
                     cell.userImage.layer.masksToBounds = true
                     cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                    cell.nameLabel.text = responseArray[indexPath.row - 2].name
+                    let attrText = NSMutableAttributedString(string: "投稿者 : \(responseArray[indexPath.row - 2].name!)")
+                    attrText.addAttributes([
+                        .foregroundColor: UIColor.blue,
+                        .font: UIFont.boldSystemFont(ofSize: 13)
+                        ], range: NSMakeRange(6, (responseArray[indexPath.row - 2].name!).count))
+                    cell.nameLabel.attributedText = attrText
+                    //                    cell.nameLabel.text = "投稿者 \(responseArray[indexPath.row - 2].name!)"
+                    let attrText1 = NSMutableAttributedString(string: "投稿ID : \(responseArray[indexPath.row - 2].docID!)")
+                    attrText1.addAttributes([
+                        .foregroundColor: UIColor.blue,
+                        .font: UIFont.boldSystemFont(ofSize: 13)
+                        ], range: NSMakeRange(7,(responseArray[indexPath.row - 2].docID!).count))
+                    //                    cell.nameLabel.attributedText = attrText1
+                    cell.docIdLabel.attributedText = attrText1
                     cell.commentLabel.text = responseArray[indexPath.row - 2].comment
                     cell.alertFlagBtn.tag = indexPath.row - 2
                     cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)
                     cell.dateLabel.text = stringFromDate(date: responseArray[indexPath.row - 2].date, format: "yyyy-MM-dd HH:mm:ss")
                     cell.opposeLabel.text = "<=  返信先 \(responseArray[indexPath.row - 2].opponentName!)＆返信先のID \(responseArray[indexPath.row - 2].opponentDocID!)"
-                    cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
+//                    cell.docIdLabel.text = "投稿ID \(responseArray[indexPath.row - 2].docID!)"
                     return cell
                 }
             }
@@ -567,7 +603,7 @@ extension CommentDetailViewController:  UITableViewDelegate, UITableViewDataSour
                 cell.userImage.layer.cornerRadius = 20
                 cell.userImage.layer.masksToBounds = true
                 cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-                cell.nameLabel.text = alertArray[indexPath.row].name
+                cell.nameLabel.text = "投稿者 \(alertArray[indexPath.row].name)"
                 cell.commentLabel.text = alertArray[indexPath.row].comment
                 cell.alertFlagBtn.tag = indexPath.row - 2
                 cell.alertFlagBtn.addTarget(self, action: #selector(self.alertTap(sender:)), for: .touchUpInside)

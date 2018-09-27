@@ -168,7 +168,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.userImage.layer.cornerRadius = 25
             cell.userImage.layer.masksToBounds = true
             cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            cell.nameLabel.text = "投稿者 : \(self.contents[indexPath.row].username!)"
+            let attrText = NSMutableAttributedString(string: "投稿者 : \(self.contents[indexPath.row].username!)")
+            attrText.addAttributes([
+                .foregroundColor: UIColor.orange,
+                .font: UIFont.boldSystemFont(ofSize: 15)
+                ], range: NSMakeRange(6, (self.contents[indexPath.row].username!).count))
+            cell.nameLabel.attributedText = attrText
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
             var param2 = WCLShineParams()
@@ -234,7 +239,12 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.userImage.layer.cornerRadius = 25
             cell.userImage.layer.masksToBounds = true
             cell.userImage.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            cell.nameLabel.text = "投稿者 : \(self.contents[indexPath.row].username!)"
+            let attrText = NSMutableAttributedString(string: "投稿者 : \(self.contents[indexPath.row].username!)")
+            attrText.addAttributes([
+                .foregroundColor: UIColor.orange,
+                .font: UIFont.boldSystemFont(ofSize: 15)
+                ], range: NSMakeRange(6, (self.contents[indexPath.row].username!).count))
+            cell.nameLabel.attributedText = attrText
             cell.titleLabel.text = self.contents[indexPath.row].title
             cell.contentLabel.text = self.contents[indexPath.row].contents
             var param2 = WCLShineParams()
