@@ -11,7 +11,7 @@ import Firebase
 import RealmSwift
 import WCLShineButton
 import SafariServices
-import FirebaseStorageUI
+import FirebaseUI
 class NewsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var mainTable: UITableView!

@@ -12,7 +12,7 @@ import WCLShineButton
 import RealmSwift
 import PKHUD
 import SafariServices
-import FirebaseStorageUI
+import FirebaseUI
 class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mainTable: UITableView!

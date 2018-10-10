@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseStorageUI
+import FirebaseUI
 import WCLShineButton
 import SafariServices
 import RealmSwift
@@ -321,7 +321,6 @@ extension SNSEvaluationViewController:UITableViewDelegate,UITableViewDataSource{
             }
         }
         print("Clicked \(sender.isSelected)")
-        
     }
     @objc func dislikeTap(sender:WCLShineButton){
         let user = realm.objects(Userdata.self)

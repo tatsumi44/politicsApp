@@ -9,16 +9,26 @@ target 'Politics' do
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
-  pod 'Alamofire'
-  pod 'SwiftyJSON'
   pod 'PKHUD', '~> 5.0'
-  pod 'SwiftDate'
+  pod 'SwiftDate', '~> 4.5.1'
   pod 'PageMenu'
-  pod 'Eureka'
+  pod 'Eureka', '~> 4.1.1'
   pod 'WCLShineButton'
   pod 'Nuke'
   pod 'FirebaseUI/Storage'
   pod 'ViewRow', :git => 'https://github.com/EurekaCommunity/ViewRow'
   # Pods for Politics
+post_install do |installer|
+
+  installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+          if target.name == 'Charts'
+              config.build_settings['SWIFT_VERSION'] = '4.2'
+              else
+              config.build_settings['SWIFT_VERSION'] = '4.1'
+          end
+      end
+  end
+end
 
 end

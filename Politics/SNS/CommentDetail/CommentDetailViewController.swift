@@ -13,7 +13,7 @@ import Firebase
 import RealmSwift
 import SwiftDate
 import SafariServices
-import FirebaseStorageUI
+import FirebaseUI
 class CommentDetailViewController: UIViewController,UITextViewDelegate {
     let SCREEN_SIZE = UIScreen.main.bounds.size
     @IBOutlet weak var postView: UIView!

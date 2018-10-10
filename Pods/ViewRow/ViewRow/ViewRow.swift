@@ -28,7 +28,7 @@ public class ViewCell<ViewType : UIView> : Cell<String>, CellType {
     
     private var notificationObserver : NSObjectProtocol?
 
-    required public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    required public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = UIColor.white

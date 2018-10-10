@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Firebase
 import Nuke
-import FirebaseStorageUI
+import FirebaseUI
 import SwiftDate
 class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -210,9 +210,9 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 
             case 1:
                 evaluationArray = [String]()
-                let dislikes = realm.objects(MyDisLikes.self)
-                dislikes.forEach { (dislike) in
-                    evaluationArray.append(dislike.documentID)
+                let likes = realm.objects(MyDisLikes.self)
+                likes.forEach { (like) in
+                    evaluationArray.append(like.documentID)
                 }
                 if evaluationArray.count != 0{
                     performSegue(withIdentifier: "EvaluationList", sender: nil)
@@ -225,6 +225,7 @@ extension SettingViewController:UITableViewDataSource,UITableViewDelegate{
                 snsID.forEach { (sns) in
                     evaluationArray.append(sns.snsID)
                 }
+                print("vote\(evaluationArray)")
                 if evaluationArray.count != 0{
                     performSegue(withIdentifier: "EvaluationList", sender: nil)
                 }else{
