@@ -9,16 +9,28 @@
 import UIKit
 import Firebase
 import SwiftDate
+import RealmSwift
 class VoteListViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     let db = Firestore.firestore()
     var questionArray = [Qusetions]()
     var num: Int!
+    let realm = try! Realm()
+    var flag:Bool!
     @IBOutlet weak var mainTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
         mainTable.dataSource = self
         mainTable.delegate  = self
+//        let realm = try! Realm()
+//        let tanakas = realm.objects(Vote.self)
+//
+//        tanakas.forEach { tanaka in
+//            try! realm.write() {
+//                realm.delete(tanaka)
+//            }
+//        }
         db.collection("questions").getDocuments { (snap, error) in
             for content in snap!.documents{
                 let data = content.data()
@@ -50,15 +62,61 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
-        performSegue(withIdentifier: "GoVote", sender: nil)
-        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        let result = realm.objects(Vote.self).filter("questionID == %@",self.questionArray[num].questionID)
+        if result.count != 0{
+//            let result1 = realm.objects(Vote.self).last
+//            print(result1!.voteDate)
+//            let f = DateFormatter()
+//            f.dateFormat = "yyyy/MM/dd"
+//            let tomorrow: Date = Date(timeIntervalSinceNow: 60*60*9)
+//            if f.string(from: result1!.voteDate) == f.string(from: tomorrow){
+//                self.alert(message: "投票内容を変更しますか？")
+                let alert: UIAlertController = UIAlertController(title: "本日は投票されています", message: "投票内容を変更しますか？", preferredStyle:  UIAlertControllerStyle.alert)
+
+                let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+                    // ボタンが押された時の処理を書く（クロージャ実装）
+                    (action: UIAlertAction!) -> Void in
+                    print("OK")
+                    self.flag = true
+                    print(self.flag)
+                    self.performSegue(withIdentifier: "GoVote", sender: nil)
+                    if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+                        tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+                    }
+                })
+                // キャンセルボタン
+                let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                    // ボタンが押された時の処理を書く（クロージャ実装）
+                    (action: UIAlertAction!) -> Void in
+                    print("Cancel")
+                })
+                // ③ UIAlertControllerにActionを追加
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+//
+//            }else{
+//                flag = false
+//                performSegue(withIdentifier: "GoVote", sender: nil)
+//                if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+//                    tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+//                }
+//            }
+//            print(tomorrow)
+        }else{
+            flag = false
+            print(self.flag)
+            performSegue(withIdentifier: "GoVote", sender: nil)
+            if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+            }
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoVote"{
             let voteviewController = segue.destination as! VoteViewController
             voteviewController.questions = self.questionArray[num]
+            voteviewController.flag = self.flag
         }
     }
     

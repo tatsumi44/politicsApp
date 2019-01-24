@@ -28,6 +28,9 @@ class PastResultViewController: ChartsResultViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let month = day.components(separatedBy: "_")[1]
+        let day1 = day.components(separatedBy: "_")[2]
+        self.title = "\(month)月\(day1)日"
         
     }
 

@@ -13,7 +13,7 @@ class FiveDaysAgoResultViewController: TodayResultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         day = nowDate(num: 5)
-        questionArray = mainQuestionArray[day]!
+//        questionArray = mainQuestionArray[day]!
     }
 
     override func didReceiveMemoryWarning() {

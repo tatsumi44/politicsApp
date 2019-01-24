@@ -125,9 +125,7 @@ class StartViewController: FormViewController  {
                     }
 
                     let tab = self.tabSegue()
-                    self.present(tab, animated: true, completion: nil)
-
-                    
+                    self.present(tab, animated: true, completion: nil)       
                 })
         // Do any additional setup after loading the view.
     }

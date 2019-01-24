@@ -42,7 +42,6 @@ class MyFormViewController: FormViewController {
                     to.dismissOnChange = false
                     
             }
-            
             +++ Section("年齢を選択してください")
             <<< PushRow<String>() {
                 $0.title = "年齢"
@@ -66,7 +65,7 @@ class MyFormViewController: FormViewController {
              +++ Section("性別を選択してください")
             <<< PushRow<String>() {
                 $0.title = "性別"
-                $0.options = ["","girl", "boy", "other"]
+                $0.options = ["","男性", "女性", "その他"]
                 $0.value = ""
                 $0.selectorTitle = "Choose an Emoji!"
                 }.onChange({ (row) in
@@ -83,24 +82,16 @@ class MyFormViewController: FormViewController {
                     to.dismissOnSelection = false
                     to.dismissOnChange = false
         }
-
-        // Do any additional setup after loading the view.
+            <<< ButtonRow(){
+                $0.title = "登録する"
+                $0.cell.tintColor = UIColor.orange
+                }.onCellSelection({ i, to in
+                    self.navigationController?.popViewController(animated: true)
+                })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

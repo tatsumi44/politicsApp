@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let setData:UserDefaults = UserDefaults.standard
     let realm = try! Realm()
     var mainQuestionArray = [String:[Qusetions]]()
+    var questionArray = [Qusetions]()
     var navBarHeight:CGFloat!
     var tabheight:CGFloat!
     var dateNum:Int!

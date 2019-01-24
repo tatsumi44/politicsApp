@@ -11,6 +11,7 @@ import Charts
 class DetailWeeklyViewController: DemoBaseViewController {
     var maincontentsArray = [mainWeeklyData]()
     var question:Qusetions!
+    var contentsArray = [WeeklyData]()
     var dateArray=[String]()
     var numArray = [Int]()
     var dataArray = [String:[Int]]()
@@ -18,29 +19,45 @@ class DetailWeeklyViewController: DemoBaseViewController {
     @IBOutlet weak var mainChart: LineChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 0..<7{
-            dateArray.append(shortNowDate(num: 6 - i))
+        for i in 0...6{
+            dateArray.append(shortNowDate(num: 7 - i))
         }
-        
-        for ques in question.array{
-            let array = maincontentsArray.filter({$0.question == ques})
+        print(dateArray)
+        let contents = self.contentsArray.sorted(by: {$0.num < $1.num})
+        for ans in question.array{
             numArray = [Int]()
-            for i in 0..<7{
-                if array.filter({$0.date == nowDate(num: 6 - i)}).count != 0{
-                    let filteredArray = array.filter({$0.date == nowDate(num: 6 - i)})
-                    numArray.append(filteredArray[0].questionCount)
-                }else{
-                    numArray.append(0)
-                }
-                if i == 6{
-//                    numArray.reverse()
-                    dataArray["\(ques)"] = numArray
+            for content in contents{
+                numArray.append(content.answerSize[ans]!)
+                print(dataArray)
+                if numArray.count == 7{
+                    numArray.reverse()
+                    dataArray[ans] = numArray
                 }
                 if dataArray.count == question.array.count{
                     print(dataArray)
                 }
             }
         }
+        //
+        //        for ques in question.array{
+        //            let array = maincontentsArray.filter({$0.question == ques})
+        //            numArray = [Int]()
+        //            for i in 0..<7{
+        //                if array.filter({$0.date == nowDate(num: 6 - i)}).count != 0{
+        //                    let filteredArray = array.filter({$0.date == nowDate(num: 6 - i)})
+        //                    numArray.append(filteredArray[0].questionCount)
+        //                }else{
+        //                    numArray.append(0)
+        //                }
+        //                if i == 6{
+        ////                    numArray.reverse()
+        //                    dataArray["\(ques)"] = numArray
+        //                }
+        //                if dataArray.count == question.array.count{
+        //                    print(dataArray)
+        //                }
+        //            }
+        //        }
         self.options = [.toggleValues,
                         .toggleFilled,
                         .toggleCircles,
@@ -89,7 +106,7 @@ class DetailWeeklyViewController: DemoBaseViewController {
         
         self.setDataCount(xValArr: dateArray, yValArr: dataArray)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,7 +121,7 @@ extension DetailWeeklyViewController: IAxisValueFormatter {
 }
 
 extension DetailWeeklyViewController{
-   
+    
     func setDataCount(xValArr: [String], yValArr: [String:[Int]]) {
         var yVals1 : [ChartDataEntry] = [ChartDataEntry]()
         var yVals2 : [ChartDataEntry] = [ChartDataEntry]()
@@ -351,6 +368,8 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 6:
             for i in 0 ..< xValArr.count {
+                print(array?.count)
+                print(xValArr.count)
                 let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
                 yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
@@ -390,7 +409,7 @@ extension DetailWeeklyViewController{
             set1.axisDependency = .left
             set1.setColor(bgolors[0] as! UIColor)
             set1.setCircleColor(.white)
-//            set1.valueColors = [UIcolor.balck]
+            //            set1.valueColors = [UIcolor.balck]
             set1.lineWidth = 2
             set1.circleRadius = 3
             set1.fillAlpha = 65/255

@@ -128,18 +128,18 @@ extension UIViewController{
             self.date = date
         }
     }
-    struct weeklyData {
-        var docID:String!
-        var title:String!
-        var questions:[String]!
-        var date:String!
-        init(docID:String,title:String,questions:[String],date:String) {
-            self.docID = docID
-            self.title = title
-            self.questions = questions
-            self.date = date
-        }
-    }
+//    struct weeklyData {
+//        var docID:String!
+//        var title:String!
+//        var questions:[String]!
+//        var date:String!
+//        init(docID:String,title:String,questions:[String],date:String) {
+//            self.docID = docID
+//            self.title = title
+//            self.questions = questions
+//            self.date = date
+//        }
+//    }
     
     struct mainWeeklyData {
         var docID:String!
@@ -153,6 +153,18 @@ extension UIViewController{
             self.question = question
             self.questionCount = questionCount
             self.date = date
+        }
+    }
+    struct WeeklyData {
+        var questionID:String!
+        var answers:[String]!
+        var answerSize:[String:Int]!
+        var num:Int!
+        init(questionID:String,answers:[String],answerSize:[String:Int],num:Int) {
+            self.questionID = questionID
+            self.answers = answers
+            self.answerSize = answerSize
+            self.num = num
         }
     }
     
@@ -238,6 +250,7 @@ extension UIViewController{
             self.date = date
         }
     }
+    
 }
 
 class Userdata: Object{
@@ -300,6 +313,12 @@ class NewsResponse: Object {
     @objc dynamic var newsID = ""
     @objc dynamic var newsDate = Date()
 }
+class Vote: Object {
+    @objc dynamic var questionID = ""
+    @objc dynamic var answer = ""
+    @objc dynamic var answerID = ""
+    @objc dynamic var voteDate = Date()
+}
 
 class Qusetions{
     var array:[String]!
@@ -322,6 +341,8 @@ class ChartResult{
         self.percent = percent
     }
 }
+
+
 
 extension  UIResponder{
     func tabSegue()-> UITabBarController{

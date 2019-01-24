@@ -21,9 +21,12 @@ class VoteViewController: FormViewController  {
     var array = [String:String]()
     let db = Firestore.firestore()
     var answer:String!
+    var ref: DocumentReference? = nil
+    var flag:Bool!
     override func viewDidLoad() {
         super.viewDidLoad()
         let date = Date()
+        print(flag)
         print(date.string(custom: "YY_MM_dd"))
         continents = questions.array
         form
@@ -83,32 +86,72 @@ class VoteViewController: FormViewController  {
                     self.alert(message: "選択されていません")
                     return
                 }
-
                 let realm = try! Realm()
                 let user = realm.objects(Userdata.self)
-                    self.db.collection(self.nowDate(num: 0)).document(self.questions.questionID).collection(self.answer).document(user[0].userID).setData([
+                if self.flag == false{
+                    self.ref = self.db.collection("vote").addDocument(data: [
+                        "uid" : user[0].userID,
                         "name" : user[0].name,
                         "age" :user[0].age,
                         "place" : user[0].place,
-                        "sex" : user[0].sex
-                        ])
-                    self.db.collection("questions").document(self.questions.questionID).getDocument { (snap, error) in
+                        "sex" : user[0].sex,
+                        "questionID" : self.questions.questionID,
+                        "answer" : self.answer,
+                        "voteDate" : self.nowDate(num: 0),
+                        "date" : NSDate()
+                        
+                    ]){error in
                         if let error = error{
                             self.alert(message: error.localizedDescription)
                         }else{
-                            let data = snap?.data()
-                            let todayFlag = data!["\(self.nowDate(num: 0))"]
-                            if todayFlag == nil{
-                                self.db.collection("questions").document(self.questions.questionID).updateData([
-                                    "\(self.nowDate(num: 0))" : true
-                                    ])
+                            let vote = Vote()
+                            vote.questionID = self.questions.questionID
+                            vote.answer = self.answer
+                            vote.answerID = "\(self.ref!.documentID)"
+                            vote.voteDate = Date(timeIntervalSinceNow: 60*60*9)
+                            try! realm.write() {
+                                realm.add(vote)
                             }
+                            self.performSegue(withIdentifier: "GoResult", sender: nil)
                         }
                     }
-                    self.performSegue(withIdentifier: "GoResult", sender: nil)
+                }else{
+                    let result = realm.objects(Vote.self).filter("questionID == %@",self.questions.questionID)
+                    self.db.collection("vote").document(result.last!.answerID).updateData([
+                        "answer" : self.answer,
+                        "voteDate" : self.nowDate(num: 0),
+                        "date" : NSDate()
+                    ]){err in
+                        if let err = err{
+                            self.alert(message: err.localizedDescription)
+                        }else{
+                            let vote = Vote()
+                            vote.questionID = self.questions.questionID
+                            vote.answer = self.answer
+                            vote.answerID = "\(result.last!.answerID)"
+                            vote.voteDate = Date(timeIntervalSinceNow: 60*60*9)
+                            try! realm.write() {
+                                realm.add(vote)
+                            }
+                            self.performSegue(withIdentifier: "GoResult", sender: nil)
+                        }
+                    }
+                }
+
+//                    self.db.collection("questions").document(self.questions.questionID).getDocument { (snap, error) in
+//                        if let error = error{
+//                            self.alert(message: error.localizedDescription)
+//                        }else{
+//                            let data = snap?.data()
+//                            let todayFlag = data!["\(self.nowDate(num: 0))"]
+//                            if todayFlag == nil{
+//                                self.db.collection("questions").document(self.questions.questionID).updateData([
+//                                    "\(self.nowDate(num: 0))" : true
+//                                    ])
+//                            }
+//                        }
+//                    }
             })
-        
-        
     }
     override func valueHasBeenChanged(for row: BaseRow, oldValue: Any?, newValue: Any?) {
         if row.section === form[0] {
@@ -123,11 +166,6 @@ class VoteViewController: FormViewController  {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//        @IBAction func vote(_ sender: Any) {
-//
-//
-//        }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoResult"{
             let chartsResultViewController = segue.destination as! ChartsResultViewController
@@ -135,5 +173,4 @@ class VoteViewController: FormViewController  {
             chartsResultViewController.questionArray = questions.array
         }
     }
-    
 }

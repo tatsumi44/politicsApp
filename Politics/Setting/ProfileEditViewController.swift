@@ -27,7 +27,7 @@ class ProfileEditViewController: FormViewController {
             +++ Section("性別を変更")
             <<< PushRow<String>("sex") {
                 $0.title = "性別"
-                $0.options = ["girl","boy","other"]
+                $0.options = ["男性","女性","その他"]
                 $0.value = user.sex
                 $0.selectorTitle = "Choose an Emoji!"
                 }.onChange({ (row) in

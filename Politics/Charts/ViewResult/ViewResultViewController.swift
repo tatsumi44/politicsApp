@@ -16,7 +16,7 @@ class ViewResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var dateArray = ["Weekly"]
+        var dateArray = [String]()
         print(nowDate(num: 0))       
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
@@ -38,14 +38,14 @@ class ViewResultViewController: UIViewController {
             dateArray.append("\(date.string(custom: "MM/dd"))")
         }
         print(dateArray)
-        vc0.title = dateArray[0]
-        vc.title = dateArray[1]
-        vc1.title = dateArray[2]
-        vc2.title = dateArray[3]
-        vc3.title = dateArray[4]
-        vc4.title = dateArray[5]
-        vc5.title = dateArray[6]
-        vc6.title = dateArray[7]
+        vc0.title = "週間データ"
+        vc.title = dateArray[0]
+        vc1.title = dateArray[1]
+        vc2.title = dateArray[2]
+        vc3.title = dateArray[3]
+        vc4.title = dateArray[4]
+        vc5.title = dateArray[5]
+        vc6.title = dateArray[6]
         controllers.append(vc0)
         controllers.append(vc)
         controllers.append(vc1)
@@ -75,18 +75,10 @@ class ViewResultViewController: UIViewController {
         self.addChildViewController(self.pageMenu!)
         self.view.addSubview(self.pageMenu!.view)
         self.pageMenu!.didMove(toParentViewController: self)
-        
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-
 }

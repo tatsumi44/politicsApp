@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftDate
+import Firebase
 class TodayResultViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     
@@ -16,16 +17,17 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     var questionArray = [Qusetions]()
     var num:Int!
     var day:String!
+    let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.dataSource = self
         mainTable.delegate = self
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        mainQuestionArray = appDelegate.mainQuestionArray
-        print(mainQuestionArray)
-        day = nowDate(num: 0)
-        questionArray = mainQuestionArray[day]!
-       
+        questionArray = appDelegate.questionArray
+//        print(mainQuestionArray)
+//        day = nowDate(num: 0)
+//        questionArray = mainQuestionArray[day]!
+
         // Do any additional setup after loading the view.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +41,7 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
+        getData()
         performSegue(withIdentifier: "a", sender: nil)
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
@@ -58,6 +61,16 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     
+    func getData() {
 
-
+//        db.collection("vote").whereField("voteDate", isEqualTo: nowDate(num: 0)).getDocuments { (snap, error) in
+//                if let error = error{
+//                    self.alert(message: error.localizedDescription)
+//                }else{
+//                    print(snap?.count)
+//                }
+//        }
+//        db.collection(nowDate(num: 0)).whereField("questionID", isEqualTo: <#T##Any#>)
+        
+    }
 }

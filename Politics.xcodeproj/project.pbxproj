@@ -286,8 +286,8 @@
 				B9085B25211E7B800099DBE1 /* DemoBaseViewController.swift */,
 				B9085B29211EB2120099DBE1 /* ChartsResultTableViewCell.swift */,
 				B9085B4E211F51AA0099DBE1 /* MyFormViewController.swift */,
-				B92934AB2120A55200637B16 /* SelectViewController.swift */,
 				B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */,
+				B92934AB2120A55200637B16 /* SelectViewController.swift */,
 				B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */,
 				B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */,
 			);
@@ -863,7 +863,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -883,7 +886,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Politics/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ne.sakura.tatsumi44.Politics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

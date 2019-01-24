@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import Charts
 import PKHUD
-class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
+class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
     
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var mainTable: UITableView!
@@ -29,6 +29,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
     var bgolors = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         HUD.show(.progress)
         self.mainTable.register(UINib(nibName: "ChartsResultListTableViewCell", bundle: nil), forCellReuseIdentifier: "ChartsResultListTableViewCell")
         print("今日は\(day)")
@@ -39,49 +40,88 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
         self.saveData.removeObject(forKey: "place")
         self.saveData.removeObject(forKey: "age")
         self.saveData.removeObject(forKey: "sex")
+        print(questionID!)
         for party in questionArray{
-            db.collection(day).document(questionID).collection(party).getDocuments { (snap, error) in
+            
+            db.collection("vote").whereField("questionID", isEqualTo: questionID!).whereField("answer", isEqualTo: party).getDocuments { (snap, error) in
                 if let error = error{
                     self.alert(message: error.localizedDescription)
                 }else{
-                    self.db.collection("users").whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-                        if let error = error{
-                            self.alert(message: error.localizedDescription)
-                        }else{
-                            print("\(party)の投票数は定期投票\(snap1!.count)")
-                            print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-                            self.sum = self.sum + Double(snap!.count + snap1!.count)
-                            if (snap!.count + snap1!.count) != 0{
-                                self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-                            }
-                            self.count += 1
-                            if self.count == self.questionArray.count{
-                                print(self.sum)
-                                print(self.numArray)
-                                for (key,value) in self.numArray{
-                                    if value != 0.0{
-                                        let val = (value/self.sum) * 100
-                                        self.numArray[key] = val
-                                        self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-                                    }
-                                }
-                                self.setDataCount(self.numArray.count, range: 100)
-                                let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-                                self.pieChart.centerAttributedText = centerText
-                                print(self.resultArray)
-                                self.resultArray.sort(by: {$0.num1 > $1.num1})
-                                self.mainTable.reloadData()
-                                HUD.hide()
-                                print(self.numArray)
-                                self.count = 0
-                                self.sum = 0.0
-                                self.firstAppear = true
+                    print("\(party)の投票数は定期投票\(snap!.count)")
+//                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
+                    self.sum = self.sum + Double(snap!.count)
+                    if (snap!.count) != 0{
+                        self.numArray["\(party)"] = Double(snap!.count)
+                    }
+                    self.count += 1
+                    if self.count == self.questionArray.count{
+                        print(self.sum)
+                        print(self.numArray)
+                        for (key,value) in self.numArray{
+                            if value != 0.0{
+                                let val = (value/self.sum) * 100
+                                self.numArray[key] = val
+                                self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                             }
                         }
-                    })
+                        self.setDataCount(self.numArray.count, range: 100)
+                        let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+                        self.pieChart.centerAttributedText = centerText
+                        print(self.resultArray)
+                        self.resultArray.sort(by: {$0.num1 > $1.num1})
+                        self.mainTable.reloadData()
+                        HUD.hide()
+                        print(self.numArray)
+                        self.count = 0
+                        self.sum = 0.0
+                        self.firstAppear = true
+                    }
                 }
             }
         }
+//                for party in questionArray{
+//                    db.collection(day).document(questionID).collection(party).getDocuments { (snap, error) in
+//                        if let error = error{
+//                            self.alert(message: error.localizedDescription)
+//                        }else{
+//                            self.db.collection("users").whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
+//                                if let error = error{
+//                                    self.alert(message: error.localizedDescription)
+//                                }else{
+//                                    print("\(party)の投票数は定期投票\(snap1!.count)")
+//                                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
+//                                    self.sum = self.sum + Double(snap!.count + snap1!.count)
+//                                    if (snap!.count + snap1!.count) != 0{
+//                                        self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
+//                                    }
+//                                    self.count += 1
+//                                    if self.count == self.questionArray.count{
+//                                        print(self.sum)
+//                                        print(self.numArray)
+//                                        for (key,value) in self.numArray{
+//                                            if value != 0.0{
+//                                                let val = (value/self.sum) * 100
+//                                                self.numArray[key] = val
+//                                                self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
+//                                            }
+//                                        }
+//                                        self.setDataCount(self.numArray.count, range: 100)
+//                                        let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+//                                        self.pieChart.centerAttributedText = centerText
+//                                        print(self.resultArray)
+//                                        self.resultArray.sort(by: {$0.num1 > $1.num1})
+//                                        self.mainTable.reloadData()
+//                                        HUD.hide()
+//                                        print(self.numArray)
+//                                        self.count = 0
+//                                        self.sum = 0.0
+//                                        self.firstAppear = true
+//                                    }
+//                                }
+//                            })
+//                        }
+//                    }
+//                }
         self.options = [.toggleValues,
                         .toggleXValues,
                         .togglePercent,
@@ -132,8 +172,6 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
             numArray = [String:Double]()
             updateChartData()
         }
-        
-        //
     }
     override func updateChartData() {
         HUD.show(.progress)
@@ -146,206 +184,228 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
         switch array.count {
         case 0:
             for party in questionArray{
-                db.collection(day).document(questionID).collection(party).getDocuments { (snap, error) in
+                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        self.db.collection("users").whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-                            if let error = error{
-                                self.alert(message: error.localizedDescription)
-                            }else{
-                                print("\(party)の投票数は定期投票\(snap1!.count)")
-                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-                                self.sum = self.sum + Double(snap!.count + snap1!.count)
-                                if (snap!.count + snap1!.count) != 0{
-                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-                                }
-                                self.count += 1
-                                if self.count == self.questionArray.count{
-                                    print(self.sum)
-                                    print(self.numArray)
-                                    for (key,value) in self.numArray{
-                                        if value != 0.0{
-                                            let val = (value/self.sum) * 100
-                                            self.numArray[key] = val
-                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-                                        }
-                                    }
-                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
-                                    self.resultArray.forEach({ (diff) in
-                                        print("\(diff.title!) \(diff.num1!)")
-                                    })
-                                    self.setDataCount(self.numArray.count, range: 100)
-                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-                                    self.pieChart.centerAttributedText = centerText
-                                    print(self.resultArray)
-                                    self.mainTable.reloadData()
-                                    HUD.hide()
-                                    print(self.numArray)
-                                    dicVal = []
-                                    dicKeys = []
-                                    self.count = 0
-                                    self.sum = 0.0
+                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        //                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
+                        self.sum = self.sum + Double(snap!.count)
+                        if (snap!.count) != 0{
+                            self.numArray["\(party)"] = Double(snap!.count)
+                        }
+                        self.count += 1
+                        if self.count == self.questionArray.count{
+                            print(self.sum)
+                            print(self.numArray)
+                            for (key,value) in self.numArray{
+                                if value != 0.0{
+                                    let val = (value/self.sum) * 100
+                                    self.numArray[key] = val
+                                    self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                                 }
                             }
-                        })
+                            self.setDataCount(self.numArray.count, range: 100)
+                            let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+                            self.pieChart.centerAttributedText = centerText
+                            print(self.resultArray)
+                            self.resultArray.sort(by: {$0.num1 > $1.num1})
+                            self.mainTable.reloadData()
+                            HUD.hide()
+                            print(self.numArray)
+                            self.count = 0
+                            self.sum = 0.0
+                            self.firstAppear = true
+                        }
                     }
                 }
             }
         case 1:
             for party in questionArray{
-                db.collection(day).document(questionID).collection(party).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
+                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        self.db.collection("users").whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-                            if let error = error{
-                                self.alert(message: error.localizedDescription)
-                            }else{
-                                print("\(party)の投票数は定期投票\(snap1!.count)")
-                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-                                self.sum = self.sum + Double(snap!.count + snap1!.count)
-                                if (snap!.count + snap1!.count) != 0{
-                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-                                }
-                                self.count += 1
-                                if self.count == self.questionArray.count{
-                                    print(self.sum)
-                                    print(self.numArray)
-                                    for (key,value) in self.numArray{
-                                        if value != 0.0{
-                                            let val = (value/self.sum) * 100
-                                            self.numArray[key] = val
-                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-                                        }
-                                    }
-                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
-                                    self.resultArray.forEach({ (diff) in
-                                        print("\(diff.title!) \(diff.num1!)")
-                                    })
-                                    self.setDataCount(self.numArray.count, range: 100)
-                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-                                    self.pieChart.centerAttributedText = centerText
-                                    print(self.resultArray)
-                                    self.mainTable.reloadData()
-                                    HUD.hide()
-                                    print(self.numArray)
-                                    self.saveData.removeObject(forKey: "place")
-                                    self.saveData.removeObject(forKey: "age")
-                                    self.saveData.removeObject(forKey: "sex")
-                                    self.array = [:]
-                                    dicVal = []
-                                    dicKeys = []
-                                    self.count = 0
-                                    self.sum = 0.0
+                        print("\(party)の投票数は定期投票\(snap!.count)")
+//                        print("\(party)の投票数は\(snap!.count)です")
+                        self.sum = self.sum + Double(snap!.count)
+                        if (snap!.count) != 0{
+                            self.numArray["\(party)"] = Double(snap!.count)
+                        }
+                        self.count += 1
+                        if self.count == self.questionArray.count{
+                            print(self.sum)
+                            print(self.numArray)
+                            for (key,value) in self.numArray{
+                                if value != 0.0{
+                                    let val = (value/self.sum) * 100
+                                    self.numArray[key] = val
+                                    self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                                 }
                             }
-                        })
+                            self.resultArray.sort(by: {$0.num1 > $1.num1})
+                            self.resultArray.forEach({ (diff) in
+                                print("\(diff.title!) \(diff.num1!)")
+                            })
+                            self.setDataCount(self.numArray.count, range: 100)
+                            let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+                            self.pieChart.centerAttributedText = centerText
+                            print(self.resultArray)
+                            self.mainTable.reloadData()
+                            HUD.hide()
+                            print(self.numArray)
+                            self.saveData.removeObject(forKey: "place")
+                            self.saveData.removeObject(forKey: "age")
+                            self.saveData.removeObject(forKey: "sex")
+                            self.array = [:]
+                            dicVal = []
+                            dicKeys = []
+                            self.count = 0
+                            self.sum = 0.0
+                        }
                     }
                 }
             }
+//            for party in questionArray{
+//                db.collection(day).document(questionID).collection(party).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
+//                    if let error = error{
+//                        self.alert(message: error.localizedDescription)
+//                    }else{
+//                        self.db.collection("users").whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
+//                            if let error = error{
+//                                self.alert(message: error.localizedDescription)
+//                            }else{
+//                                print("\(party)の投票数は定期投票\(snap1!.count)")
+//                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
+//                                self.sum = self.sum + Double(snap!.count + snap1!.count)
+//                                if (snap!.count + snap1!.count) != 0{
+//                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
+//                                }
+//                                self.count += 1
+//                                if self.count == self.questionArray.count{
+//                                    print(self.sum)
+//                                    print(self.numArray)
+//                                    for (key,value) in self.numArray{
+//                                        if value != 0.0{
+//                                            let val = (value/self.sum) * 100
+//                                            self.numArray[key] = val
+//                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
+//                                        }
+//                                    }
+//                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
+//                                    self.resultArray.forEach({ (diff) in
+//                                        print("\(diff.title!) \(diff.num1!)")
+//                                    })
+//                                    self.setDataCount(self.numArray.count, range: 100)
+//                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+//                                    self.pieChart.centerAttributedText = centerText
+//                                    print(self.resultArray)
+//                                    self.mainTable.reloadData()
+//                                    HUD.hide()
+//                                    print(self.numArray)
+//                                    self.saveData.removeObject(forKey: "place")
+//                                    self.saveData.removeObject(forKey: "age")
+//                                    self.saveData.removeObject(forKey: "sex")
+//                                    self.array = [:]
+//                                    dicVal = []
+//                                    dicKeys = []
+//                                    self.count = 0
+//                                    self.sum = 0.0
+//                                }
+//                            }
+//                        })
+//                    }
+//                }
+//            }
         case 2:
             for party in questionArray{
-                db.collection(day).document(questionID).collection(party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).getDocuments { (snap, error) in
+                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        self.db.collection("users").whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-                            if let error = error{
-                                self.alert(message: error.localizedDescription)
-                            }else{
-                                print("\(party)の投票数は定期投票\(snap1!.count)")
-                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-                                self.sum = self.sum + Double(snap!.count + snap1!.count)
-                                if (snap!.count + snap1!.count) != 0{
-                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-                                }
-                                self.count += 1
-                                if self.count == self.questionArray.count{
-                                    print(self.sum)
-                                    print(self.numArray)
-                                    for (key,value) in self.numArray{
-                                        if value != 0.0{
-                                            let val = (value/self.sum) * 100
-                                            self.numArray[key] = val
-                                            print("2\(self.numArray)")
-                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-                                        }
-                                    }
-                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
-                                    self.resultArray.forEach({ (diff) in
-                                        print("\(diff.title!) \(diff.num1!)")
-                                    })
-                                    self.setDataCount(self.numArray.count, range: 100)
-                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-                                    self.pieChart.centerAttributedText = centerText
-                                    print(self.resultArray)
-                                    self.mainTable.reloadData()
-                                    HUD.hide()
-                                    print(self.numArray)
-                                    self.saveData.removeObject(forKey: "place")
-                                    self.saveData.removeObject(forKey: "age")
-                                    self.saveData.removeObject(forKey: "sex")
-                                    self.array = [:]
-                                    dicVal = []
-                                    dicKeys = []
-                                    self.count = 0
-                                    self.sum = 0.0
+                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        //                        print("\(party)の投票数は\(snap!.count)です")
+                        self.sum = self.sum + Double(snap!.count)
+                        if (snap!.count) != 0{
+                            self.numArray["\(party)"] = Double(snap!.count)
+                        }
+                        self.count += 1
+                        if self.count == self.questionArray.count{
+                            print(self.sum)
+                            print(self.numArray)
+                            for (key,value) in self.numArray{
+                                if value != 0.0{
+                                    let val = (value/self.sum) * 100
+                                    self.numArray[key] = val
+                                    self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                                 }
                             }
-                        })
+                            self.resultArray.sort(by: {$0.num1 > $1.num1})
+                            self.resultArray.forEach({ (diff) in
+                                print("\(diff.title!) \(diff.num1!)")
+                            })
+                            self.setDataCount(self.numArray.count, range: 100)
+                            let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+                            self.pieChart.centerAttributedText = centerText
+                            print(self.resultArray)
+                            self.mainTable.reloadData()
+                            HUD.hide()
+                            print(self.numArray)
+                            self.saveData.removeObject(forKey: "place")
+                            self.saveData.removeObject(forKey: "age")
+                            self.saveData.removeObject(forKey: "sex")
+                            self.array = [:]
+                            dicVal = []
+                            dicKeys = []
+                            self.count = 0
+                            self.sum = 0.0
+                        }
                     }
                 }
             }
         case 3:
             for party in questionArray{
-                db.collection(day).document(questionID).collection(party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField(dicKeys[2], isEqualTo: dicVal[2]).getDocuments { (snap, error) in
+                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField(dicKeys[2], isEqualTo: dicVal[2]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        self.db.collection("users").whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField(dicKeys[2], isEqualTo: dicVal[2]).whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-                            if let error = error{
-                                self.alert(message: error.localizedDescription)
-                            }else{
-                                print("\(party)の投票数は定期投票\(snap1!.count)")
-                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-                                self.sum = self.sum + Double(snap!.count + snap1!.count)
-                                if (snap!.count + snap1!.count) != 0{
-                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-                                }
-                                self.count += 1
-                                if self.count == self.questionArray.count{
-                                    print(self.sum)
-                                    print(self.numArray)
-                                    for (key,value) in self.numArray{
-                                        if value != 0.0{
-                                            let val = (value/self.sum) * 100
-                                            self.numArray[key] = val
-                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-                                        }
-                                    }
-                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
-                                    self.resultArray.forEach({ (diff) in
-                                        print("\(diff.title!) \(diff.num1!)")
-                                    })
-                                    self.setDataCount(self.numArray.count, range: 100)
-                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-                                    self.pieChart.centerAttributedText = centerText
-                                    print(self.resultArray)
-                                    self.mainTable.reloadData()
-                                    HUD.hide()
-                                    print(self.numArray)
-                                    self.saveData.removeObject(forKey: "place")
-                                    self.saveData.removeObject(forKey: "age")
-                                    self.saveData.removeObject(forKey: "sex")
-                                    self.array = [:]
-                                    dicVal = []
-                                    dicKeys = []
-                                    self.count = 0
-                                    self.sum = 0.0
+                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        //                        print("\(party)の投票数は\(snap!.count)です")
+                        self.sum = self.sum + Double(snap!.count)
+                        if (snap!.count) != 0{
+                            self.numArray["\(party)"] = Double(snap!.count)
+                        }
+                        self.count += 1
+                        if self.count == self.questionArray.count{
+                            print(self.sum)
+                            print(self.numArray)
+                            for (key,value) in self.numArray{
+                                if value != 0.0{
+                                    let val = (value/self.sum) * 100
+                                    self.numArray[key] = val
+                                    self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
                                 }
                             }
-                        })
+                            self.resultArray.sort(by: {$0.num1 > $1.num1})
+                            self.resultArray.forEach({ (diff) in
+                                print("\(diff.title!) \(diff.num1!)")
+                            })
+                            self.setDataCount(self.numArray.count, range: 100)
+                            let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
+                            self.pieChart.centerAttributedText = centerText
+                            print(self.resultArray)
+                            self.mainTable.reloadData()
+                            HUD.hide()
+                            print(self.numArray)
+                            self.saveData.removeObject(forKey: "place")
+                            self.saveData.removeObject(forKey: "age")
+                            self.saveData.removeObject(forKey: "sex")
+                            self.array = [:]
+                            dicVal = []
+                            dicKeys = []
+                            self.count = 0
+                            self.sum = 0.0
+                        }
                     }
                 }
             }
@@ -392,7 +452,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
                                             label: key)
             array.append(entries)
         }
-//        array.sort(by: {$0.value < $1.value})
+        //        array.sort(by: {$0.value < $1.value})
         let set = PieChartDataSet(values: array, label: "投票結果")
         set.drawIconsEnabled = false
         set.sliceSpace = 2
@@ -427,7 +487,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return numArray.count
+        return numArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -438,7 +498,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
         cell.bgView.layer.borderWidth = 4
         cell.bgView.layer.cornerRadius = 4
         cell.bgView.layer.masksToBounds = true
-//        cell.numView.backgroundColor = bgolors[indexPath.row] as? UIColor
+        //        cell.numView.backgroundColor = bgolors[indexPath.row] as? UIColor
         cell.titleLabel.text = resultArray[indexPath.row].title
         cell.countLabel.text = "投票数 \(resultArray[indexPath.row].num1!)票"
         cell.percentLabel.text = "\((round(resultArray[indexPath.row].percent * 10)/10))%"
@@ -454,3 +514,11 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource {
     
 }
 
+extension ChartsResultViewController:UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if viewController is VoteViewController{
+            print("---------------------")
+            navigationController.popToViewController(navigationController.viewControllers[1], animated: true)
+        }
+    }
+}

@@ -13,7 +13,7 @@ class ThreeDaysAgoResultViewController: TodayResultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         day = nowDate(num: 3)
-        questionArray = mainQuestionArray[day]!
+//        questionArray = mainQuestionArray[day]!
         // Do any additional setup after loading the view.
     }
 
