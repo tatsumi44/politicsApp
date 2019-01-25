@@ -37,7 +37,9 @@ class WeeklyViewController: UIViewController {
                         //                        print("\(qes.questionID)=>\(self.nowDate(num: i))=>\(data?["answer_size"])")
                         let answer:[String] = data!["answer"] as! [String]
                         let answer_size:[String:Int] = data?["answer_size"] as! [String : Int]
-                        self.contentsArray.append(WeeklyData(questionID: (snap?.documentID)!, answers: answer, answerSize: answer_size, num: i))
+                        let sum = [Int](answer_size.values)
+                        self.contentsArray.append(WeeklyData(questionID: (snap?.documentID)!, answers: answer, answerSize: answer_size, num: i, sum: sum.reduce(0, {$0+$1})))
+                        print(sum.reduce(0, {$0+$1}))
                         if self.contentsArray.count == 7{
                             HUD.hide()
                         }

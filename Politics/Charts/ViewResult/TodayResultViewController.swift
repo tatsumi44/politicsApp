@@ -57,7 +57,7 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
             let pastResultViewController = segue.destination as! PastResultViewController
             pastResultViewController.questionArray = self.questionArray[num].array
             pastResultViewController.questionID = self.questionArray[num].questionID
-            pastResultViewController.day = self.day
+//            pastResultViewController.day = self.day
         }
     }
     

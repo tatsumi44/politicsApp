@@ -13,8 +13,8 @@ class DetailWeeklyViewController: DemoBaseViewController {
     var question:Qusetions!
     var contentsArray = [WeeklyData]()
     var dateArray=[String]()
-    var numArray = [Int]()
-    var dataArray = [String:[Int]]()
+    var numArray = [Double]()
+    var dataArray = [String:[Double]]()
     var bgolors = [Any]()
     @IBOutlet weak var mainChart: LineChartView!
     override func viewDidLoad() {
@@ -25,9 +25,10 @@ class DetailWeeklyViewController: DemoBaseViewController {
         print(dateArray)
         let contents = self.contentsArray.sorted(by: {$0.num < $1.num})
         for ans in question.array{
-            numArray = [Int]()
+            numArray = [Double]()
             for content in contents{
-                numArray.append(content.answerSize[ans]!)
+                print(Double(content.sum))
+                numArray.append((Double(content.answerSize[ans]!) / Double(content.sum))*100)
                 print(dataArray)
                 if numArray.count == 7{
                     numArray.reverse()
@@ -38,26 +39,7 @@ class DetailWeeklyViewController: DemoBaseViewController {
                 }
             }
         }
-        //
-        //        for ques in question.array{
-        //            let array = maincontentsArray.filter({$0.question == ques})
-        //            numArray = [Int]()
-        //            for i in 0..<7{
-        //                if array.filter({$0.date == nowDate(num: 6 - i)}).count != 0{
-        //                    let filteredArray = array.filter({$0.date == nowDate(num: 6 - i)})
-        //                    numArray.append(filteredArray[0].questionCount)
-        //                }else{
-        //                    numArray.append(0)
-        //                }
-        //                if i == 6{
-        ////                    numArray.reverse()
-        //                    dataArray["\(ques)"] = numArray
-        //                }
-        //                if dataArray.count == question.array.count{
-        //                    print(dataArray)
-        //                }
-        //            }
-        //        }
+        
         self.options = [.toggleValues,
                         .toggleFilled,
                         .toggleCircles,
@@ -122,7 +104,7 @@ extension DetailWeeklyViewController: IAxisValueFormatter {
 
 extension DetailWeeklyViewController{
     
-    func setDataCount(xValArr: [String], yValArr: [String:[Int]]) {
+    func setDataCount(xValArr: [String], yValArr: [String:[Double]]) {
         var yVals1 : [ChartDataEntry] = [ChartDataEntry]()
         var yVals2 : [ChartDataEntry] = [ChartDataEntry]()
         var yVals3 : [ChartDataEntry] = [ChartDataEntry]()
@@ -368,10 +350,8 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 6:
             for i in 0 ..< xValArr.count {
-                print(array?.count)
-                print(xValArr.count)
                 let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
-                yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
+                yVals1.append(dataEntry)
             }
             for i in 0 ..< xValArr.count {
                 let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))

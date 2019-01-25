@@ -68,6 +68,8 @@
 		B96A7A3E213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */; };
 		B96A7A40213AE25B0022CDE0 /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */; };
 		B97402E42131D3BD008A1D34 /* MainTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97402E32131D3BD008A1D34 /* MainTodayViewController.swift */; };
+		B9D11CC121FAFB8E00AB308D /* TopListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11CBF21FAFB8E00AB308D /* TopListTableViewCell.swift */; };
+		B9D11CC221FAFB8E00AB308D /* TopListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D11CC021FAFB8E00AB308D /* TopListTableViewCell.xib */; };
 		B9F7E0D9213DA0A600A0B99F /* commentWithUrlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F7E0D7213DA0A600A0B99F /* commentWithUrlTableViewCell.swift */; };
 		B9F7E0DA213DA0A600A0B99F /* commentWithUrlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9F7E0D8213DA0A600A0B99F /* commentWithUrlTableViewCell.xib */; };
 		B9FC939F212F09890029EF12 /* NewsTodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC939D212F09890029EF12 /* NewsTodayTableViewCell.swift */; };
@@ -165,6 +167,8 @@
 		B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartsResultListTableViewCell.xib; sourceTree = "<group>"; };
 		B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
 		B97402E32131D3BD008A1D34 /* MainTodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodayViewController.swift; sourceTree = "<group>"; };
+		B9D11CBF21FAFB8E00AB308D /* TopListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListTableViewCell.swift; sourceTree = "<group>"; };
+		B9D11CC021FAFB8E00AB308D /* TopListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopListTableViewCell.xib; sourceTree = "<group>"; };
 		B9F7E0D7213DA0A600A0B99F /* commentWithUrlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentWithUrlTableViewCell.swift; sourceTree = "<group>"; };
 		B9F7E0D8213DA0A600A0B99F /* commentWithUrlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = commentWithUrlTableViewCell.xib; sourceTree = "<group>"; };
 		B9FC939D212F09890029EF12 /* NewsTodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTodayTableViewCell.swift; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				B92934AB2120A55200637B16 /* SelectViewController.swift */,
 				B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */,
 				B920C9F72147FAF400ECF00C /* ReguralyViewController.swift */,
+				B9D11CBF21FAFB8E00AB308D /* TopListTableViewCell.swift */,
+				B9D11CC021FAFB8E00AB308D /* TopListTableViewCell.xib */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 				B91C27F3214EB4C5002477B9 /* ProfileDetailEditTableViewCell.xib in Resources */,
 				B9179C58213D8260006F4352 /* SNSwithUrlTableViewCell.xib in Resources */,
 				B9FC93A0212F09890029EF12 /* NewsTodayTableViewCell.xib in Resources */,
+				B9D11CC221FAFB8E00AB308D /* TopListTableViewCell.xib in Resources */,
 				B920C9FA214C0F6C00ECF00C /* Setting.storyboard in Resources */,
 				B9F7E0DA213DA0A600A0B99F /* commentWithUrlTableViewCell.xib in Resources */,
 				B9FE61682126F4DB00DFF419 /* TagTableViewCell.xib in Resources */,
@@ -660,6 +667,7 @@
 				B920CA00214C1C2F00ECF00C /* ProfileSettingTableViewCell.swift in Sources */,
 				B920C9EF213EDDEC00ECF00C /* WeeklyViewController.swift in Sources */,
 				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
+				B9D11CC121FAFB8E00AB308D /* TopListTableViewCell.swift in Sources */,
 				B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */,
 				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,

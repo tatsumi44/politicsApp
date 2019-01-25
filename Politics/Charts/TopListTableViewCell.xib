@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TopListTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopListTableViewCell" rowHeight="135" id="KGk-i7-Jjw" customClass="TopListTableViewCell" customModule="Politics" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcD-vP-3m8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-IK-La1">
+                                <rect key="frame" x="8" y="66" width="304" height="60.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voting" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-v2-TiL">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6RM-FK-SbY"/>
+                                    <constraint firstAttribute="height" constant="50" id="C2K-zx-Bgh"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本日投票可能な質問" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bK-04-0Vo">
+                                <rect key="frame" x="78" y="8" width="234" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="9yX-mh-DVd" firstAttribute="trailing" secondItem="gwD-IK-La1" secondAttribute="trailing" constant="8" id="0SD-Sj-wSQ"/>
+                            <constraint firstItem="Ao1-v2-TiL" firstAttribute="leading" secondItem="9yX-mh-DVd" secondAttribute="leading" constant="8" id="DVq-Vb-h1G"/>
+                            <constraint firstItem="gwD-IK-La1" firstAttribute="top" secondItem="Ao1-v2-TiL" secondAttribute="bottom" constant="8" id="PVk-kS-BEY"/>
+                            <constraint firstItem="9yX-mh-DVd" firstAttribute="bottom" secondItem="gwD-IK-La1" secondAttribute="bottom" constant="8" id="Pt2-8F-BYl"/>
+                            <constraint firstItem="9yX-mh-DVd" firstAttribute="trailing" secondItem="8bK-04-0Vo" secondAttribute="trailing" constant="8" id="QoN-bn-Tg6"/>
+                            <constraint firstItem="Ao1-v2-TiL" firstAttribute="top" secondItem="9yX-mh-DVd" secondAttribute="top" constant="8" id="WiH-Gs-QU9"/>
+                            <constraint firstItem="gwD-IK-La1" firstAttribute="leading" secondItem="9yX-mh-DVd" secondAttribute="leading" constant="8" id="ukj-y4-Ob9"/>
+                            <constraint firstItem="gwD-IK-La1" firstAttribute="top" secondItem="8bK-04-0Vo" secondAttribute="bottom" constant="25" id="xfY-UO-2Wu"/>
+                            <constraint firstItem="8bK-04-0Vo" firstAttribute="top" secondItem="9yX-mh-DVd" secondAttribute="top" constant="8" id="yPc-gy-ddS"/>
+                            <constraint firstItem="8bK-04-0Vo" firstAttribute="leading" secondItem="Ao1-v2-TiL" secondAttribute="trailing" constant="20" id="zdg-V9-1FA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9yX-mh-DVd"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hcD-vP-3m8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4pB-p3-SzR"/>
+                    <constraint firstItem="hcD-vP-3m8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OGT-Rr-Ly5"/>
+                    <constraint firstAttribute="bottom" secondItem="hcD-vP-3m8" secondAttribute="bottom" id="TV3-Hq-mvD"/>
+                    <constraint firstAttribute="trailing" secondItem="hcD-vP-3m8" secondAttribute="trailing" id="TXK-yS-JIW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="contentLabel" destination="gwD-IK-La1" id="QCD-o3-5Wi"/>
+                <outlet property="iconImageView" destination="Ao1-v2-TiL" id="7jA-us-lgz"/>
+                <outlet property="subLabel" destination="8bK-04-0Vo" id="wFT-xc-5co"/>
+            </connections>
+            <point key="canvasLocation" x="-254.40000000000001" y="-14.842578710644679"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="voting" width="200.16000366210938" height="200.16000366210938"/>
+    </resources>
+</document>

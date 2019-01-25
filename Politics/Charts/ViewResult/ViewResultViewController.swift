@@ -64,7 +64,6 @@ class ViewResultViewController: UIViewController {
             .menuItemWidth(90.0),
             .centerMenuItems(true),
             .addBottomMenuHairline(true),
-            
             ]
         
         pageMenu = CAPSPageMenu(
