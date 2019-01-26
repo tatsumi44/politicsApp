@@ -16,7 +16,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
     @IBOutlet weak var mainTable: UITableView!
     
     let db = Firestore.firestore()
-    var questionID: String!
+    var question: Qusetions!
     var questionArray = [String]()
     var numArray = [String:Double]()
     var sum:Double = 0
@@ -27,9 +27,11 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
     var firstAppear: Bool = false
     var day = "apple"
     var bgolors = [Any]()
+    var question_ID_Array = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
+        
         HUD.show(.progress)
         self.mainTable.register(UINib(nibName: "ChartsResultListTableViewCell", bundle: nil), forCellReuseIdentifier: "ChartsResultListTableViewCell")
         print("今日は\(day)")
@@ -40,18 +42,17 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
         self.saveData.removeObject(forKey: "place")
         self.saveData.removeObject(forKey: "age")
         self.saveData.removeObject(forKey: "sex")
-        print(questionID!)
-        for party in questionArray{
+        question_ID_Array = [String](question.array.keys)
+        for partyID in question_ID_Array{
             
-            db.collection("vote").whereField("questionID", isEqualTo: questionID!).whereField("answer", isEqualTo: party).getDocuments { (snap, error) in
+            db.collection("vote").whereField("questionID", isEqualTo: question.questionID).whereField("answerID", isEqualTo: partyID).getDocuments { (snap, error) in
                 if let error = error{
                     self.alert(message: error.localizedDescription)
                 }else{
-                    print("\(party)の投票数は定期投票\(snap!.count)")
-//                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
+                    print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
                     self.sum = self.sum + Double(snap!.count)
                     if (snap!.count) != 0{
-                        self.numArray["\(party)"] = Double(snap!.count)
+                        self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
                     }
                     self.count += 1
                     if self.count == self.questionArray.count{
@@ -79,49 +80,6 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                 }
             }
         }
-//                for party in questionArray{
-//                    db.collection(day).document(questionID).collection(party).getDocuments { (snap, error) in
-//                        if let error = error{
-//                            self.alert(message: error.localizedDescription)
-//                        }else{
-//                            self.db.collection("users").whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-//                                if let error = error{
-//                                    self.alert(message: error.localizedDescription)
-//                                }else{
-//                                    print("\(party)の投票数は定期投票\(snap1!.count)")
-//                                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-//                                    self.sum = self.sum + Double(snap!.count + snap1!.count)
-//                                    if (snap!.count + snap1!.count) != 0{
-//                                        self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-//                                    }
-//                                    self.count += 1
-//                                    if self.count == self.questionArray.count{
-//                                        print(self.sum)
-//                                        print(self.numArray)
-//                                        for (key,value) in self.numArray{
-//                                            if value != 0.0{
-//                                                let val = (value/self.sum) * 100
-//                                                self.numArray[key] = val
-//                                                self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-//                                            }
-//                                        }
-//                                        self.setDataCount(self.numArray.count, range: 100)
-//                                        let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-//                                        self.pieChart.centerAttributedText = centerText
-//                                        print(self.resultArray)
-//                                        self.resultArray.sort(by: {$0.num1 > $1.num1})
-//                                        self.mainTable.reloadData()
-//                                        HUD.hide()
-//                                        print(self.numArray)
-//                                        self.count = 0
-//                                        self.sum = 0.0
-//                                        self.firstAppear = true
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    }
-//                }
         self.options = [.toggleValues,
                         .toggleXValues,
                         .togglePercent,
@@ -144,9 +102,6 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
         l.yEntrySpace = 0
         l.yOffset = 0
         self.pieChart.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        //        charts1?.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        //        self.setDataCount(5, range: 100)
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -183,16 +138,16 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
         var dicVal = [String](array.values)
         switch array.count {
         case 0:
-            for party in questionArray{
-                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).getDocuments { (snap, error) in
+            for partyID in question_ID_Array{
+                db.collection("vote").whereField("questionID", isEqualTo: question.questionID).whereField("answerID", isEqualTo: partyID).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
                         //                    print("\(party)の投票数は\(snap!.count + snap1!.count)です")
                         self.sum = self.sum + Double(snap!.count)
                         if (snap!.count) != 0{
-                            self.numArray["\(party)"] = Double(snap!.count)
+                            self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
                         }
                         self.count += 1
                         if self.count == self.questionArray.count{
@@ -221,16 +176,16 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                 }
             }
         case 1:
-            for party in questionArray{
-                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
+            for partyID in question_ID_Array{
+                db.collection("vote").whereField("questionID", isEqualTo: question.questionID).whereField("answerID", isEqualTo: partyID).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
 //                        print("\(party)の投票数は\(snap!.count)です")
                         self.sum = self.sum + Double(snap!.count)
                         if (snap!.count) != 0{
-                            self.numArray["\(party)"] = Double(snap!.count)
+                            self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
                         }
                         self.count += 1
                         if self.count == self.questionArray.count{
@@ -266,68 +221,17 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                     }
                 }
             }
-//            for party in questionArray{
-//                db.collection(day).document(questionID).collection(party).whereField(dicKeys[0], isEqualTo: dicVal[0]).getDocuments { (snap, error) in
-//                    if let error = error{
-//                        self.alert(message: error.localizedDescription)
-//                    }else{
-//                        self.db.collection("users").whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField("regularFlag", isEqualTo: true).whereField(self.questionID, isEqualTo: party).getDocuments(completion: { (snap1, error) in
-//                            if let error = error{
-//                                self.alert(message: error.localizedDescription)
-//                            }else{
-//                                print("\(party)の投票数は定期投票\(snap1!.count)")
-//                                print("\(party)の投票数は\(snap!.count + snap1!.count)です")
-//                                self.sum = self.sum + Double(snap!.count + snap1!.count)
-//                                if (snap!.count + snap1!.count) != 0{
-//                                    self.numArray["\(party)"] = Double(snap!.count + snap1!.count)
-//                                }
-//                                self.count += 1
-//                                if self.count == self.questionArray.count{
-//                                    print(self.sum)
-//                                    print(self.numArray)
-//                                    for (key,value) in self.numArray{
-//                                        if value != 0.0{
-//                                            let val = (value/self.sum) * 100
-//                                            self.numArray[key] = val
-//                                            self.resultArray.append(ChartResult(title: key, num1: Int(value), percent: val))
-//                                        }
-//                                    }
-//                                    self.resultArray.sort(by: {$0.num1 > $1.num1})
-//                                    self.resultArray.forEach({ (diff) in
-//                                        print("\(diff.title!) \(diff.num1!)")
-//                                    })
-//                                    self.setDataCount(self.numArray.count, range: 100)
-//                                    let centerText = NSMutableAttributedString(string: "投票数 : \(Int(self.sum))")
-//                                    self.pieChart.centerAttributedText = centerText
-//                                    print(self.resultArray)
-//                                    self.mainTable.reloadData()
-//                                    HUD.hide()
-//                                    print(self.numArray)
-//                                    self.saveData.removeObject(forKey: "place")
-//                                    self.saveData.removeObject(forKey: "age")
-//                                    self.saveData.removeObject(forKey: "sex")
-//                                    self.array = [:]
-//                                    dicVal = []
-//                                    dicKeys = []
-//                                    self.count = 0
-//                                    self.sum = 0.0
-//                                }
-//                            }
-//                        })
-//                    }
-//                }
-//            }
         case 2:
-            for party in questionArray{
-                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).getDocuments { (snap, error) in
+            for partyID in question_ID_Array{
+                db.collection("vote").whereField("questionID", isEqualTo: question.questionID).whereField("answerID", isEqualTo: partyID).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
                         //                        print("\(party)の投票数は\(snap!.count)です")
                         self.sum = self.sum + Double(snap!.count)
                         if (snap!.count) != 0{
-                            self.numArray["\(party)"] = Double(snap!.count)
+                            self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
                         }
                         self.count += 1
                         if self.count == self.questionArray.count{
@@ -364,16 +268,16 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                 }
             }
         case 3:
-            for party in questionArray{
-                db.collection("vote").whereField("questionID", isEqualTo: questionID).whereField("answer", isEqualTo: party).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField(dicKeys[2], isEqualTo: dicVal[2]).getDocuments { (snap, error) in
+            for partyID in question_ID_Array{
+                db.collection("vote").whereField("questionID", isEqualTo: question.questionID).whereField("answerID", isEqualTo: partyID).whereField(dicKeys[0], isEqualTo: dicVal[0]).whereField(dicKeys[1], isEqualTo: dicVal[1]).whereField(dicKeys[2], isEqualTo: dicVal[2]).getDocuments { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
-                        print("\(party)の投票数は定期投票\(snap!.count)")
+                        print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
                         //                        print("\(party)の投票数は\(snap!.count)です")
                         self.sum = self.sum + Double(snap!.count)
                         if (snap!.count) != 0{
-                            self.numArray["\(party)"] = Double(snap!.count)
+                            self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
                         }
                         self.count += 1
                         if self.count == self.questionArray.count{
@@ -511,14 +415,14 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
 
 extension ChartsResultViewController:UINavigationControllerDelegate{
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if viewController is VoteViewController{
             print("---------------------")
-            navigationController.popToViewController(navigationController.viewControllers[1], animated: true)
+//            navigationController.popToViewController(navigationController.viewControllers[1], animated: true)
+            navigationController.popToRootViewController(animated: true)
         }
     }
 }

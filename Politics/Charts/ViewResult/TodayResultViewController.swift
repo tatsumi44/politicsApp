@@ -55,8 +55,9 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "a"{
             let pastResultViewController = segue.destination as! PastResultViewController
-            pastResultViewController.questionArray = self.questionArray[num].array
-            pastResultViewController.questionID = self.questionArray[num].questionID
+            let ques = [String](self.questionArray[num].array.values)
+            pastResultViewController.questionArray = ques
+            pastResultViewController.question = self.questionArray[num]
 //            pastResultViewController.day = self.day
         }
     }

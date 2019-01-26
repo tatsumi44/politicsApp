@@ -30,22 +30,22 @@ class SelectViewController: UIViewController {
         appDelegate.navBarHeight = navheight
         appDelegate.tabheight = tabheight
         db = Firestore.firestore()
-        db.collection("questions").getDocuments { (snap, error) in
-            if let error = error{
-                self.alert(message: error.localizedDescription)
-                print(error.localizedDescription)
-            }else{
-                for doc in snap!.documents{
-                    let data = doc.data()
-                    self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: doc.documentID))
-                }
-                if self.questionArray.count == snap?.count{
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.questionArray = self.questionArray
-                    HUD.hide()
-                }
-            }
-        }
+//        db.collection("questions").getDocuments { (snap, error) in
+//            if let error = error{
+//                self.alert(message: error.localizedDescription)
+//                print(error.localizedDescription)
+//            }else{
+//                for doc in snap!.documents{
+//                    let data = doc.data()
+//                    self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: doc.documentID))
+//                }
+//                if self.questionArray.count == snap?.count{
+//                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                    appDelegate.questionArray = self.questionArray
+//                    HUD.hide()
+//                }
+//            }
+//        }
     }
     
     override func didReceiveMemoryWarning() {

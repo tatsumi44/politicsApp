@@ -16,11 +16,12 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
     var num: Int!
     let realm = try! Realm()
     var flag:Bool!
-    var mainQuestionArray = [String:[Qusetions]]()
+    var array = [String:String]()
     var db: Firestore!
     var questionArray = [Qusetions]()
     var idArray = [String]()
     @IBOutlet weak var mainTable: UITableView!
+    let button = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
         //        navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
@@ -49,7 +50,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.navBarHeight = navheight
         appDelegate.tabheight = tabheight
-        let button = UIButton()
+        //        let button = UIButton()
         let mainBoundSize: CGSize = UIScreen.main.bounds.size
         button.frame = CGRect(x:mainBoundSize.width - 120, y:mainBoundSize.height - tabheight! - 120,
                               width:100, height:100)
@@ -61,22 +62,56 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(self.oldData), for: .touchUpInside)
         self.view.addSubview(button)
+        
         db = Firestore.firestore()
-        db.collection("questions").getDocuments { (snap, error) in
-            for content in snap!.documents{
-                let data = content.data()
-                //                print(data)
-                self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: content.documentID))
-                print(data["main_title"] as! String)
+//        db.collection("questions").getDocuments { (snap, error) in
+//            for content in snap!.documents{
+//                let data = content.data()
+//                //                print(data)
+//                self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: content.documentID))
+//                print(data["main_title"] as! String)
+//            }
+//            if self.questionArray.count == snap?.count{
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDelegate.questionArray = self.questionArray
+//                //                self.mainTable.reloadData()
+//                self.mainTable.reloadData()
+//                HUD.hide()
+//                self.button.isHidden = false
+//            }
+//
+//        }
+        db.collection("questions").whereField("flag", isEqualTo: true).getDocuments { (snap1, error) in
+            if let error = error{
+                self.alert(message: error.localizedDescription)
+            }else{
+                for doc in snap1!.documents{
+                    let data = doc.data()
+                    let docID = doc.documentID
+                    let title = data["main_title"] as! String
+                    self.db.collection("questions").document(docID).collection("answer").getDocuments(completion: { (snap, error) in
+                        if let error = error{
+                            self.alert(message: error.localizedDescription)
+                        }else{
+                            self.array = [String:String]()
+                            for doc in snap!.documents{
+                                let data1 = doc.data()
+                                let docID1 = doc.documentID
+                                self.array[docID1] = data1["answer"] as? String
+                            }
+                            self.questionArray.append(Qusetions(array: self.array, title: title, questionID: docID))
+                            print(self.questionArray)
+                            if self.questionArray.count == snap1?.count{
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                appDelegate.questionArray = self.questionArray
+                                self.mainTable.reloadData()
+                                HUD.hide()
+                                self.button.isHidden = false
+                            }
+                        }
+                    })
+                }
             }
-            if self.questionArray.count == snap?.count{
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.questionArray = self.questionArray
-                self.mainTable.reloadData()
-                self.mainTable.reloadData()
-                HUD.hide()
-            }
-            
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -96,19 +131,36 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
-        cell.iconImageView.layer.cornerRadius = 25
-        cell.iconImageView.layer.masksToBounds = true
-//        cell.backgroundColor = UIColor.hex(string: "#1167C0", alpha: 1)
+        //        cell.iconImageView.layer.cornerRadius = 25
+        //        cell.iconImageView.layer.masksToBounds = true
+        //        cell.backgroundColor = UIColor.hex(string: "#1167C0", alpha: 1)
         if let title = questionArray[indexPath.row].title{
-            print(title)
+            
             cell.contentLabel.text = title
             cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
             
         }
+        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == questionArray.count - 1{
+            button.isHidden = true
+        }else{
+            button.isHidden = false
+        }
+        //        print(indexPath.row)
+        //        guard tableView.cellForRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0)-1, section: 0)) != nil else {
+        //            return
+        //        }
+        
+        // ここでリフレッシュのメソッドを呼ぶ
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
         let result = realm.objects(Vote.self).filter("questionID == %@",self.questionArray[num].questionID)

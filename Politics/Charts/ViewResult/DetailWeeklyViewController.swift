@@ -24,7 +24,8 @@ class DetailWeeklyViewController: DemoBaseViewController {
         }
         print(dateArray)
         let contents = self.contentsArray.sorted(by: {$0.num < $1.num})
-        for ans in question.array{
+        let ques_array = [String](question.array.values)
+        for ans in ques_array{
             numArray = [Double]()
             for content in contents{
                 print(Double(content.sum))
@@ -39,7 +40,6 @@ class DetailWeeklyViewController: DemoBaseViewController {
                 }
             }
         }
-        
         self.options = [.toggleValues,
                         .toggleFilled,
                         .toggleCircles,
@@ -112,22 +112,22 @@ extension DetailWeeklyViewController{
         var yVals5 : [ChartDataEntry] = [ChartDataEntry]()
         var yVals6 : [ChartDataEntry] = [ChartDataEntry]()
         var yVals7 : [ChartDataEntry] = [ChartDataEntry]()
-        let array = question.array
+        let array = [String](question.array.values)
         switch yValArr.count {
         case 3:
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[0]]![i]))
                 yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[1]]![i]))
                 yVals2.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![2]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[2]]![i]))
                 yVals3.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
-            let set1 = LineChartDataSet(values: yVals1, label: array?[0])
+            let set1 = LineChartDataSet(values: yVals1, label: array[0])
             set1.colors = ChartColorTemplates.vordiplom()
                 + ChartColorTemplates.joyful()
                 + ChartColorTemplates.colorful()
@@ -150,7 +150,7 @@ extension DetailWeeklyViewController{
             set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set1.drawCircleHoleEnabled = false
             
-            let set2 = LineChartDataSet(values: yVals2, label: array?[1])
+            let set2 = LineChartDataSet(values: yVals2, label: array[1])
             set2.axisDependency = .right
             set2.setColor(bgolors[1] as! UIColor)
             set2.setCircleColor(.white)
@@ -161,7 +161,7 @@ extension DetailWeeklyViewController{
             set2.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set2.drawCircleHoleEnabled = false
             
-            let set3 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set3 = LineChartDataSet(values: yVals3, label: array[2])
             set3.axisDependency = .right
             set3.setColor(bgolors[2] as! UIColor)
             set3.setCircleColor(.white)
@@ -179,22 +179,22 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 4:
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[0]]![i]))
                 yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[1]]![i]))
                 yVals2.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![2]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[2]]![i]))
                 yVals3.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![3]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[3]]![i]))
                 yVals4.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
-            let set1 = LineChartDataSet(values: yVals1, label: array?[0])
+            let set1 = LineChartDataSet(values: yVals1, label: array[0])
             set1.colors = ChartColorTemplates.vordiplom()
                 + ChartColorTemplates.joyful()
                 + ChartColorTemplates.colorful()
@@ -217,7 +217,7 @@ extension DetailWeeklyViewController{
             set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set1.drawCircleHoleEnabled = false
             
-            let set2 = LineChartDataSet(values: yVals2, label: array?[1])
+            let set2 = LineChartDataSet(values: yVals2, label: array[1])
             set2.axisDependency = .right
             set2.setColor(bgolors[1] as! UIColor)
             set2.setCircleColor(.white)
@@ -228,7 +228,7 @@ extension DetailWeeklyViewController{
             set2.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set2.drawCircleHoleEnabled = false
             
-            let set3 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set3 = LineChartDataSet(values: yVals3, label: array[2])
             set3.axisDependency = .right
             set3.setColor(bgolors[2] as! UIColor)
             set3.setCircleColor(.white)
@@ -239,7 +239,7 @@ extension DetailWeeklyViewController{
             set3.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set3.drawCircleHoleEnabled = false
             
-            let set4 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set4 = LineChartDataSet(values: yVals3, label: array[2])
             set4.axisDependency = .right
             set4.setColor(bgolors[3] as! UIColor)
             set4.setCircleColor(.white)
@@ -257,26 +257,26 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 5:
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[0]]![i]))
                 yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[1]]![i]))
                 yVals2.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![2]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[2]]![i]))
                 yVals3.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![3]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[3]]![i]))
                 yVals4.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![4]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[4]]![i]))
                 yVals5.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
-            let set1 = LineChartDataSet(values: yVals1, label: array?[0])
+            let set1 = LineChartDataSet(values: yVals1, label: array[0])
             set1.colors = ChartColorTemplates.vordiplom()
                 + ChartColorTemplates.joyful()
                 + ChartColorTemplates.colorful()
@@ -299,7 +299,7 @@ extension DetailWeeklyViewController{
             set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set1.drawCircleHoleEnabled = false
             
-            let set2 = LineChartDataSet(values: yVals2, label: array?[1])
+            let set2 = LineChartDataSet(values: yVals2, label: array[1])
             set2.axisDependency = .right
             set2.setColor(bgolors[1] as! UIColor)
             set2.setCircleColor(.white)
@@ -310,7 +310,7 @@ extension DetailWeeklyViewController{
             set2.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set2.drawCircleHoleEnabled = false
             
-            let set3 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set3 = LineChartDataSet(values: yVals3, label: array[2])
             set3.axisDependency = .right
             set3.setColor(bgolors[2] as! UIColor)
             set3.setCircleColor(.white)
@@ -321,7 +321,7 @@ extension DetailWeeklyViewController{
             set3.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set3.drawCircleHoleEnabled = false
             
-            let set4 = LineChartDataSet(values: yVals4, label: array?[3])
+            let set4 = LineChartDataSet(values: yVals4, label: array[3])
             set4.axisDependency = .right
             set4.setColor(bgolors[3] as! UIColor)
             set4.setCircleColor(.white)
@@ -332,7 +332,7 @@ extension DetailWeeklyViewController{
             set4.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set4.drawCircleHoleEnabled = false
             
-            let set5 = LineChartDataSet(values: yVals5, label: array?[4])
+            let set5 = LineChartDataSet(values: yVals5, label: array[4])
             set5.axisDependency = .right
             set5.setColor(bgolors[4] as! UIColor)
             set5.setCircleColor(.white)
@@ -350,30 +350,30 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 6:
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[0]]![i]))
                 yVals1.append(dataEntry)
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[1]]![i]))
                 yVals2.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![2]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[2]]![i]))
                 yVals3.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![3]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[3]]![i]))
                 yVals4.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![4]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[4]]![i]))
                 yVals5.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![5]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[5]]![i]))
                 yVals6.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
-            let set1 = LineChartDataSet(values: yVals1, label: array?[0])
+            let set1 = LineChartDataSet(values: yVals1, label: array[0])
             set1.colors = ChartColorTemplates.vordiplom()
                 + ChartColorTemplates.joyful()
                 + ChartColorTemplates.colorful()
@@ -397,7 +397,7 @@ extension DetailWeeklyViewController{
             set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set1.drawCircleHoleEnabled = false
             
-            let set2 = LineChartDataSet(values: yVals2, label: array?[1])
+            let set2 = LineChartDataSet(values: yVals2, label: array[1])
             set2.axisDependency = .right
             set2.setColor(bgolors[1] as! UIColor)
             set2.setCircleColor(.white)
@@ -408,7 +408,7 @@ extension DetailWeeklyViewController{
             set2.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set2.drawCircleHoleEnabled = false
             
-            let set3 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set3 = LineChartDataSet(values: yVals3, label: array[2])
             set3.axisDependency = .right
             set3.setColor(bgolors[2] as! UIColor)
             set3.setCircleColor(.white)
@@ -419,7 +419,7 @@ extension DetailWeeklyViewController{
             set3.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set3.drawCircleHoleEnabled = false
             
-            let set4 = LineChartDataSet(values: yVals4, label: array?[3])
+            let set4 = LineChartDataSet(values: yVals4, label: array[3])
             set4.axisDependency = .right
             set4.setColor(bgolors[3] as! UIColor)
             set4.setCircleColor(.white)
@@ -430,7 +430,7 @@ extension DetailWeeklyViewController{
             set4.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set4.drawCircleHoleEnabled = false
             
-            let set5 = LineChartDataSet(values: yVals5, label: array?[4])
+            let set5 = LineChartDataSet(values: yVals5, label: array[4])
             set5.axisDependency = .right
             set5.setColor(bgolors[4] as! UIColor)
             set5.setCircleColor(.white)
@@ -441,7 +441,7 @@ extension DetailWeeklyViewController{
             set5.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set5.drawCircleHoleEnabled = false
             
-            let set6 = LineChartDataSet(values: yVals6, label: array?[5])
+            let set6 = LineChartDataSet(values: yVals6, label: array[5])
             set6.axisDependency = .right
             set6.setColor(bgolors[5] as! UIColor)
             set6.setCircleColor(.white)
@@ -459,34 +459,34 @@ extension DetailWeeklyViewController{
             mainChart.data = data
         case 7:
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![0]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[0]]![i]))
                 yVals1.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![1]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[1]]![i]))
                 yVals2.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![2]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[2]]![i]))
                 yVals3.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![3]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[3]]![i]))
                 yVals4.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![4]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[4]]![i]))
                 yVals5.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![5]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[5]]![i]))
                 yVals6.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
             for i in 0 ..< xValArr.count {
-                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array![6]]![i]))
+                let dataEntry = ChartDataEntry(x: Double(i), y: Double(yValArr[array[6]]![i]))
                 yVals7.append(dataEntry) //(ChartDataEntry(x: Double(i), y: dollars1[i]))
             }
-            let set1 = LineChartDataSet(values: yVals1, label: array?[0])
+            let set1 = LineChartDataSet(values: yVals1, label: array[0])
             set1.colors = ChartColorTemplates.vordiplom()
                 + ChartColorTemplates.joyful()
                 + ChartColorTemplates.colorful()
@@ -509,7 +509,7 @@ extension DetailWeeklyViewController{
             set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set1.drawCircleHoleEnabled = false
             
-            let set2 = LineChartDataSet(values: yVals2, label: array?[1])
+            let set2 = LineChartDataSet(values: yVals2, label: array[1])
             set2.axisDependency = .right
             set2.setColor(bgolors[1] as! UIColor)
             set2.setCircleColor(.white)
@@ -520,7 +520,7 @@ extension DetailWeeklyViewController{
             set2.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set2.drawCircleHoleEnabled = false
             
-            let set3 = LineChartDataSet(values: yVals3, label: array?[2])
+            let set3 = LineChartDataSet(values: yVals3, label: array[2])
             set3.axisDependency = .right
             set3.setColor(bgolors[2] as! UIColor)
             set3.setCircleColor(.white)
@@ -531,7 +531,7 @@ extension DetailWeeklyViewController{
             set3.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set3.drawCircleHoleEnabled = false
             
-            let set4 = LineChartDataSet(values: yVals4, label: array?[3])
+            let set4 = LineChartDataSet(values: yVals4, label: array[3])
             set4.axisDependency = .right
             set4.setColor(bgolors[3] as! UIColor)
             set4.setCircleColor(.white)
@@ -542,7 +542,7 @@ extension DetailWeeklyViewController{
             set4.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set4.drawCircleHoleEnabled = false
             
-            let set5 = LineChartDataSet(values: yVals5, label: array?[4])
+            let set5 = LineChartDataSet(values: yVals5, label: array[4])
             set5.axisDependency = .right
             set5.setColor(bgolors[4] as! UIColor)
             set5.setCircleColor(.white)
@@ -553,7 +553,7 @@ extension DetailWeeklyViewController{
             set5.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set5.drawCircleHoleEnabled = false
             
-            let set6 = LineChartDataSet(values: yVals6, label: array?[5])
+            let set6 = LineChartDataSet(values: yVals6, label: array[5])
             set6.axisDependency = .right
             set6.setColor(bgolors[5] as! UIColor)
             set6.setCircleColor(.white)
@@ -564,7 +564,7 @@ extension DetailWeeklyViewController{
             set6.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
             set6.drawCircleHoleEnabled = false
             
-            let set7 = LineChartDataSet(values: yVals7, label: array?[6])
+            let set7 = LineChartDataSet(values: yVals7, label: array[6])
             set7.axisDependency = .right
             set7.setColor(bgolors[6] as! UIColor)
             set7.setCircleColor(.white)

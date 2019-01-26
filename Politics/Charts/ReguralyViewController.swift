@@ -25,18 +25,20 @@ class ReguralyViewController: FormViewController {
 //        }
 //
         
-        db.collection("questions").getDocuments { (snap, error) in
-            if let error = error{
-                self.alert(message: error.localizedDescription)
-            }else{
-                for doc in snap!.documents{
-                    let data = doc.data()
-                    self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: doc.documentID))
-                }
-                self.createNormalForm(forms: self.questionArray)
-            }
-        }
+//        db.collection("questions").getDocuments { (snap, error) in
+//            if let error = error{
+//                self.alert(message: error.localizedDescription)
+//            }else{
+//                for doc in snap!.documents{
+//                    let data = doc.data()
+//                    self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: doc.documentID))
+//                }
+//                self.createNormalForm(forms: self.questionArray)
+//            }
+//        }
         // Do any additional setup after loading the view.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        questionArray = appDelegate.questionArray
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -108,7 +110,7 @@ class ReguralyViewController: FormViewController {
                             $0.value = ""
                         }
                         $0.title = item.title
-                        $0.options = item.array
+//                        $0.options = item.array
                         $0.selectorTitle = "Choose an Emoji!"
                         num += 1
                         }.onChange({ (row) in

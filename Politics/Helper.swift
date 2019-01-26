@@ -323,10 +323,10 @@ class Vote: Object {
 }
 
 class Qusetions{
-    var array:[String]!
+    var array:[String:String]!
     var title:String!
     var questionID:String!
-    init(array:[String],title:String,questionID:String) {
+    init(array:[String:String],title:String,questionID:String) {
         self.array = array
         self.title = title
         self.questionID = questionID

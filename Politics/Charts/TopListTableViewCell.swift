@@ -13,7 +13,7 @@ class TopListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var subLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+//    @IBOutlet weak var iconImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

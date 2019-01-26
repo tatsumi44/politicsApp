@@ -26,7 +26,7 @@ class MyFormViewController: FormViewController {
                               "徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県",
                               "熊本県","大分県","宮崎県","鹿児島県","沖縄県"]
                 $0.value = ""
-                $0.selectorTitle = "Choose an Emoji!"
+                $0.selectorTitle = "選択肢一覧"
                 }.onChange({ (row) in
                     //                    print(row.value)
                     if let age = row.value{
@@ -47,7 +47,7 @@ class MyFormViewController: FormViewController {
                 $0.title = "年齢"
                 $0.options = ["","~20歳","20歳~24歳","25歳~29歳","30歳~34歳","35歳~39歳","40歳~44歳","45歳~49歳","50歳~54歳","55歳~59歳","60歳~64歳","65歳~69歳","70歳~74歳","75歳~79歳","80歳以上"]
                 $0.value = ""
-                $0.selectorTitle = "Choose an Emoji!"
+//                $0.selectorTitle = "Choose an Emoji!"
                 }.onChange({ (row) in
                     if let age = row.value{
                         if row.value == ""{
@@ -67,7 +67,7 @@ class MyFormViewController: FormViewController {
                 $0.title = "性別"
                 $0.options = ["","男性", "女性", "その他"]
                 $0.value = ""
-                $0.selectorTitle = "Choose an Emoji!"
+//                $0.selectorTitle = "Choose an Emoji!"
                 }.onChange({ (row) in
                     if let age = row.value{
                         if row.value == ""{
@@ -83,7 +83,7 @@ class MyFormViewController: FormViewController {
                     to.dismissOnChange = false
         }
             <<< ButtonRow(){
-                $0.title = "登録する"
+                $0.title = "検索"
                 $0.cell.tintColor = UIColor.orange
                 }.onCellSelection({ i, to in
                     self.navigationController?.popViewController(animated: true)

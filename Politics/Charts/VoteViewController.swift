@@ -28,7 +28,8 @@ class VoteViewController: FormViewController  {
         let date = Date()
         print(flag)
         print(date.string(custom: "YY_MM_dd"))
-        continents = questions.array
+        continents = [String](questions.array.values)
+        print(continents)
         form
             +++ Section("質問タイトル")
             <<< LabelRow { row in
@@ -88,6 +89,9 @@ class VoteViewController: FormViewController  {
                 }
                 let realm = try! Realm()
                 let user = realm.objects(Userdata.self)
+                let answerID = Array(self.questions.array.filter{$0.value == self.answer}.keys)[0]
+//                let answerID:String = answerI1[0]
+                print("answerID=>\(answerID)")
                 if self.flag == false{
                     self.ref = self.db.collection("vote").addDocument(data: [
                         "uid" : user[0].userID,
@@ -96,7 +100,7 @@ class VoteViewController: FormViewController  {
                         "place" : user[0].place,
                         "sex" : user[0].sex,
                         "questionID" : self.questions.questionID,
-                        "answer" : self.answer,
+                        "answerID" : answerID,
                         "voteDate" : self.nowDate(num: 0),
                         "date" : NSDate()
                         
@@ -104,9 +108,10 @@ class VoteViewController: FormViewController  {
                         if let error = error{
                             self.alert(message: error.localizedDescription)
                         }else{
+                            
                             let vote = Vote()
                             vote.questionID = self.questions.questionID
-                            vote.answer = self.answer
+                            vote.answer = answerID
                             vote.answerID = "\(self.ref!.documentID)"
                             vote.voteDate = Date(timeIntervalSinceNow: 60*60*9)
                             try! realm.write() {
@@ -117,8 +122,9 @@ class VoteViewController: FormViewController  {
                     }
                 }else{
                     let result = realm.objects(Vote.self).filter("questionID == %@",self.questions.questionID)
+                    let answerID = Array(self.questions.array.filter{$0.value == self.answer}.keys)[0]
                     self.db.collection("vote").document(result.last!.answerID).updateData([
-                        "answer" : self.answer,
+                        "answerID" : answerID,
                         "voteDate" : self.nowDate(num: 0),
                         "date" : NSDate()
                     ]){err in
@@ -127,7 +133,7 @@ class VoteViewController: FormViewController  {
                         }else{
                             let vote = Vote()
                             vote.questionID = self.questions.questionID
-                            vote.answer = self.answer
+                            vote.answer = answerID
                             vote.answerID = "\(result.last!.answerID)"
                             vote.voteDate = Date(timeIntervalSinceNow: 60*60*9)
                             try! realm.write() {
@@ -137,20 +143,6 @@ class VoteViewController: FormViewController  {
                         }
                     }
                 }
-
-//                    self.db.collection("questions").document(self.questions.questionID).getDocument { (snap, error) in
-//                        if let error = error{
-//                            self.alert(message: error.localizedDescription)
-//                        }else{
-//                            let data = snap?.data()
-//                            let todayFlag = data!["\(self.nowDate(num: 0))"]
-//                            if todayFlag == nil{
-//                                self.db.collection("questions").document(self.questions.questionID).updateData([
-//                                    "\(self.nowDate(num: 0))" : true
-//                                    ])
-//                            }
-//                        }
-//                    }
             })
     }
     override func valueHasBeenChanged(for row: BaseRow, oldValue: Any?, newValue: Any?) {
@@ -169,8 +161,8 @@ class VoteViewController: FormViewController  {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoResult"{
             let chartsResultViewController = segue.destination as! ChartsResultViewController
-            chartsResultViewController.questionID = questions.questionID
-            chartsResultViewController.questionArray = questions.array
+            chartsResultViewController.question = questions
+            chartsResultViewController.questionArray = [String](questions.array.values)
         }
     }
 }
