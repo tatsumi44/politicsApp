@@ -24,7 +24,7 @@ class ViewResultViewController: UIViewController {
         print(navBarHeight!)
         let navheight = statusBarHeight + navBarHeight!
         var controllers : [UIViewController] = []
-//        let vc0 = UIStoryboard(name: "Chart", bundle: nil).instantiateViewController(withIdentifier: "WeeklyViewController")
+        let vc0 = UIStoryboard(name: "Chart", bundle: nil).instantiateViewController(withIdentifier: "WeeklyViewController")
         let vc = UIStoryboard(name: "Chart", bundle: nil).instantiateViewController(withIdentifier: "TodayResultViewController")
         let vc1 = UIStoryboard(name: "Chart", bundle: nil).instantiateViewController(withIdentifier: "OneDayAgoResultViewController")
         let vc2 = UIStoryboard(name: "Chart", bundle: nil).instantiateViewController(withIdentifier: "TwoDaysAgoResultViewController")
@@ -38,7 +38,7 @@ class ViewResultViewController: UIViewController {
             dateArray.append("\(date.string(custom: "MM/dd"))")
         }
         print(dateArray)
-//        vc0.title = "週間データ"
+        vc0.title = "週間データ"
         vc.title = dateArray[0]
         vc1.title = dateArray[1]
         vc2.title = dateArray[2]
@@ -46,7 +46,7 @@ class ViewResultViewController: UIViewController {
         vc4.title = dateArray[4]
         vc5.title = dateArray[5]
         vc6.title = dateArray[6]
-//        controllers.append(vc0)
+        controllers.append(vc0)
         controllers.append(vc)
         controllers.append(vc1)
         controllers.append(vc2)

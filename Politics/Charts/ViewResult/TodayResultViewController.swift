@@ -24,24 +24,25 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
         mainTable.delegate = self
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         questionArray = appDelegate.questionArray
+        self.mainTable.register(UINib(nibName: "TopListTableViewCell", bundle: nil), forCellReuseIdentifier: "TopListTableViewCell")
 //        print(mainQuestionArray)
 //        day = nowDate(num: 0)
 //        questionArray = mainQuestionArray[day]!
-
-        // Do any additional setup after loading the view.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = questionArray[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
+        if let title = questionArray[indexPath.row].title{
+            cell.contentLabel.text = title
+            cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
-        getData()
         performSegue(withIdentifier: "a", sender: nil)
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
@@ -60,18 +61,5 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
             pastResultViewController.question = self.questionArray[num]
 //            pastResultViewController.day = self.day
         }
-    }
-    
-    func getData() {
-
-//        db.collection("vote").whereField("voteDate", isEqualTo: nowDate(num: 0)).getDocuments { (snap, error) in
-//                if let error = error{
-//                    self.alert(message: error.localizedDescription)
-//                }else{
-//                    print(snap?.count)
-//                }
-//        }
-//        db.collection(nowDate(num: 0)).whereField("questionID", isEqualTo: <#T##Any#>)
-        
     }
 }

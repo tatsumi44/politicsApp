@@ -95,9 +95,11 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
         self.setup(pieChartView: self.pieChart)
         self.pieChart.delegate = self
         let l = self.pieChart.legend
-        l.horizontalAlignment = .right
-        l.verticalAlignment = .center
-        l.orientation = .vertical
+//        l.form = .line
+        l.horizontalAlignment = .left
+        l.orientation = .horizontal
+        l.verticalAlignment = .bottom
+//        l.orientation = .vertical
         l.xEntrySpace = 7
         l.yEntrySpace = 0
         l.yOffset = 0
@@ -182,7 +184,7 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                         self.alert(message: error.localizedDescription)
                     }else{
                         print("\(self.question.array[partyID])の投票数は定期投票\(snap!.count)")
-//                        print("\(party)の投票数は\(snap!.count)です")
+                        //                        print("\(party)の投票数は\(snap!.count)です")
                         self.sum = self.sum + Double(snap!.count)
                         if (snap!.count) != 0{
                             self.numArray["\(self.question.array[partyID]!)"] = Double(snap!.count)
@@ -328,16 +330,22 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                         .drawCenter,
                         .saveToGallery,
                         .toggleData]
-        self.setup(pieChartView: self.pieChart)
-        self.pieChart.delegate = self
         let l = self.pieChart.legend
-        l.horizontalAlignment = .right
-        l.verticalAlignment = .center
-        l.orientation = .vertical
-        l.xEntrySpace = 7
-        l.yEntrySpace = 0
-        l.yOffset = 0
+        //        l.horizontalAlignment = .right
+        //        l.verticalAlignment = .bottom
+        //        l.orientation = .vertical
+        //        l.xEntrySpace = 7
+        //        l.yEntrySpace = 0
+        //        l.yOffset = 0
+        l.form = .line
+        l.textColor = .orange
+        l.horizontalAlignment = .left
+        l.verticalAlignment = .top
+        l.orientation = .horizontal
         self.pieChart.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        self.pieChart.delegate = self
+        self.setup(pieChartView: self.pieChart)
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -421,7 +429,7 @@ extension ChartsResultViewController:UINavigationControllerDelegate{
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if viewController is VoteViewController{
             print("---------------------")
-//            navigationController.popToViewController(navigationController.viewControllers[1], animated: true)
+            //            navigationController.popToViewController(navigationController.viewControllers[1], animated: true)
             navigationController.popToRootViewController(animated: true)
         }
     }

@@ -131,18 +131,12 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
-        //        cell.iconImageView.layer.cornerRadius = 25
-        //        cell.iconImageView.layer.masksToBounds = true
-        //        cell.backgroundColor = UIColor.hex(string: "#1167C0", alpha: 1)
         if let title = questionArray[indexPath.row].title{
-            
             cell.contentLabel.text = title
             cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
-            
         }
-        
         return cell
     }
     

@@ -35,7 +35,7 @@
                                     <constraint firstAttribute="height" constant="100" id="vtG-Wf-q0q"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-IK-La1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-IK-La1">
                                 <rect key="frame" x="113" y="43.5" width="199" height="100"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -46,7 +46,7 @@
                             <constraint firstItem="gwD-IK-La1" firstAttribute="top" secondItem="8bK-04-0Vo" secondAttribute="bottom" constant="8" id="58C-kh-loi"/>
                             <constraint firstItem="9yX-mh-DVd" firstAttribute="bottom" secondItem="gwD-IK-La1" secondAttribute="bottom" constant="8" id="6IE-6a-f7R"/>
                             <constraint firstItem="9yX-mh-DVd" firstAttribute="trailing" secondItem="8bK-04-0Vo" secondAttribute="trailing" constant="8" id="6R5-2I-7aM"/>
-                            <constraint firstItem="9yX-mh-DVd" firstAttribute="bottom" secondItem="sg7-KO-T9W" secondAttribute="bottom" constant="8" id="OtR-qn-FSt"/>
+                            <constraint firstItem="9yX-mh-DVd" firstAttribute="bottom" secondItem="sg7-KO-T9W" secondAttribute="bottom" constant="8" id="Te2-Dk-fR1"/>
                             <constraint firstItem="8bK-04-0Vo" firstAttribute="top" secondItem="9yX-mh-DVd" secondAttribute="top" constant="8" id="bqK-lH-gXP"/>
                             <constraint firstItem="sg7-KO-T9W" firstAttribute="leading" secondItem="9yX-mh-DVd" secondAttribute="leading" constant="8" id="m5I-OW-K79"/>
                             <constraint firstItem="9yX-mh-DVd" firstAttribute="trailing" secondItem="gwD-IK-La1" secondAttribute="trailing" constant="8" id="uJh-sw-fil"/>
@@ -69,7 +69,7 @@
                 <outlet property="contentLabel" destination="gwD-IK-La1" id="QCD-o3-5Wi"/>
                 <outlet property="subLabel" destination="8bK-04-0Vo" id="wFT-xc-5co"/>
             </connections>
-            <point key="canvasLocation" x="-254.40000000000001" y="-7.1964017991004505"/>
+            <point key="canvasLocation" x="-82" y="-10"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -26,19 +26,27 @@ class WeeklyViewController: UIViewController {
         mainTable.delegate = self
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         questionArray = appDelegate.questionArray
+        self.mainTable.register(UINib(nibName: "TopListTableViewCell", bundle: nil), forCellReuseIdentifier: "TopListTableViewCell")
         print(questionArray)
         for qes in questionArray{
+//            let qesIDs = qes.questionID
+            let ansIDs = Array([String](qes.array.keys))
+//            print(qesIDs)
+            guard let qesIDs = qes.questionID else{
+                return
+            }
+            print(ansIDs)
             for i in 1...7{
-                db.collection(nowDate(num: i)).document("weekly_data").collection("weekly_data").document(qes.questionID).getDocument { (snap, error) in
+                db.collection(nowDate(num: i)).document("weekly_data").collection("weekly_data").document(qesIDs).getDocument { (snap, error) in
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
                         let data = snap?.data()
                         //                        print("\(qes.questionID)=>\(self.nowDate(num: i))=>\(data?["answer_size"])")
-                        let answer:[String] = data!["answer"] as! [String]
+//                        let answer:[String] = data!["answer"] as! [String]
                         let answer_size:[String:Int] = data?["answer_size"] as! [String : Int]
                         let sum = [Int](answer_size.values)
-                        self.contentsArray.append(WeeklyData(questionID: (snap?.documentID)!, answers: answer, answerSize: answer_size, num: i, sum: sum.reduce(0, {$0+$1})))
+                        self.contentsArray.append(WeeklyData(questionID: (snap?.documentID)!, answers: ansIDs, answerSize: answer_size, num: i, sum: sum.reduce(0, {$0+$1})))
                         print(sum.reduce(0, {$0+$1}))
                         if self.contentsArray.count == 7{
                             HUD.hide()
@@ -61,8 +69,11 @@ extension WeeklyViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeeklyCell", for: indexPath)
-        cell.textLabel?.text = questionArray[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
+        if let title = questionArray[indexPath.row].title{
+            cell.contentLabel.text = title
+            cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
