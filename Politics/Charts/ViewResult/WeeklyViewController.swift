@@ -62,6 +62,13 @@ class WeeklyViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)
+    }
+
+    
 }
 extension WeeklyViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
