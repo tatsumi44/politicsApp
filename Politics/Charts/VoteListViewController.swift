@@ -39,21 +39,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         //                realm.delete(tanaka)
         //            }
         //        }
-        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        let item = UIBarButtonItem(customView: view1)
-        self.navigationItem.leftBarButtonItem = item
-        let iconImageView = UIImageView(frame: CGRect(x: 2.5, y: 5, width: 35, height: 35))
-        iconImageView.layer.cornerRadius = 35/2
-        iconImageView.layer.masksToBounds = true
-        let iconBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-//        iconBtn.backgroundColor = UIColor.red
-        iconBtn.addTarget(self, action: #selector(self.iconTap(_:)), for: .touchUpInside)
-        view1.addSubview(iconBtn)
-        let user = realm.objects(Userdata.self)[0]
-        let storageRef = Storage.storage().reference()
-        let reference = storageRef.child("image/profile/\(user.userID).jpg")
-        iconImageView.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
-        view1.addSubview(iconImageView)
+        iconCreate()
         
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
@@ -118,6 +104,26 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
             }
         }
     }
+    
+     func iconCreate() {
+        print("呼ばれてるよ")
+        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        let item = UIBarButtonItem(customView: view1)
+        self.navigationItem.leftBarButtonItem = item
+        let iconImageView = UIImageView(frame: CGRect(x: 2.5, y: 5, width: 35, height: 35))
+        iconImageView.layer.cornerRadius = 35/2
+        iconImageView.layer.masksToBounds = true
+        let iconBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        //        iconBtn.backgroundColor = UIColor.red
+        iconBtn.addTarget(self, action: #selector(VoteListViewController.iconTap(_:)), for: .touchUpInside)
+        view1.addSubview(iconBtn)
+        let user = realm.objects(Userdata.self)[0]
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child("image/profile/\(user.userID).jpg")
+        iconImageView.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        view1.addSubview(iconImageView)
+    }
+    
     @objc func iconTap(_ sender: UIButton){
         print("iconTap")
         performSegue(withIdentifier: "goSetting", sender: nil)

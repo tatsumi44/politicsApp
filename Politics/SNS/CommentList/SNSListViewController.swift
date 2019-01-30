@@ -42,12 +42,39 @@ class SNSListViewController: UIViewController,UITableViewDelegate,UITableViewDat
         mainTable.dataSource = self
         mainTable.delegate = self
         searchBar.delegate = self
+        iconCreate()
+        let voteListViewController = VoteListViewController()
+        voteListViewController.iconCreate()
         num = -1
         self.mainTable.register(UINib(nibName: "SNSTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell2")
         self.mainTable.register(UINib(nibName: "SNSwithUrlTableViewCell", bundle: nil), forCellReuseIdentifier: "SNSwithUrlTableViewCell")
         resarchmiddleContents = [MiddleGetDtail]()
         resarchContents = [GetDetail]()
         getData()
+    }
+    
+    func iconCreate() {
+        print("呼ばれてるよ")
+        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        let item = UIBarButtonItem(customView: view1)
+        self.navigationItem.leftBarButtonItem = item
+        let iconImageView = UIImageView(frame: CGRect(x: 2.5, y: 5, width: 35, height: 35))
+        iconImageView.layer.cornerRadius = 35/2
+        iconImageView.layer.masksToBounds = true
+        let iconBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        //        iconBtn.backgroundColor = UIColor.red
+        iconBtn.addTarget(self, action: #selector(VoteListViewController.iconTap(_:)), for: .touchUpInside)
+        view1.addSubview(iconBtn)
+        let user = realm.objects(Userdata.self)[0]
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child("image/profile/\(user.userID).jpg")
+        iconImageView.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        view1.addSubview(iconImageView)
+    }
+    
+    @objc func iconTap(_ sender: UIButton){
+        print("iconTap")
+        performSegue(withIdentifier: "goSetting", sender: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

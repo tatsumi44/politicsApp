@@ -9,13 +9,16 @@
 import UIKit
 import PageMenu
 import SwiftDate
+import FirebaseUI
+import RealmSwift
 class NewsMainViewController: UIViewController {
-    
+    let realm = try! Realm()
     var pageMenu : CAPSPageMenu?
     var dateArray = [String]()
     var navBarHeight:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
+        iconCreate()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         for i in 0..<7{
             let date = nowDate(num: i)
@@ -75,6 +78,29 @@ class NewsMainViewController: UIViewController {
         pageMenu!.didMove(toParentViewController: self)
 
         // Do any additional setup after loading the view.
+    }
+    func iconCreate() {
+        print("呼ばれてるよ")
+        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        let item = UIBarButtonItem(customView: view1)
+        self.navigationItem.leftBarButtonItem = item
+        let iconImageView = UIImageView(frame: CGRect(x: 2.5, y: 5, width: 35, height: 35))
+        iconImageView.layer.cornerRadius = 35/2
+        iconImageView.layer.masksToBounds = true
+        let iconBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        //        iconBtn.backgroundColor = UIColor.red
+        iconBtn.addTarget(self, action: #selector(VoteListViewController.iconTap(_:)), for: .touchUpInside)
+        view1.addSubview(iconBtn)
+        let user = realm.objects(Userdata.self)[0]
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child("image/profile/\(user.userID).jpg")
+        iconImageView.sd_setImage(with: reference, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        view1.addSubview(iconImageView)
+    }
+    
+    @objc func iconTap(_ sender: UIButton){
+        print("iconTap")
+        performSegue(withIdentifier: "goSetting", sender: nil)
     }
 
     override func didReceiveMemoryWarning() {

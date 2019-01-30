@@ -33,6 +33,7 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var dateNum:Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mainTable.delegate = self
         mainTable.dataSource = self
         self.mainTable.register(UINib(nibName: "NewsTodayTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTodayTableViewCell")
