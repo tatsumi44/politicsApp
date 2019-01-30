@@ -366,10 +366,10 @@ extension  UIResponder{
         thirdVC.tabBarItem = UITabBarItem(title: "ニュース", image: UIImage(named:"news"), tag: 3)
         viewControllers.append(thirdVC)
         
-        let fourthSB = UIStoryboard(name: "Setting", bundle: nil)
-        let fourthVC = fourthSB.instantiateInitialViewController()! as UIViewController
-        fourthVC.tabBarItem = UITabBarItem(title: "設定", image: #imageLiteral(resourceName: "settings"), tag: 4)
-        viewControllers.append(fourthVC)
+//        let fourthSB = UIStoryboard(name: "Setting", bundle: nil)
+//        let fourthVC = fourthSB.instantiateInitialViewController()! as UIViewController
+//        fourthVC.tabBarItem = UITabBarItem(title: "設定", image: #imageLiteral(resourceName: "settings"), tag: 4)
+//        viewControllers.append(fourthVC)
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.unselectedItemTintColor = UIColor.orange

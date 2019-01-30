@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,17 +35,20 @@
                                 <color key="textColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-2d-slW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-2d-slW">
                                 <rect key="frame" x="0.0" y="0.0" width="216" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wZ1-2d-slW" secondAttribute="trailing" id="4Me-pe-0ec"/>
                             <constraint firstItem="8ug-V1-ufR" firstAttribute="top" secondItem="4NU-Qi-0hM" secondAttribute="top" id="IcG-Kd-4Xc"/>
                             <constraint firstItem="8ug-V1-ufR" firstAttribute="leading" secondItem="4NU-Qi-0hM" secondAttribute="leading" id="a7h-Nm-qgb"/>
                             <constraint firstAttribute="trailing" secondItem="8ug-V1-ufR" secondAttribute="trailing" id="cTv-eU-2QK"/>
+                            <constraint firstItem="wZ1-2d-slW" firstAttribute="top" secondItem="4NU-Qi-0hM" secondAttribute="top" id="h4H-fN-XND"/>
+                            <constraint firstItem="wZ1-2d-slW" firstAttribute="leading" secondItem="4NU-Qi-0hM" secondAttribute="leading" id="hIZ-MQ-4qN"/>
                             <constraint firstAttribute="bottom" secondItem="8ug-V1-ufR" secondAttribute="bottom" id="kWI-pY-1vr"/>
+                            <constraint firstAttribute="bottom" secondItem="wZ1-2d-slW" secondAttribute="bottom" id="lXp-iu-gx5"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQO-DR-rHF">
@@ -64,7 +66,7 @@
                                         <state key="normal" title="Button" image="Comment1"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kG1-DW-alu">
-                                        <rect key="frame" x="30" y="0.0" width="59" height="20"/>
+                                        <rect key="frame" x="30" y="0.0" width="59.5" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -122,7 +124,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="cQQ-Pp-6BV">
-                                        <rect key="frame" x="30" y="0.0" width="59" height="20"/>
+                                        <rect key="frame" x="30" y="0.0" width="59.5" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -197,7 +199,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Comment1" width="2084" height="2084"/>
+        <image name="Comment1" width="500.16000366210938" height="500.16000366210938"/>
         <image name="goo_logo" width="115" height="63"/>
     </resources>
 </document>

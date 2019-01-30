@@ -64,7 +64,6 @@ class NewsMainViewController: UIViewController {
         self.navBarHeight = appDelegate.navBarHeight
         let tabheight = appDelegate.tabheight
         
-        print("navBarHeight  \(self.navBarHeight)")
         pageMenu = CAPSPageMenu(
             viewControllers: controllers,
             frame:           CGRect(x: 0.0, y: navBarHeight, width:  self.view.frame.width, height:  self.view.frame.height - navBarHeight - tabheight!),

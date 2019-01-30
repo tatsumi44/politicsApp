@@ -78,6 +78,7 @@
                         <outlet property="mainTable" destination="GBL-Xu-WLv" id="8dT-lW-NdT"/>
                         <segue destination="QNa-g3-Zsc" kind="show" identifier="GoVote" id="82c-Ar-ZZy"/>
                         <segue destination="PR6-w3-cCl" kind="show" identifier="oldData" id="xDO-Xw-K2T"/>
+                        <segue destination="CoO-2J-VFC" kind="show" identifier="goSetting" id="fbA-1h-yYc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VdY-Bx-LIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -531,6 +532,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJy-Kp-wEC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7664.8000000000002" y="138.98050974512745"/>
+        </scene>
+        <!--Setting-->
+        <scene sceneID="X68-SI-Ffk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" id="CoO-2J-VFC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RIW-U0-FMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7355" y="-545"/>
         </scene>
         <!--Charts Result View Controller-->
         <scene sceneID="ir2-dw-jmV">

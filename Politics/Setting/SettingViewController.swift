@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import Firebase
-import Nuke
 import FirebaseUI
 import SwiftDate
 class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -27,6 +26,7 @@ class SettingViewController: UIViewController,UIImagePickerControllerDelegate,UI
     var image:UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = false
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         mainTable.delegate = self
         mainTable.dataSource = self
