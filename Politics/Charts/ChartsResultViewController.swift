@@ -331,20 +331,16 @@ class ChartsResultViewController: DemoBaseViewController,UITableViewDataSource{
                         .saveToGallery,
                         .toggleData]
         let l = self.pieChart.legend
-        //        l.horizontalAlignment = .right
-        //        l.verticalAlignment = .bottom
-        //        l.orientation = .vertical
-        //        l.xEntrySpace = 7
-        //        l.yEntrySpace = 0
-        //        l.yOffset = 0
+        //属性表示のタイプ
         l.form = .line
-        l.textColor = .orange
+        //属性表示のフォント
+        l.font = UIFont(name: "HelveticaNeue-Light", size: 14)!
+        //属性表示の文字色
+        l.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
         l.horizontalAlignment = .left
         l.verticalAlignment = .top
         l.orientation = .horizontal
-        self.pieChart.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        self.pieChart.delegate = self
-        self.setup(pieChartView: self.pieChart)
+        l.drawInside = false
         
     }
     override func viewWillDisappear(_ animated: Bool) {

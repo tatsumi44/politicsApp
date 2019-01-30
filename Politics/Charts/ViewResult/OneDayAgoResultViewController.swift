@@ -14,13 +14,22 @@ class OneDayAgoResultViewController: TodayResultViewController {
         super.viewDidLoad()
         day = nowDate(num: 1)
 //        questionArray = mainQuestionArray[day]!
-        
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
+        if let title = questionArray[indexPath.row].title{
+            cell.mainLabel.text = "\(shortNowDate(num: 1))の投票データ"
+            cell.contentLabel.text = title
+            cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
+        }
+        return cell
+    }
+    
+    
 }

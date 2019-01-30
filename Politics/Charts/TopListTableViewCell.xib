@@ -67,6 +67,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentLabel" destination="gwD-IK-La1" id="QCD-o3-5Wi"/>
+                <outlet property="mainLabel" destination="8bK-04-0Vo" id="FOh-lw-Wjw"/>
                 <outlet property="subLabel" destination="8bK-04-0Vo" id="wFT-xc-5co"/>
             </connections>
             <point key="canvasLocation" x="-82" y="-10"/>

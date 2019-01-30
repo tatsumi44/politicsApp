@@ -23,15 +23,15 @@ class SixDaysAgoResultViewController: TodayResultViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
+        if let title = questionArray[indexPath.row].title{
+            cell.mainLabel.text = "\(shortNowDate(num: 6))の投票データ"
+            cell.contentLabel.text = title
+            cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
+        }
+        return cell
     }
-    */
 
 }

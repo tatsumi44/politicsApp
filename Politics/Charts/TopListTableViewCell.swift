@@ -11,6 +11,7 @@ import UIKit
 class TopListTableViewCell: UITableViewCell {
     
 
+    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
 //    @IBOutlet weak var iconImageView: UIImageView!

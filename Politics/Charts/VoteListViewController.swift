@@ -41,6 +41,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "small_icon.png"))
         HUD.show(.progress)
         self.navigationItem.hidesBackButton = true
+//        hidesBottomBarWhenPushed = true
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
         print(statusBarHeight)
@@ -55,7 +56,8 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         button.frame = CGRect(x:mainBoundSize.width - 120, y:mainBoundSize.height - tabheight! - 120,
                               width:100, height:100)
         button.setTitle("過去のデータ", for:UIControlState.normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 17)
+//        button.titleLabel?.font =  UIFont.systemFont(ofSize: 17)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         button.setTitleColor(UIColor.hex(string: "#EE983F", alpha: 1), for: .normal)
         button.backgroundColor = UIColor.hex(string: "#1167C0", alpha: 1)
         button.layer.cornerRadius = 50
@@ -64,23 +66,6 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         self.view.addSubview(button)
         
         db = Firestore.firestore()
-//        db.collection("questions").getDocuments { (snap, error) in
-//            for content in snap!.documents{
-//                let data = content.data()
-//                //                print(data)
-//                self.questionArray.append(Qusetions(array: data["question_array"] as! [String], title: data["main_title"] as! String, questionID: content.documentID))
-//                print(data["main_title"] as! String)
-//            }
-//            if self.questionArray.count == snap?.count{
-//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDelegate.questionArray = self.questionArray
-//                //                self.mainTable.reloadData()
-//                self.mainTable.reloadData()
-//                HUD.hide()
-//                self.button.isHidden = false
-//            }
-//
-//        }
         db.collection("questions").whereField("flag", isEqualTo: true).getDocuments { (snap1, error) in
             if let error = error{
                 self.alert(message: error.localizedDescription)
@@ -102,6 +87,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
                             self.questionArray.append(Qusetions(array: self.array, title: title, questionID: docID))
                             print(self.questionArray)
                             if self.questionArray.count == snap1?.count{
+                                self.questionArray.reverse()
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.questionArray = self.questionArray
                                 self.mainTable.reloadData()
@@ -116,6 +102,13 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        hidesBottomBarWhenPushed = false
+//        tabBarController?.tabBar.isHidden = false
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,7 +116,9 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         // Dispose of any resources that can be recreated.
     }
     @objc func oldData(){
+//        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "oldData", sender: nil)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -174,6 +169,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
                 print("OK")
                 self.flag = true
                 print(self.flag)
+//                self.hidesBottomBarWhenPushed = true
                 self.performSegue(withIdentifier: "GoVote", sender: nil)
                 if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
                     tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
@@ -201,6 +197,7 @@ class VoteListViewController: UIViewController,UITableViewDataSource,UITableView
         }else{
             flag = false
             print(self.flag)
+//            hidesBottomBarWhenPushed = true
             performSegue(withIdentifier: "GoVote", sender: nil)
             if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPathForSelectedRow, animated: true)

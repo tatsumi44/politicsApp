@@ -15,12 +15,14 @@ class WeeklyViewController: UIViewController {
     var contentsArray = [WeeklyData]()
     //    var maincontentsArray = [mainWeeklyData]()
     var num:Int = 0
+    var pageFlag:Bool = true
     var selectNum:Int!
     var question = [Qusetions]()
-    
+    var mainHeight:CGFloat!
     @IBOutlet weak var mainTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         HUD.show(.progress)
         mainTable.dataSource = self
         mainTable.delegate = self
@@ -41,9 +43,8 @@ class WeeklyViewController: UIViewController {
                     if let error = error{
                         self.alert(message: error.localizedDescription)
                     }else{
+                        
                         let data = snap?.data()
-                        //                        print("\(qes.questionID)=>\(self.nowDate(num: i))=>\(data?["answer_size"])")
-//                        let answer:[String] = data!["answer"] as! [String]
                         let answer_size:[String:Int] = data?["answer_size"] as! [String : Int]
                         let sum = [Int](answer_size.values)
                         self.contentsArray.append(WeeklyData(questionID: (snap?.documentID)!, answers: ansIDs, answerSize: answer_size, num: i, sum: sum.reduce(0, {$0+$1})))
@@ -64,8 +65,17 @@ class WeeklyViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)
+        if pageFlag == true {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)
+            print("画面の長さ => \(self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)")
+            mainHeight = self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight
+            pageFlag = false
+        }else{
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: mainHeight)
+        }
+        
     }
 
     
@@ -79,12 +89,14 @@ extension WeeklyViewController:UITableViewDataSource,UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
         if let title = questionArray[indexPath.row].title{
             cell.contentLabel.text = title
+            cell.mainLabel.text = "過去1週間の投票データ"
             cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
         }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectNum = indexPath.row
+//        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "GoWeekly", sender: nil)
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)

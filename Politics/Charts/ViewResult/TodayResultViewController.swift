@@ -36,6 +36,7 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell") as! TopListTableViewCell
         if let title = questionArray[indexPath.row].title{
+            cell.mainLabel.text = "\(shortNowDate(num: 0))の投票データ"
             cell.contentLabel.text = title
             cell.subLabel.textColor = UIColor.hex(string: "#1167C0", alpha: 1)
         }
@@ -43,10 +44,16 @@ class TodayResultViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         num = indexPath.row
+        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "a", sender: nil)
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        mainTable.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)
     }
 
     override func didReceiveMemoryWarning() {
