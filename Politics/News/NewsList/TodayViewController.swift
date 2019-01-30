@@ -52,6 +52,13 @@ class TodayViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         print("goodArray\(goodArray)")
         print("badArray\(badArray)")
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            mainTable.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+
+    }
     
     func getNews(date:String){
         HUD.show(.progress)

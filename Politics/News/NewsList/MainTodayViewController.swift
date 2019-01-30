@@ -46,9 +46,11 @@ class MainTodayViewController: TodayViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: self.view.bounds.height - appDelegate.tabheight - appDelegate.navBarHeight)
+        
+            mainTable.frame = CGRect(x: 0, y: -40, width: self.view.bounds.width, height: self.view.bounds.height)
     }
+    
+
 
     
     

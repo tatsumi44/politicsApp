@@ -15,10 +15,10 @@ class WeeklyViewController: UIViewController {
     var contentsArray = [WeeklyData]()
     //    var maincontentsArray = [mainWeeklyData]()
     var num:Int = 0
-    var pageFlag:Bool = true
     var selectNum:Int!
     var question = [Qusetions]()
     var mainHeight:CGFloat!
+    var pageFlag:Bool = true
     @IBOutlet weak var mainTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
