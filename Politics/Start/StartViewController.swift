@@ -121,11 +121,12 @@ class StartViewController: FormViewController  {
                                 self.realm.add(user)
                             }
                             self.saveData.set(true, forKey: "user")
+                            let tab = self.tabSegue()
+                            self.present(tab, animated: true, completion: nil) 
                         }
                     }
-
-                    let tab = self.tabSegue()
-                    self.present(tab, animated: true, completion: nil)       
+                    
+                    
                 })
         // Do any additional setup after loading the view.
     }

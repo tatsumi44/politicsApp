@@ -45,6 +45,14 @@ extension UIViewController{
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    func alert1(message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default) { (sample) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func stringFromDate(date: NSDate, format: String) -> String {
         let formatter: DateFormatter = DateFormatter()
@@ -354,7 +362,7 @@ extension  UIResponder{
         firstVC.tabBarItem = UITabBarItem(title: "世論調査", image: UIImage(named:"chart"), tag: 1)
         viewControllers.append(firstVC)
         
-        // 2ページ目になるViewController
+//         2ページ目になるViewController
         let secondSB = UIStoryboard(name: "SNS", bundle: nil)
         let secondVC = secondSB.instantiateInitialViewController()! as UIViewController
         secondVC.tabBarItem = UITabBarItem(title: "語り場", image: UIImage(named:"User"), tag: 2)
@@ -366,10 +374,10 @@ extension  UIResponder{
         thirdVC.tabBarItem = UITabBarItem(title: "ニュース", image: UIImage(named:"news"), tag: 3)
         viewControllers.append(thirdVC)
         
-//        let fourthSB = UIStoryboard(name: "Setting", bundle: nil)
-//        let fourthVC = fourthSB.instantiateInitialViewController()! as UIViewController
-//        fourthVC.tabBarItem = UITabBarItem(title: "設定", image: #imageLiteral(resourceName: "settings"), tag: 4)
-//        viewControllers.append(fourthVC)
+        let fourthSB = UIStoryboard(name: "publicVote", bundle: nil)
+        let fourthVC = fourthSB.instantiateInitialViewController()! as UIViewController
+        fourthVC.tabBarItem = UITabBarItem(title: "みんなの投稿", image: #imageLiteral(resourceName: "settings"), tag: 4)
+        viewControllers.append(fourthVC)
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.unselectedItemTintColor = UIColor.orange
@@ -513,7 +521,7 @@ extension UIColor {
             let b = CGFloat(color & 0x0000FF) / 255.0
             return UIColor(red:r,green:g,blue:b,alpha:alpha)
         } else {
-            return UIColor.white;
+            return UIColor.white
         }
     }
 }

@@ -64,6 +64,11 @@
 		B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92934B12120C62B00637B16 /* MyPastFormViewController.swift */; };
 		B95FC8FA21531DE100F85A4F /* AlertFlagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95FC8F921531DE100F85A4F /* AlertFlagViewController.swift */; };
 		B95FC8FF21541F6E00F85A4F /* NewsComentAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95FC8FE21541F6E00F85A4F /* NewsComentAlertViewController.swift */; };
+		B96929EF22030858005C54D1 /* publicVote.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B96929EE22030858005C54D1 /* publicVote.storyboard */; };
+		B96929F1220308A2005C54D1 /* PublicVoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96929F0220308A2005C54D1 /* PublicVoteListViewController.swift */; };
+		B96929F5220309BD005C54D1 /* publicVoteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96929F3220309BD005C54D1 /* publicVoteListTableViewCell.swift */; };
+		B96929F6220309BD005C54D1 /* publicVoteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B96929F4220309BD005C54D1 /* publicVoteListTableViewCell.xib */; };
+		B96929F8220485FA005C54D1 /* PublicVotePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96929F7220485FA005C54D1 /* PublicVotePostViewController.swift */; };
 		B96A7A3D213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */; };
 		B96A7A3E213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */; };
 		B96A7A40213AE25B0022CDE0 /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */; };
@@ -163,6 +168,11 @@
 		B92934B12120C62B00637B16 /* MyPastFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPastFormViewController.swift; sourceTree = "<group>"; };
 		B95FC8F921531DE100F85A4F /* AlertFlagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFlagViewController.swift; sourceTree = "<group>"; };
 		B95FC8FE21541F6E00F85A4F /* NewsComentAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsComentAlertViewController.swift; sourceTree = "<group>"; };
+		B96929EE22030858005C54D1 /* publicVote.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = publicVote.storyboard; sourceTree = "<group>"; };
+		B96929F0220308A2005C54D1 /* PublicVoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicVoteListViewController.swift; sourceTree = "<group>"; };
+		B96929F3220309BD005C54D1 /* publicVoteListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = publicVoteListTableViewCell.swift; sourceTree = "<group>"; };
+		B96929F4220309BD005C54D1 /* publicVoteListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = publicVoteListTableViewCell.xib; sourceTree = "<group>"; };
+		B96929F7220485FA005C54D1 /* PublicVotePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicVotePostViewController.swift; sourceTree = "<group>"; };
 		B96A7A3B213AD1B60022CDE0 /* ChartsResultListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsResultListTableViewCell.swift; sourceTree = "<group>"; };
 		B96A7A3C213AD1B60022CDE0 /* ChartsResultListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartsResultListTableViewCell.xib; sourceTree = "<group>"; };
 		B96A7A3F213AE25B0022CDE0 /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +272,7 @@
 				B9FE614A2125266600DFF419 /* SNS */,
 				B9FC939C212F04F10029EF12 /* News */,
 				B920C9FD214C104100ECF00C /* Setting */,
+				B96929F2220308B9005C54D1 /* publicVote */,
 				B9085AD3211B3EF50099DBE1 /* Assets.xcassets */,
 				B9085AD5211B3EF50099DBE1 /* LaunchScreen.storyboard */,
 				B9085AD8211B3EF50099DBE1 /* Info.plist */,
@@ -371,6 +382,18 @@
 				B920C9F021404BFF00ECF00C /* DetailWeeklyViewController.swift */,
 			);
 			path = ViewResult;
+			sourceTree = "<group>";
+		};
+		B96929F2220308B9005C54D1 /* publicVote */ = {
+			isa = PBXGroup;
+			children = (
+				B96929EE22030858005C54D1 /* publicVote.storyboard */,
+				B96929F0220308A2005C54D1 /* PublicVoteListViewController.swift */,
+				B96929F7220485FA005C54D1 /* PublicVotePostViewController.swift */,
+				B96929F3220309BD005C54D1 /* publicVoteListTableViewCell.swift */,
+				B96929F4220309BD005C54D1 /* publicVoteListTableViewCell.xib */,
+			);
+			path = publicVote;
 			sourceTree = "<group>";
 		};
 		B9FC939C212F04F10029EF12 /* News */ = {
@@ -531,10 +554,12 @@
 				B91C27FA214F57A5002477B9 /* SectionTableViewCell.xib in Resources */,
 				B920C9F52146FACB00ECF00C /* opposeTableViewCell.xib in Resources */,
 				B9FE61522125D35000DFF419 /* SNSTableViewCell.xib in Resources */,
+				B96929EF22030858005C54D1 /* publicVote.storyboard in Resources */,
 				B9085AD4211B3EF50099DBE1 /* Assets.xcassets in Resources */,
 				B9FE61642126F43D00DFF419 /* TagCollectionViewCell.xib in Resources */,
 				B9085AD2211B3EF10099DBE1 /* Chart.storyboard in Resources */,
 				B9FE616E21282FF300DFF419 /* commentTableViewCell.xib in Resources */,
+				B96929F6220309BD005C54D1 /* publicVoteListTableViewCell.xib in Resources */,
 				B920CA01214C1C2F00ECF00C /* ProfileSettingTableViewCell.xib in Resources */,
 				B9085B1F211D8CAF0099DBE1 /* GoogleService-Info.plist in Resources */,
 			);
@@ -669,6 +694,7 @@
 				B9FE617A212891BB00DFF419 /* ResponseTableViewCell.swift in Sources */,
 				B9D11CC121FAFB8E00AB308D /* TopListTableViewCell.swift in Sources */,
 				B920C9F42146FACB00ECF00C /* opposeTableViewCell.swift in Sources */,
+				B96929F8220485FA005C54D1 /* PublicVotePostViewController.swift in Sources */,
 				B92934AE2120AAB700637B16 /* PastResultViewController.swift in Sources */,
 				B92934A421200DA500637B16 /* FourDaysAgoResultViewController.swift in Sources */,
 				B91C27F5214EB809002477B9 /* ProfileEditViewController.swift in Sources */,
@@ -682,6 +708,7 @@
 				B929349E21200D6B00637B16 /* OneDayAgoResultViewController.swift in Sources */,
 				B92934A821200DD100637B16 /* SixDaysAgoResultViewController.swift in Sources */,
 				B9085ACF211B3EF10099DBE1 /* ViewController.swift in Sources */,
+				B96929F5220309BD005C54D1 /* publicVoteListTableViewCell.swift in Sources */,
 				B9085B4F211F51AA0099DBE1 /* MyFormViewController.swift in Sources */,
 				B92934B22120C62B00637B16 /* MyPastFormViewController.swift in Sources */,
 				B9085ACD211B3EF10099DBE1 /* AppDelegate.swift in Sources */,
@@ -693,6 +720,7 @@
 				B9FC93B7213082500029EF12 /* NewsDetailViewController.swift in Sources */,
 				B9FC939F212F09890029EF12 /* NewsTodayTableViewCell.swift in Sources */,
 				B96A7A40213AE25B0022CDE0 /* SearchPostViewController.swift in Sources */,
+				B96929F1220308A2005C54D1 /* PublicVoteListViewController.swift in Sources */,
 				B97402E42131D3BD008A1D34 /* MainTodayViewController.swift in Sources */,
 				B9FE61632126F43D00DFF419 /* TagCollectionViewCell.swift in Sources */,
 				B92934A221200D9000637B16 /* ThreeDaysAgoResultViewController.swift in Sources */,
